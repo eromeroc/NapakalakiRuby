@@ -11,42 +11,13 @@ class BadConsequence
     attr_reader :specificHiddenTreasures  #Tesorros ocultos
     attr_reader :specificVisibleTreasures  #Tesoros visibles
     
-  def initialize(text, death)
-    @text = text
-    @death = death
-    
-    @levels = 0 
-    @nHiddenTreasures = 0
-    @nVisibleTreasures = 0
-    @specificHiddenTreasures = Array.new
-    @specificVisibleTreasures = Array.new   
-  end
-  
-  def initialize(text, levels, specificHiddenT, specificVisibleT)
-    @text = text
-    @levels = levels
-    @nHiddenTreasures = 0
-    @nVisibleTreasures = 0
-    @death = false
-    @specificHiddenTreasures = specificHiddenT
-    @specificVisibleTreasures = specificVisibleT    
-  end
-  
-  def initialize(text, levels, nHiddenT, nVisibleT)
-    @text = text
-    @levels = levels
-    @nHiddenTreasures = nHiddenT
-    @nVisibleTreasures = nVisibleT
-    @death = false
-    @specificHiddenTreasures = Array.new
-    @specificVisibleTreasures = Array.new    
-  end
-  
+
+ 
   def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
     @text = aText
     @levels = someLevels
     @nVisibleTreasures = someVisibleTreasures
-    @nHiddenTreasures = someVisibleTreasures
+    @nHiddenTreasures = someHiddenTreasures
     @specificHiddenTreasures  = someSpecificHiddenTreasures 
     @specificVisibleTreasures = someSpecificVisibleTreasures 
     @death = death
@@ -56,8 +27,8 @@ class BadConsequence
     
   end
   
-  def
-    
+  def newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
+    initialize(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures)
   end
   
   end

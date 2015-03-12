@@ -3,8 +3,8 @@
 # and open the template in the editor.
 
 class Prize
-    atr_readder :treasures
-    atr_readder :levels
+    attr_reader :treasures
+    attr_reader :levels
     
     def initialize(treasures, levels)
         @treasures = treasures

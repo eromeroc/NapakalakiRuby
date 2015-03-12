@@ -3,10 +3,10 @@
 # and open the template in the editor.
 
 class Monster
-    attr_readder :name
-    attr_readder :combatLevel
-    attr_readder :bc
-    attr_readder :prize
+    attr_reader :name
+    attr_reader :combatLevel
+    attr_reader :bc
+    attr_reader :prize
     
     
     def initialize(name, combatLevel, bc, prize)

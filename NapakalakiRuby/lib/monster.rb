@@ -17,11 +17,11 @@ class Monster
     end
     
     
-    def toString
-        puts "Name = #{name}
-        Levels = #{levels}
-        Prize = #{price.toString}
-        BadConsequence = #{bc.toString}"
+    def to_s
+        puts "\nNombre = #{name}
+        \nNivel = #{levels}
+        \nPremio = #{prize.to_s}
+        \nMal rollo = #{bc.to_s}"
     end
     
 end

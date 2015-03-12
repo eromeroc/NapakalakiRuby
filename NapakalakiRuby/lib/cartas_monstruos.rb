@@ -2,30 +2,20 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-require_relative 'monster'
-require_relative 'bad_consequence'
-require_relative 'prize'
-require_relative 'treasure_kind'
-
-#def initializeMonstruos(max)
-    # Array con las cartas de los monstruos
-    monstruos = Array.new    
+class CartasMonstruos
+  def initialize
+    monstruos = Array.new(0, Monster)
+    
     
     # 3 Byakhees de bonanza
-    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes tu armadura visible y" + 
+    badConsequence = BadConsequence.new("Pierdes tu armadura visible y" + 
                                         "otra oculta.", 0, 
-                                        [TreasureKind::ARMOR], 
-                                        [TreasureKind::ARMOR])
+                                        [TreasureKind.ARMOR], 
+                                        [TreasureKind.ARMOR])
     prize = Prize.new(2, 1)
-    monstruito = Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)
-    # Añade un nuevo monstruo al final del array
-    monstruos << monstruito
-    
-    puts monstruito.to_s
-    
-
+    monstruos << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)
   
-=begin
+  
     # Chibithulhu
     badConsequence = BadConsequence.new("Embobados con el lindo" +
                                         "primigenio te descartas de tu casco" +
@@ -58,13 +48,13 @@ require_relative 'treasure_kind'
     
     # El gorrón en el umbral
     badConsequence = BadConsequence.new("Pierdes todos tus tesores visibles.", 0, 
-                                        max, 0)
+                                        Integer::MAX, 0)
     prize = Prize.new(3,1)
     monstruos << Monster.new("El gorrón en el umbral", 10, badConsequence, prize)
   
     
     # H.P. Munchcraft
-    badConsequence = BadConsequence.new("Pierdes la armadura visible.", 0,
+    badConsequence = BadConsequence.new("Pierdes la armadura visible.", 0, 
                                         [TreasureKind.ARMOR], 
                                         Array.new)
     prize = Prize.new(2,1)
@@ -94,10 +84,43 @@ require_relative 'treasure_kind'
     monstruos << Monster.new("La que redacta en las tinieblas", 2, 
                               badConsequence, prize)
   
-    
-    return monstruos
-  end
-=end
   
-puts monstruos.toString
+    #Los hondos
+    badConsequence = BadConsequence.new("Estos monstruos resultan bastante superficiales y te aburren mortalmente. Estas muerto",1)
+    prize = Prize.new(2,1)
+    monstruos << Monster.new("Los hondos", 8 ,badConsequence,prize)
+    
+    #Semillas Cthulhu
+    badConsequence = BadConsequence.new("Pierdes dos niveles y dos tesoros ocultos", 2, 0, 2)
+    prize = Prize.new(2,1)
+    monstruos << Monster.new("Semillas Cthulhu", 4,badConsequence, prize)
+   
+   
+   #Dameargo
+   badConsequence = BadConsequence.new("Te intentas escaquear. Pierdes una mano visible", 0, 1, 0)
+   prize = Prize.new(2,1)
+   monstruos << Monster.new("Dameargo", 1,badConsequence, prize)
 
+    #Pollipólipo volante
+    badConsequence = BadConsequence.new("Da mucho asquito. Pierdes tres niveles", 3, 0, 0)
+    prize = Prize.new(1,1)
+    monstruos << Monster.new("Pollipólipo volante", 3,badConsequence, prize)
+    
+    #Yskhtihyssq-Goth
+    badConsequence = BadConsequence.new("No le hace gracia que pronuncien mal su nombre. Estas muerto", 1)
+    prize = Prize.new(3,1)
+    monstruos << Monster.new("Yskhtihyssq-Goth", 12,badConsequence, prize)
+    
+    
+    #Familia feliz
+    badConsequence = BadConsequence.new("La familia te atrapa. Estas muerto", 1)
+    prize = Prize.new(4,1)
+    monstruos << Monster.new("Familia feliz", 1,badConsequence, prize)
+
+    #Faltan: de la segunda carilla están hasta los 6 primeros.
+  end
+  
+  
+  #Mostrar todos los monstruos que tengan un nivel de combate superior a 10.
+  
+end

@@ -1,8 +1,5 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+# coding: utf-8 
 
-# -*- coding: utf-8 -*-
 
 class BadConsequence
     
@@ -45,6 +42,25 @@ class BadConsequence
     @specificVisibleTreasures = Array.new    
   end
   
+  def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
+    @text = aText
+    @levels = someLevels
+    @nVisibleTreasures = someVisibleTreasures
+    @nHiddenTreasures = someVisibleTreasures
+    @specificHiddenTreasures  = someSpecificHiddenTreasures 
+    @specificVisibleTreasures = someSpecificVisibleTreasures 
+    @death = death
+  end
+  
+  def newNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
+    
+  end
+  
+  def
+    
+  end
+  
+  end
   def arrayToString(array)
     texto = "\n"
     for array in 0.. array.size do

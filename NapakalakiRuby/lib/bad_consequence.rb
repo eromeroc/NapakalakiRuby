@@ -11,6 +11,8 @@ class BadConsequence
     attr_reader :specificHiddenTreasures  #Tesorros ocultos
     attr_reader :specificVisibleTreasures  #Tesoros visibles
     
+
+
   def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
     @text = aText
     @levels = someLevels
@@ -28,8 +30,10 @@ class BadConsequence
   def newDeath (aText,death)
     initialize(aText, 0, 0, 0 , Array.new, Array.new, death)
   end
-  
-  
+    
+  def newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
+    initialize(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures)
+  end
   
   private_class_method :new
 
@@ -50,5 +54,4 @@ class BadConsequence
         Tesoros ocultos = #{arrayToString(@specificHiddenTreasures)}
         Tesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
   end
-  
 end

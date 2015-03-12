@@ -12,10 +12,10 @@ require_relative 'treasure_kind'
     monstruos = Array.new    
     
     # 3 Byakhees de bonanza
-    badConsequence = BadConsequence.new("Pierdes tu armadura visible y" + 
+    badConsequence = BadConsequence.newNumberOfTreasures("Pierdes tu armadura visible y" + 
                                         "otra oculta.", 0, 
-                                        [TreasureKind.ARMOR], 
-                                        [TreasureKind.ARMOR])
+                                        [TreasureKind::ARMOR], 
+                                        [TreasureKind::ARMOR])
     prize = Prize.new(2, 1)
     # Añade un nuevo monstruo al final del array
     monstruos << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)

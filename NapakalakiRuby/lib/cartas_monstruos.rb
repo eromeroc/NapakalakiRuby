@@ -2,23 +2,23 @@
 
 class CartasMonstruos
   def initialize
-    @@monstruos = Array.new(0, Monster)
+    @monstruos = Array.new(0, Monster)
     
     
     # 3 Byakhees de bonanza
     badConsequence = BadConsequence.new("Pierdes tu armadura visible y" + 
                                         "otra oculta.", 0, 
-                                        [TreasureKind.ARMOR], 
-                                        [TreasureKind.ARMOR])
+                                        [TreasureKind::ARMOR], 
+                                        [TreasureKind::ARMOR])
     prize = Prize.new(2, 1)
-    @@monstruos << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)
+    @monstruos << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)
   
   
     # Chibithulhu
     badConsequence = BadConsequence.new("Embobados con el lindo" +
                                         "primigenio te descartas de tu casco" +
                                         "visible.", 0, 
-                                        [TreasureKind.HELMET], 
+                                        [TreasureKind::HELMET], 
                                         Array.new)
     prize = Prize.new(1, 1)
     @monstruos << Monster.new("Chibithulhu", 2, badConsequence, prize)
@@ -27,7 +27,7 @@ class CartasMonstruos
     # El sopor de Dunwich
     badConsequence = BadConsequence.new("El primordial bostezo contaguioso." +
                                         "Pierdes el calzado visible.", 0, 
-                                        [TreasureKind.HELMET], 
+                                        [TreasureKind::HELMET], 
                                         Array.new)
     prize = Prize.new(1,1)
     @monstruos << Monster.new("El sopor de Dunwich", 2, badConsequence, prize)
@@ -38,8 +38,8 @@ class CartasMonstruos
                                         "y te dejan car en mitad del vuelo." +
                                         "Descarta 1 mano visible y 1 mano oculta.",
                                         0, 
-                                        [TreasureKind.ONEHAND], 
-                                        [TreasureKind.ONEHAND])
+                                        [TreasureKind::ONEHAND], 
+                                        [TreasureKind::ONEHAND])
     prize = Prize.new(4,1)
     @monstruos << Monster.new("Ángeles de la noche ibicenca", 14, badConsequence, prize)
   
@@ -53,7 +53,7 @@ class CartasMonstruos
     
     # H.P. Munchcraft
     badConsequence = BadConsequence.new("Pierdes la armadura visible.", 0, 
-                                        [TreasureKind.ARMOR], 
+                                        [TreasureKind::ARMOR], 
                                         Array.new)
     prize = Prize.new(2,1)
     @monstruos << Monster.new("H.P. Munchcraft", 6, badConsequence, prize)
@@ -62,7 +62,7 @@ class CartasMonstruos
     # Bichgooth
     badConsequence = BadConsequence.new("Sientes bichos bajo la ropa. " +
                                         "Descarta la armadura visible.", 0, 
-                                        [TreasureKind.ARMOR], 
+                                        [TreasureKind::ARMOR], 
                                         Array.new)
     prize = Prize.new(1,1)
     @monstruos << Monster.new("Bichgooth", 2, badConsequence, prize)
@@ -122,11 +122,10 @@ class CartasMonstruos
   #Mostrar todos los @monstruos que tengan un nivel de combate superior a 10.
   def nivelSuperiorDiez
     lista_monstruos = Array.new(0,Monster)
-    for @monstruos in 0..@monstruos.size do
+    @monstruos.each do |m|
       if monstruos.combatLevel > 10
         lista_monstruos >> monstruos
       end
-      
     end
     lista_monstruos
   end
@@ -135,11 +134,12 @@ class CartasMonstruos
   def soloPierdesNiveles 
     lista_monstruos = Array.new(0,Monster)
     
-    for @monstruos in 0 .. @monstruos.size do
+    @monstruos.each do |m|
       if monstruos.bc.level > 0 && monstruos.bc.nHiddenTreasures == 0 && monstruos.bc.nVisibleTreasures == 0 && monstruos.bc.death == 0
         lista_monstruos >> monstruos
       end
     end
+    lista_monstruos
   end
   
 end

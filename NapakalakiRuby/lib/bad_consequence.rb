@@ -39,8 +39,9 @@ class BadConsequence
 
   def arrayToString(array)
     texto = "\n"
-    for array in 0.. array.size do
-      texto += (array.to_s + " ")
+    
+    array.each do |i| 
+      texto += (i.to_s + " ")
     end
   end
   

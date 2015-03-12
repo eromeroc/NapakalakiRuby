@@ -10,12 +10,18 @@ require_relative 'cartas_monstruos'
 
 monstruos = CartasMonstruos.new
 
-aux1 = Array.new(0,Monster)
-aux2 = Array.new(0,Monster)
-aux3 = Array.new(0,Monster)
-aux4 = Array.new(0,Monster)
+array1 = Array.new(0,Monster)
+array2 = Array.new(0,Monster)
+array3 = Array.new(0,Monster)
+array4 = Array.new(0,Monster)
 
-aux1 = monstruos.nivelSuperiorDiez
-aux2 = monstruos.soloPierdesNiveles
+array1 = monstruos.nivelSuperiorDiez
+array2 = monstruos.soloPierdesNiveles
 
+#array3 = 
+#array4 = 
 
+#System.out.println(array1.to_s)
+#System.out.println(array2.to_s)
+#System.out.println(array3.to_s)
+#System.out.println(array4.to_s)

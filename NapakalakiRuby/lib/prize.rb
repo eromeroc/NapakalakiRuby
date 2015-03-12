@@ -12,7 +12,7 @@ class Prize
     end
     
     def toString
-        puts "\nTesoros: #{treasures}
-        \nNiveles: #{levels}"
+        puts "\nTesoros: #{@treasures}
+        \nNiveles: #{@levels}"
     end
 end

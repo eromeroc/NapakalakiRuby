@@ -24,15 +24,15 @@ class BadConsequence
   end
   
   def self.newNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
-    initialize(aText,someLevels, someVisibleTreasures, someHiddenTreasures, Array.new, Array.new,false)
+    new(aText,someLevels, someVisibleTreasures, someHiddenTreasures, Array.new, Array.new,false)
   end
   
   def self.newDeath (aText)
-    initialize(aText, 0, 0, 0 , Array.new, Array.new, true)
+    new(aText, 0, 0, 0 , Array.new, Array.new, true)
   end
     
   def self.newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
-    initialize(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures)
+    new(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures)
   end
   
   private_class_method :new
@@ -46,11 +46,11 @@ class BadConsequence
   
   
   def to_s
-        puts "\nMal rollo = #{text}
-        \nNiveles que pierdes = #{levels}
-        \nNº de tesoros escondidos #{nHiddenTreasures}
-        \nNº de tesoros visibles = #{nVisibleTreasures}
-        \nMuerte = #{death}
+        puts "\nMal rollo = #{@text}
+        \nNiveles que pierdes = #{@levels}
+        \nNº de tesoros escondidos #{@nHiddenTreasures}
+        \nNº de tesoros visibles = #{@nVisibleTreasures}
+        \nMuerte = #{@death}
         \nTesoros ocultos = #{arrayToString(@specificHiddenTreasures)}
         \nTesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
   end

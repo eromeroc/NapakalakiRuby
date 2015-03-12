@@ -18,10 +18,10 @@ class Monster
     
     
     def to_s
-        puts "\nNombre = #{name}
-        \nNivel = #{levels}
-        \nPremio = #{prize.to_s}
-        \nMal rollo = #{bc.to_s}"
+        puts "\nNombre = #{@name}
+        \nNivel = #{@levels}
+        \nPremio = #{@prize.to_s}
+        \nMal rollo = #{@bc.to_s}"
     end
     
 end

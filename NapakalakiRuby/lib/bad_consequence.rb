@@ -32,7 +32,7 @@ class BadConsequence
   end
     
   def self.newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
-    new(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures)
+    new(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
   end
   
   private_class_method :new

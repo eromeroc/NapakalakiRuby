@@ -22,7 +22,7 @@ array2 = monstruos.soloPierdesNiveles
 #array3 = 
 #array4 = 
 
-#System.out.println(array1.to_s)
-#System.out.println(array2.to_s)
-#System.out.println(array3.to_s)
-#System.out.println(array4.to_s)
+puts array1.to_s
+puts array2.to_s
+#puts array3.to_s
+#putsarray4.to_s

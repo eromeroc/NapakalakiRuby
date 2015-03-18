@@ -169,21 +169,18 @@ class CartasMonstruos
     # Añade un nuevo monstruo al final del array
     @monstruos << Monster.new("Familia feliz", 1, badConsequence, prize)
     
-#
-#    #Roboggoth
-#    badConsequence = BadConsequence.newSpecificTreasures("La quinta directiva primaria te obliga a perder 2 niveles"+
-#                                                         "y un tesoro 2 manos visible", 2,[TreasureKind::BOTHHANDS], Array.new)
-#    prize = Prize.new(2, 1)
-#    @monstruos << Monster.new("Roboggoth", 8, badConsequence, prize)
-#    
-#    
-#    #El espia
-#    badConsequence = BadConsequence.newSpecificTreasures("Te asusta en la noche.Pierdes un casco visible",0,
-#                                                        [TreasureKind::HELMET], Array.new)
-#    prize = Prize.new(1, 1)
-#    @monstruos << Monster.new("El espía", 5, badConsequence, prize)
-#    
-#    
+    #Roboggoth
+    badConsequence = BadConsequence.newSpecificTreasures("La quinta directiva primaria te obliga a perder 2 niveles"+
+                                                         "y un tesoro 2 manos visible", 2,[TreasureKind::BOTHHANDS], Array.new)
+    prize = Prize.new(2, 1)
+    @monstruos << Monster.new("Roboggoth", 8, badConsequence, prize)
+        
+    #El espia
+    badConsequence = BadConsequence.newSpecificTreasures("Te asusta en la noche.Pierdes un casco visible",0,
+                                                        [TreasureKind::HELMET], Array.new)
+    prize = Prize.new(1, 1)
+    @monstruos << Monster.new("El espía", 5, badConsequence, prize)
+    
 #    #El lenguas
 #    badConsequence = BadConsequence.newNumberOfTreasures("Menudo susto te llevas. Pierdes 2 niveles y"+
 #                                                         "5 tesoros visibles", 2, 5, 0)
@@ -223,5 +220,42 @@ class CartasMonstruos
     end
     lista_monstruos
   end
+
+  #Mostrar todos los @monstruos que ganan nivel superior a uno
+  def ganaNivelSuperiorUno
+    lista_monstruos = Array.new(0, Monster)
+    
+    @monstruos.each do |m|
+      if m.prize.levels > 1
+        lista_monstruos << m
+      end
+    end
+    lista_monstruos
+  end
   
+  #Mostrar todos los monstruos que pierden al menos un tesoro tiepo ONEHAND
+  def pierdeOnehand
+    lista_monstruos = Array.new(0, Monster)
+    
+    @monstruos.each do |m|
+      m.bc.specificHiddenTreasures.each do |k|
+        if k == ONEHAND
+          lista_monstruos << m
+        end
+      end
+      m.bc.specificVisibleTreasures.each do |k|
+        if k == ONEHAND
+          lista_monstruos << m
+        end
+      end
+    end
+  end
+  
+  def to_s
+    
+    @monstruos.each do |m|
+      puts m.to_s
+    end  
+  end
 end
+

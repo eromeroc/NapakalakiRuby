@@ -1,6 +1,3 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
 
 require_relative 'monster'
 require_relative 'bad_consequence'
@@ -19,10 +16,10 @@ array4 = Array.new(0,Monster)
 array1 = monstruos.nivelSuperiorDiez
 array2 = monstruos.soloPierdesNiveles
 
-#array3 = 
-#array4 = 
+array3 = monstruos.ganaNivelSuperiorUno
+array4 = monstruos.pierdeOnehand
 
 puts array1.to_s
 puts array2.to_s
-#puts array3.to_s
-#putsarray4.to_s
+puts array3.to_s
+putsarray4.to_s

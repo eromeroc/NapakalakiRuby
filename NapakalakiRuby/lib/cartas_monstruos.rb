@@ -239,12 +239,12 @@ class CartasMonstruos
     
     @monstruos.each do |m|
       m.bc.specificHiddenTreasures.each do |k|
-        if k == ONEHAND
+        if k == TreasureKind::ONEHAND
           lista_monstruos << m
         end
       end
       m.bc.specificVisibleTreasures.each do |k|
-        if k == ONEHAND
+        if k == TreasureKind::ONEHAND
           lista_monstruos << m
         end
       end

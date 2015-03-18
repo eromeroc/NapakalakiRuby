@@ -22,4 +22,4 @@ array4 = monstruos.pierdeOnehand
 puts array1.to_s
 puts array2.to_s
 puts array3.to_s
-putsarray4.to_s
+puts array4.to_s

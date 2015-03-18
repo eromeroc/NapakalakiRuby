@@ -232,6 +232,11 @@ class CartasMonstruos
           puts m.to_s
         end
       end
+      m.bc.specificVisibleTreasures.each do |k|
+        if k == TreasureKind::ONEHAND
+          puts m.to_s
+        end
+      end
     end
   end
 =begin

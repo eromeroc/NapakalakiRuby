@@ -10,7 +10,7 @@ class Monster
     
     
     def initialize(name, combatLevel, bc, prize)
-        @name = name.to_s
+        @name = name
         @combatLevel = combatLevel
         @bc = bc
         @prize = prize
@@ -19,7 +19,7 @@ class Monster
     
     def to_s
         puts "\nNombre = #{@name}
-        \nNivel = #{@levels}
+        \nNivel = #{@combatLevel}
         \nPremio = #{@prize.to_s}
         \nMal rollo = #{@bc.to_s}"
     end

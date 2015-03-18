@@ -251,9 +251,9 @@ class CartasMonstruos
     end
   end
   
-  def to_s
+  def to_s(array)
     
-    @monstruos.each do |m|
+    array.each do |m|
       puts m.to_s
     end  
   end

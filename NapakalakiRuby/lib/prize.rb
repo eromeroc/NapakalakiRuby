@@ -11,7 +11,7 @@ class Prize
         @levels = levels
     end
     
-    def toString
+    def to_s
         puts "\nTesoros: #{@treasures}
         \nNiveles: #{@levels}"
     end

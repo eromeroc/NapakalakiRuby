@@ -181,23 +181,60 @@ class CartasMonstruos
     prize = Prize.new(1, 1)
     @monstruos << Monster.new("El espía", 5, badConsequence, prize)
     
-#    #El lenguas
-#    badConsequence = BadConsequence.newNumberOfTreasures("Menudo susto te llevas. Pierdes 2 niveles y"+
-#                                                         "5 tesoros visibles", 2, 5, 0)
-#    prize = Prize.new(1, 1)
-#    @monstruos << Monster.new("El lenguas", 20, badConsequence, prize)
-#    
-#    
-#    #Bicefalo
-#    badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para tanta cabeza. Pierdes 3 niveles"+
-#                                                         "y tus tesoros visibles de las manos", 3, 999999999999999, 0)
-#    prize = Prize.new(1,1)
-#    @monstruos << Monster.new("Bicefalo", 20, badConsequence, prize)
+    #El lenguas
+    badConsequence = BadConsequence.newNumberOfTreasures("Menudo susto te llevas. Pierdes 2 niveles y"+
+                                                         "5 tesoros visibles", 2, 5, 0)
+    prize = Prize.new(1, 1)
+    @monstruos << Monster.new("El lenguas", 20, badConsequence, prize)
+    
+    
+    #Bicefalo
+    badConsequence = BadConsequence.newNumberOfTreasures("Te faltan manos para tanta cabeza. Pierdes 3 niveles"+
+                                                         "y tus tesoros visibles de las manos", 3, 999999999999999, 0)
+    prize = Prize.new(1,1)
+    @monstruos << Monster.new("Bicefalo", 20, badConsequence, prize)
     
                                                       
   end
   
+  #Mostrar todos los @monstruos que tengan un nivel de combate superior a 10.
+  def nivelSuperiorDiez
+    @monstruos.each do |m|
+      if m.combatLevel > 10
+        puts m.to_s
+      end
+    end
+  end
   
+   #Mostrar todos los @monstruos que tengan un mal rollo que implique sólo pérdida de niveles.
+  def soloPierdesNiveles 
+    @monstruos.each do |m|
+      if m.bc.levels > 0 && m.bc.nHiddenTreasures == 0 && m.bc.nVisibleTreasures == 0 && m.bc.death == 0
+        puts m.to_s
+      end
+    end
+  end
+  
+  #Mostrar todos los @monstruos que ganan nivel superior a uno
+  def ganaNivelSuperiorUno
+    @monstruos.each do |m|
+      if m.prize.levels > 1
+        puts m.to_s
+      end
+    end
+  end
+  
+  #Mostrar todos los monstruos que pierden al menos un tesoro tiepo ONEHAND
+  def pierdeOnehand
+    @monstruos.each do |m|
+      m.bc.specificHiddenTreasures.each do |k|
+        if k == TreasureKind::ONEHAND
+          puts m.to_s
+        end
+      end
+    end
+  end
+=begin
   #Mostrar todos los @monstruos que tengan un nivel de combate superior a 10.
   def nivelSuperiorDiez
     lista_monstruos = Array.new(0,Monster)
@@ -250,12 +287,12 @@ class CartasMonstruos
       end
     end
   end
+=end
   
-  def to_s(array)
-    
-    array.each do |m|
+  
+  def to_s
       puts m.to_s
-    end  
+      puts "\n\n"
   end
 end
 

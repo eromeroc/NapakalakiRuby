@@ -8,20 +8,14 @@ require_relative 'cartas_monstruos'
 
 monstruos = CartasMonstruos.new
 
+monstruos.nivelSuperiorDiez
+monstruos.soloPierdesNiveles
 
-array1 = Array.new(0, Monster)
-array2 = Array.new(0,Monster)
-array3 = Array.new(0,Monster)
-array4 = Array.new(0,Monster)
-
-array1 = monstruos.nivelSuperiorDiez
-array2 = monstruos.soloPierdesNiveles
-
-array3 = monstruos.ganaNivelSuperiorUno
-array4 = monstruos.pierdeOnehand
+monstruos.ganaNivelSuperiorUno
+monstruos.pierdeOnehand
 
 
-puts monstruos.to_s(array1)
+#puts monstruos.to_s(array1)
 #puts array2.to_s
 #puts array3.to_s
 #puts array4.to_s

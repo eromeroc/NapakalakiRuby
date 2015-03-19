@@ -199,6 +199,7 @@ class CartasMonstruos
   
   #Mostrar todos los @monstruos que tengan un nivel de combate superior a 10.
   def nivelSuperiorDiez
+    puts "\n\tMonstruos cuyo nivel de combate es superior a 10:"
     @monstruos.each do |m|
       if m.combatLevel > 10
         puts m.to_s
@@ -208,6 +209,7 @@ class CartasMonstruos
   
    #Mostrar todos los @monstruos que tengan un mal rollo que implique sólo pérdida de niveles.
   def soloPierdesNiveles 
+    puts "\n\tMonstruos cuyo mal rollo implica solo la perdida de niveles:"
     @monstruos.each do |m|
       if m.bc.levels > 0 && m.bc.nHiddenTreasures == 0 && m.bc.nVisibleTreasures == 0 && m.bc.death == 0
         puts m.to_s
@@ -217,6 +219,7 @@ class CartasMonstruos
   
   #Mostrar todos los @monstruos que ganan nivel superior a uno
   def ganaNivelSuperiorUno
+    puts "\n\tMonstruos que ganan nivel superior a uno:"
     @monstruos.each do |m|
       if m.prize.levels > 1
         puts m.to_s
@@ -224,8 +227,9 @@ class CartasMonstruos
     end
   end
   
-  #Mostrar todos los monstruos que pierden al menos un tesoro tiepo ONEHAND
+  #Mostrar todos los monstruos que pierden al menos un tesoro tipo ONEHAND
   def pierdeOnehand
+    puts "\n\tMonstruos que pierden al menos un tesoro de tipo ONEHAND :"
     @monstruos.each do |m|
       m.bc.specificHiddenTreasures.each do |k|
         if k == TreasureKind::ONEHAND

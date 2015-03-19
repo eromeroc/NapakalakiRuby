@@ -9,10 +9,10 @@ require_relative 'cartas_monstruos'
 monstruos = CartasMonstruos.new
 
 monstruos.nivelSuperiorDiez
-monstruos.soloPierdesNiveles
+#monstruos.soloPierdesNiveles
 
-monstruos.ganaNivelSuperiorUno
-monstruos.pierdeOnehand
+#monstruos.ganaNivelSuperiorUno
+#monstruos.pierdeOnehand
 
 
 #puts monstruos.to_s(array1)

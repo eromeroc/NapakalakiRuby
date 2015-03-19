@@ -12,7 +12,9 @@ class Prize
     end
     
     def to_s
-        puts "\nTesoros: #{@treasures}
-        \nNiveles: #{@levels}"
+        output = "\n\tTesoros: #{@treasures}"+
+        "\n\tNiveles: #{@levels}"
+      
+      output
     end
 end

@@ -211,7 +211,7 @@ class CartasMonstruos
   def soloPierdesNiveles 
     puts "\n\tMonstruos cuyo mal rollo implica solo la perdida de niveles:"
     @monstruos.each do |m|
-      if m.bc.levels > 0 && m.bc.nHiddenTreasures == 0 && m.bc.nVisibleTreasures == 0 && m.bc.death == 0
+      if m.bc.levels > 0 && m.bc.nHiddenTreasures == 0 && m.bc.nVisibleTreasures == 0 && m.bc.death == 0 && m.bc.someSpecificVisibleTreasures.empty? && m.bc.someSpecificHiddenTreasures.empty?
         puts m.to_s
       end
     end

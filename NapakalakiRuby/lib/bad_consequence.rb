@@ -38,7 +38,7 @@ class BadConsequence
   private_class_method :new
 
   def arrayToString(array)
-    texto = "\n"
+    texto = "\n\t"
     
     array.each do |i| 
       texto += (i.to_s + " ")
@@ -47,12 +47,14 @@ class BadConsequence
   
   
   def to_s
-        puts "\nMal rollo = #{@text}
-        \nNiveles que pierdes = #{@levels}
-        \nNº de tesoros escondidos #{@nHiddenTreasures}
-        \nNº de tesoros visibles = #{@nVisibleTreasures}
-        \nMuerte = #{@death}
-        \nTesoros ocultos = #{arrayToString(@specificHiddenTreasures)}
-        \nTesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
+        output = "\n\t\tMal rollo = #{@text}"+
+        "\n\tNiveles que pierdes = #{@levels}"+
+        "\n\tNº de tesoros escondidos #{@nHiddenTreasures}"+
+        "\n\tNº de tesoros visibles = #{@nVisibleTreasures}"+
+        "\n\tMuerte = #{@death}"+
+        "\n\tTesoros ocultos = #{arrayToString(@specificHiddenTreasures)}"+
+        "\n\tTesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
+      
+    output
   end
 end

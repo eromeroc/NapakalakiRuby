@@ -7,18 +7,12 @@ require_relative 'card_dealer'
 
 class Player
 =begin
-
-QUE ES???
-#computeGoldCoinsValue(t : Treasure []) : float
+  Discontinuas con:
 
 
-+
-+
-+
-+
-+
-+
-
+  CardDealer
+  CombatResult
+  Dice
 =end
   
 

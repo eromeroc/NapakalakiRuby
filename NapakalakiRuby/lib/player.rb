@@ -20,9 +20,7 @@ class Player
   attr_reader :pendingBadConsequence  #Objeto de BC
   attr_reader :visibleTreasures       #Objeto de Treasure
   attr_reader :hiddenTreasures       #Objeto de Treasure
-  
-  @name
-  @level
+ 
   #−name : string
   #−level : int
   
@@ -38,7 +36,7 @@ class Player
   end
   
   def bringToLive()
-    @dead = true
+    @dead = false;
   end
   
   def incrementLevels(l)
@@ -94,11 +92,11 @@ class Player
   end
   
   def discardVisibleTreasure(t)# t : Treasure) 
-    # void
+    @pendingBadConsequence.specificVisibleTreasures = Array.new
   end
   
   def discardHiddenTreasure(t) # t : Treasure) 
-      #: void
+      @pendingBadConsequence.specificHiddenTreasures = Array.new
   end
   
   def buyLevels(visible , hidden)  #visible: Treasure []      hidden  : Treasure []
@@ -106,7 +104,8 @@ class Player
   end
   
   def getCombatLevel() 
-    #int
+    #?
+    @level
   end
   
   def validState() 
@@ -118,23 +117,22 @@ class Player
   end
   
   def isDead() 
-    #: boolean
+    @dead
   end
   
   def hasVisibleTreasures()
-    #: boolean
+    @pendingBadConsequence.specificVisibleTreasures.empty?
   end
   
   def player(name) #Player(name : string)
-    
+    @name = name;
   end
   
   def getVisibleTreasures() 
-    #: Treasure []
-    
+    @pendingBadConsequence.specificVisibleTreasures
   end
   
   def getHiddenTreasures() 
-    #: Treasure []
+    @pendingBadConsequence.specificHiddenTreasures
   end
 end

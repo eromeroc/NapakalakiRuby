@@ -1,6 +1,7 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+include Singleton
 
 class Dice
 =begin
@@ -12,7 +13,7 @@ class Dice
   end
   
   def getInstance()
-    #Dice
+    Dice.new
   end
   
   def nextNumber()

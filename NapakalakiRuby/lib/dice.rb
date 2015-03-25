@@ -18,5 +18,6 @@ class Dice
   
   def nextNumber()
     #int
+    #Genera un número aleatorio entre 1 y 6.
   end
 end

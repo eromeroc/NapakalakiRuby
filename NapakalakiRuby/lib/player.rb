@@ -66,7 +66,8 @@ class Player
   end
   
   def canIBuyLevels(l)
-    
+    #Devuelve true si con los niveles que compra no gana la partida y false en caso
+#contrario.
   end
   
   #Hasta aquí se supone que son privados, como lo pongo?
@@ -105,11 +106,14 @@ class Player
   
   def getCombatLevel() 
     #?
-    @level
+    @level+ @visibleTreasures.maxBonus + @hiddenTreasures.maxBonus
   end
   
   def validState() 
     #: boolean
+    
+    #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
+#más de 4 tesoros ocultos y false en caso contrario.
   end
   
   def initTreasures() 

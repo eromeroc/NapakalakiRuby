@@ -37,6 +37,18 @@ class BadConsequence
   
   private_class_method :new
 
+ def isEmpty()
+        #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
+#atributos del mal rollo indican que no hay mal rollo que cumplir, plantéate qué
+#valores deberán tener.
+        true
+ end
+    
+    def kills()
+        @death;
+    end
+  
+  
   def arrayToString(array)
     texto = "\n\t"
     

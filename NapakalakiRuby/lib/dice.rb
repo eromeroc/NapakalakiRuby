@@ -1,9 +1,11 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-include Singleton
+require 'singleton'
 
 class Dice
+  include Singleton
+
 =begin
 −instance : Dice = null
 −Dice()
@@ -12,12 +14,17 @@ class Dice
     
   end
   
-  def getInstance()
-    Dice.new
-  end
   
+  #Genera un número aleatorio entre 1 y 6.
   def nextNumber()
-    #int
-    #Genera un número aleatorio entre 1 y 6.
+    num = rand(5) +1
+    
+    num
   end
 end
+
+=begin
+for i in 0..5
+  puts Dice.instance.nextNumber()
+end
+=end

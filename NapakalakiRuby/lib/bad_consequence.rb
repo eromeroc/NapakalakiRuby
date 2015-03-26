@@ -35,13 +35,21 @@ class BadConsequence
     new(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
   end
   
+  def self.newVacio()
+    new(" ", 0,0, 0, Array.new, Array.new, false)
+  end
   private_class_method :new
 
  def isEmpty()
-        #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
+   if @text == " " && @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures == Array.new && @specificVisibleTreasures == Array.new && @death  == false
+     respuesta = true
+   else
+     respuesta = false
+     #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
 #atributos del mal rollo indican que no hay mal rollo que cumplir, plantéate qué
 #valores deberán tener.
-        true
+   end
+  respuesta
  end
     
     def kills()

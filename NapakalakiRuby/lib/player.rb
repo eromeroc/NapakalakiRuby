@@ -26,25 +26,38 @@ class Player
   
   def initialize
     @dead = true
-    @MAXHIDDENTREASURES = 4
+    @@MAXHIDDENTREASURES = 4
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
+    @pendingBadConsequence = BadConsequence.newVacio
     
     # ?
     @name = "Sin nombre"
     @level = 0 
   end
   
+  
+  #Devuelve a la vida ?
   def bringToLive()
     @dead = false;
   end
   
+  #Incrementa el nivel del jugador en i niveles, teniendo 1 <=level <= 10  (CREO)
   def incrementLevels(l)
-    @level += l
+    if (@level += l) >= 10
+      @level = 10
+    else
+      @level += l
+    end
   end
   
+  #Decrementa el nivel del jugador en i niveles, teniendo 1 <=level <= 10  (CREO)
   def decrementLevels(l)
-    @level = @level - l
+    if (@level = @level - l) <= 1
+      @level = 1
+    else
+      @level = @level - l
+    end
   end
   
   def setPendingBadConsequence( b) #b -> BadConsequence
@@ -53,6 +66,8 @@ class Player
   
   def die()
     @dead = true;
+    @visibleTreasures = new Array
+    @HiddenTreasures = new Array
   end
   
   def discardNecklaceIfVisible()
@@ -65,7 +80,17 @@ class Player
     end
   end
   
-  def canIBuyLevels(l)
+  #Devuelve true si con los niveles que compra no gana la partida y false en caso
+  #contrario.
+  def canIBuyLevels(i) #i int
+    l = i / 1000
+    if (@level += l) >= 10
+      respuesta = false
+    else
+      respuesta = true
+    end
+    
+    respuesta
     #Devuelve true si con los niveles que compra no gana la partida y false en caso
 #contrario.
   end
@@ -104,12 +129,23 @@ class Player
     #: boolean
   end
   
+  
+  #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
+  #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del
+  #juego.
   def getCombatLevel() 
-    #?
-    @level+ @visibleTreasures.maxBonus + @hiddenTreasures.maxBonus
+    @level + @visibleTreasures.maxBonus + @hiddenTreasures.maxBonus
   end
   
+  
+  #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
+  #más de 4 tesoros ocultos y false en caso contrario.
   def validState() 
+    if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size > 4)
+      respuesta = true
+    else
+      respuesta = false
+    end
     #: boolean
     
     #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
@@ -140,3 +176,9 @@ class Player
     @pendingBadConsequence.specificHiddenTreasures
   end
 end
+
+=begin
+  jugador = Player.new
+  jugador.getCombatLevel()
+  puts jugador.validState()
+=end

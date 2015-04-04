@@ -157,43 +157,31 @@ class Player
   
   #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
   #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego
-  
+  def cuentaNivelTesoros(array)
+    resultado = 0
+    array.each do |k|
+      if (k.maxBonus != k.minBonus)
+        if k.type == TreasureKind::NECKLACE
+          collar = true
+        end
+        if (collar == true)
+          resultado += k.maxBonus
+        else
+          resultado += k.minBonus
+        end
+      else
+        resultado  += k.maxBonus
+      end
+    end
+    resultado
+  end
   def getCombatLevel() 
     #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
   #sino suma el minimo
     resultado = @level
-    collar_visible = false
-    collar_oculto = false
+    resultado += cuentaNivelTesoros(@visibleTreasures)
+    resultado += cuentaNivelTesoros(@hiddenTreasures)
     
-    @visibleTreasures.each do |k|
-      if (k.maxBonus != k.minBonus)
-        if k.type == TreasureKind::NECKLACE
-          collar_visible = true
-        end
-        if (collar_visible == true)
-          resultado += @visibleTreasures.maxBonus
-        else
-          resultado += @visibleTreasures.minBonus
-        end
-      else
-        resultado  += @visibleTreasures.maxBonus
-      end
-    end
-   
-    @hiddenTreasures.each do |k|
-      if (k.maxBonus != k.minBonus)
-        if k.type == TreasureKind::NECKLACE
-          collar_oculto = true
-        end
-        if collar_oculto
-          resultado += @hiddenTreasures.maxBonus
-        else
-          resultado += @hiddenTreasures.minBonus
-        end
-      else
-        resultado  += @hiddenTreasures.maxBonus
-      end
-    end
     resultado
   end
   

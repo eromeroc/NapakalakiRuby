@@ -1,4 +1,4 @@
-
+# coding: utf-8 
 require 'singleton'
 require_relative 'treasure'
 require_relative 'monster'

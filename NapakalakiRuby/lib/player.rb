@@ -1,4 +1,4 @@
-
+# coding: utf-8 
 require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
@@ -20,7 +20,7 @@ class Player
   Igual con getVisibleTreasure y el de los ocultos
 
   En los dos de Discard, igual. Son los tesoros del jugador, y solo se descarta de los que quiere en concreto,
-  mejor lo hacemos más adelante cuando pida ese metodo
+  mejor lo hacemos más adelante cuando pida ese metodo 
   
 =end
 
@@ -157,10 +157,45 @@ class Player
   
   #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
   #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego
-  def getCombatLevel() 
-    @level + @visibleTreasures.maxBonus + @hiddenTreasures.maxBonus
-  end
   
+  def getCombatLevel() 
+    #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
+  #sino suma el minimo
+    resultado = @level
+    collar_visible = false
+    collar_oculto = false
+    
+    @visibleTreasures.each do |k|
+      if (k.maxBonus != k.minBonus)
+        if k.type == TreasureKind::NECKLACE
+          collar_visible = true
+        end
+        if (collar_visible == true)
+          resultado += @visibleTreasures.maxBonus
+        else
+          resultado += @visibleTreasures.minBonus
+        end
+      else
+        resultado  += @visibleTreasures.maxBonus
+      end
+    end
+   
+    @hiddenTreasures.each do |k|
+      if (k.maxBonus != k.minBonus)
+        if k.type == TreasureKind::NECKLACE
+          collar_oculto = true
+        end
+        if collar_oculto
+          resultado += @hiddenTreasures.maxBonus
+        else
+          resultado += @hiddenTreasures.minBonus
+        end
+      else
+        resultado  += @hiddenTreasures.maxBonus
+      end
+    end
+    resultado
+  end
   
   #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
   #más de 4 tesoros ocultos y false en caso contrario.
@@ -186,24 +221,22 @@ class Player
   
   
   def hasVisibleTreasures()
-    @pendingBadConsequence.specificVisibleTreasures.empty?
+    resultado = @visibleTreasures != 0
+    resultado
   end
   
   def getVisibleTreasures()
-    #@visibleTreasures
-    @pendingBadConsequence.specificVisibleTreasures
+    @visibleTreasures
   end
   
   def getHiddenTreasures() 
-    @pendingBadConsequence.specificHiddenTreasures
+    @hiddenTreasures
   end
 end
 
 
 
 
-=begin
-  jugador = Player.new
-  jugador.getCombatLevel()
+  jugador = Player.new("marta")
   puts jugador.validState()
-=end
+  puts jugador.getCombatLevel()

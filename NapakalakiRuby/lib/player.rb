@@ -155,6 +155,7 @@ class Player
   end
   
   def buscaCollar(array)
+    resultado = false
     array.each do |k|
       if k.type == TreasureKind::NECKLACE
         resultado =true

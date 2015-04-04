@@ -4,18 +4,13 @@ require 'singleton'
 class Dice
   include Singleton
 
-=begin
-−instance : Dice = null
-−Dice()
-=end
   def initialize
     
   end
   
-  
   #Genera un número aleatorio entre 1 y 6.
   def nextNumber()
-    num = rand(5) +1
+    num = rand(6) +1
     
     num
   end

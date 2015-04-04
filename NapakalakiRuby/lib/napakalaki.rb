@@ -4,7 +4,7 @@ require 'singleton'
 
 class Napakalaki
   include Singleton
-  #Ni getInstance ni nada?
+  
   
   attr_reader :currentMonster   #Objeto Monster
   attr_reader :currentPlayer    #Objeto Player

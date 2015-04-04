@@ -6,11 +6,22 @@ require_relative 'card_dealer'
 class Player
 =begin
   Discontinuas con:
+    CardDealer
+    CombatResult
+    Dice
 
+  ¿Seria poner el require_relative de esas y ya esta?
+  ¿Y el require_relative hay que ponerlo siempre que usamos un objeto de otra clase en todas?
 
-  CardDealer
-  CombatResult
-  Dice
+  En getCombatLevel, cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
+  sino suma el minimo
+
+  En hasVisibleTreasure, creo que se refiere a los tesoros del jugador, no del mal rollo pendiente.
+  Igual con getVisibleTreasure y el de los ocultos
+
+  En los dos de Discard, igual. Son los tesoros del jugador, y solo se descarta de los que quiere en concreto,
+  mejor lo hacemos más adelante cuando pida ese metodo
+  
 =end
 
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
@@ -31,14 +42,16 @@ class Player
     @pendingBadConsequence = BadConsequence.newVacio  
   end
   
-  private
+  private  
   
-  #Devuelve a la vida ?
+  #Devuelve a la vida al jugador
   def bringToLive()
     @dead = false;
   end
   
-  #Incrementa el nivel del jugador en i niveles, teniendo 1 <=level <= 10  (CREO)
+  
+  #Incrementa el nivel del jugador en i niveles
+  #1 <=level <= 10 
   def incrementLevels(l)
     if (@level += l) >= 10
       @level = 10
@@ -47,39 +60,49 @@ class Player
     end
   end
   
-  #Decrementa el nivel del jugador en i niveles, teniendo 1 <=level <= 10  (CREO)
+  
+  #Decrementa el nivel del jugador en i niveles
+  #1 <=level <= 10  
   def decrementLevels(l)
-    if (@level = @level - l) <= 1
+    if (@level -= l) <= 1
       @level = 1
     else
-      @level = @level - l
+      @level -= l
     end
   end
+  
   
   #Asigna el mal rollo al jugador
   def setPendingBadConsequence(b) #b : BadConsequence
     pendingBadConsequence = b
   end
   
+  
+  #Cambia el estado del jugador a muerto, quitándole todos los tesoros y volviendo al nivel 1
   def die()
-    @dead = true;
+    @dead = true
+    @level = 1
     @visibleTreasures = new Array
     @HiddenTreasures = new Array
   end
+  
   
   def discardNecklaceIfVisible()
     
   end
   
+  
+  #Cambia el estado del jugador a muerto si no tiene tesoros visibles ni ocultos
   def dieIfNoTreasures()
     if @visibleTreasures.empty? && @hiddenTreasures.empty?
       @dead = true
     end
   end
   
+  
   #Devuelve true si con los niveles que compra no gana la partida y false en caso
   #contrario.
-  def canIBuyLevels(i) #i int
+  def canIBuyLevels(i)      #(i : int) : boolean
     l = i / 1000
     if (@level += l) >= 10
       respuesta = false
@@ -90,13 +113,14 @@ class Player
     respuesta
   end
   
+  
   protected
-  def computeGoldCoinsValue(t) #t : Treasure[]
+  def computeGoldCoinsValue(t) #(t : Treasure[]) : float
     
   end
   
-  public
   
+  public
   def applyPrize(p)   #(p : Prize) : void
     
   end
@@ -132,8 +156,7 @@ class Player
   
   
   #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
-  #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del
-  #juego.
+  #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego
   def getCombatLevel() 
     @level + @visibleTreasures.maxBonus + @hiddenTreasures.maxBonus
   end
@@ -142,42 +165,36 @@ class Player
   #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
   #más de 4 tesoros ocultos y false en caso contrario.
   def validState() 
-    if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size > 4)
+    if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size <= 4)
       respuesta = true
     else
       respuesta = false
     end
-    #: boolean
     
+    respuesta
   end
   
   def initTreasures() #: boolean
     
   end
   
+  
+  #Devuelve true si el jugador esta muerto
   def isDead() 
     @dead
   end
   
+  
   def hasVisibleTreasures()
     @pendingBadConsequence.specificVisibleTreasures.empty?
   end
-
-=begin
-este Player es el constructor, que le pasas el nombre, lo he puesto bien arriba que tenias una ?
-  def player(name) 
-    @name = name;
-  end
-=end
   
   def getVisibleTreasures()
-    #Creo que se refiere a los tesoros visibles del jugador, no los del mal rollo,osea solo:
     #@visibleTreasures
     @pendingBadConsequence.specificVisibleTreasures
   end
   
   def getHiddenTreasures() 
-    #Igual
     @pendingBadConsequence.specificHiddenTreasures
   end
 end

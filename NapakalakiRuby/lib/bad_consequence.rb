@@ -10,9 +10,8 @@ class BadConsequence
     attr_reader :death             #Mal rollo de tipo muerte
     attr_reader :specificHiddenTreasures  #Tesorros ocultos
     attr_reader :specificVisibleTreasures  #Tesoros visibles
-    
 
-
+  
   def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
     @text = aText
     @levels = someLevels
@@ -42,38 +41,48 @@ class BadConsequence
   private_class_method :new
   
 
- #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
- #atributos del mal rollo indican que no hay mal rollo que cumplir.
- def isEmpty()
-   if @text == " " && @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures.empty? &&
-      @specificVisibleTreasures.empty? && @death  == false
-     respuesta = true
-   else
-     respuesta = false    
-   end
-  respuesta
- end
- 
- 
- #
- def kills()
-    @death;
- end
-  
- 
- #
- def arrayToString(array)
-   texto = "\n\t"
+  #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
+  #atributos del mal rollo indican que no hay mal rollo que cumplir.
+  def isEmpty()
+    if @text == " " && @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures.empty? &&
+       @specificVisibleTreasures.empty? && @death  == false
     
-   array.each do |i| 
-     texto += (i.to_s + " ")
+      respuesta = true
+    else
+      respuesta = false    
     end
- end
+   respuesta
+  end
  
  
- #
- def to_s
-       output = "\n\t\tMal rollo = #{@text}"+
+  #Devuelve true si el mal rollo es muerte
+  def kills()
+     @death
+  end
+  
+  def substractVisibleTreasure(t) # (t : Treasure) : void
+
+  end
+  
+  def substractHiddenTreasure(t) # (t : Treasure) : void
+
+  end
+  
+  def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence
+    
+  end
+ 
+  
+  def arrayToString(array)
+    texto = "\n\t"
+    
+    array.each do |i| 
+      texto += (i.to_s + " ")
+     end
+  end
+ 
+  def to_s
+      output = "\n\t\tMal rollo = #{@text}"+
        "\n\tNiveles que pierdes = #{@levels}"+
        "\n\tNº de tesoros escondidos #{@nHiddenTreasures}"+
        "\n\tNº de tesoros visibles = #{@nVisibleTreasures}"+
@@ -82,5 +91,5 @@ class BadConsequence
        "\n\tTesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
       
    output
- end
+  end
 end

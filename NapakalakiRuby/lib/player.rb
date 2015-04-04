@@ -1,6 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
+
 require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
@@ -14,28 +12,26 @@ class Player
   CombatResult
   Dice
 =end
-  
 
-
-  attr_reader :pendingBadConsequence  #Objeto de BC
-  attr_reader :visibleTreasures       #Objeto de Treasure
-  attr_reader :hiddenTreasures       #Objeto de Treasure
+  attr_reader :pendingBadConsequence  #Objeto BadConsequence
+  attr_reader :visibleTreasures       #Objeto Treasure
+  attr_reader :hiddenTreasures        #Objeto Treasure
  
+  #-dead : boolean
   #−name : string
   #−level : int
   
-  def initialize
+  def initialize(name)
     @dead = true
+    @name = name
+    @level = 1
     @@MAXHIDDENTREASURES = 4
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
-    @pendingBadConsequence = BadConsequence.newVacio
-    
-    # ?
-    @name = "Sin nombre"
-    @level = 0 
+    @pendingBadConsequence = BadConsequence.newVacio  
   end
   
+  private
   
   #Devuelve a la vida ?
   def bringToLive()
@@ -60,7 +56,8 @@ class Player
     end
   end
   
-  def setPendingBadConsequence( b) #b -> BadConsequence
+  #Asigna el mal rollo al jugador
+  def setPendingBadConsequence(b) #b : BadConsequence
     pendingBadConsequence = b
   end
   
@@ -71,7 +68,7 @@ class Player
   end
   
   def discardNecklaceIfVisible()
-    # ??
+    
   end
   
   def dieIfNoTreasures()
@@ -91,42 +88,46 @@ class Player
     end
     
     respuesta
-    #Devuelve true si con los niveles que compra no gana la partida y false en caso
-#contrario.
   end
   
-  #Hasta aquí se supone que son privados, como lo pongo?
-  
-  def applyPrize(p)   #p -> Prize   return void
-    #?
+  protected
+  def computeGoldCoinsValue(t) #t : Treasure[]
+    
   end
   
-  def combat(m)  #m->Monster ; return CombatLevel
-    #?
+  public
+  
+  def applyPrize(p)   #(p : Prize) : void
+    
   end
   
-  def applyBadConsequence(bad ) # bad-> : BadConsequence
-    #void
+  def combat(m)  #(m : Monster) : CombatResult
+    
   end
   
-  def makeTreasureVisible(t) # t: Treasure)  
-    # return boolean
+  def applyBadConsequence(bad) #(bad : BadConsequence) : void
+    
   end
   
-  def canMakeTreasureVisible(t) # t : Treasure) 
-    #return: boolean
+  def makeTreasureVisible(t) # (t: Treasure) : boolean  
+   
   end
   
-  def discardVisibleTreasure(t)# t : Treasure) 
+  def canMakeTreasureVisible(t) # (t : Treasure) : boolean
+   
+  end
+  
+  def discardVisibleTreasure(t) # (t : Treasure) : void 
     @pendingBadConsequence.specificVisibleTreasures = Array.new
   end
   
-  def discardHiddenTreasure(t) # t : Treasure) 
+  def discardHiddenTreasure(t) # (t : Treasure) : void
       @pendingBadConsequence.specificHiddenTreasures = Array.new
   end
   
-  def buyLevels(visible , hidden)  #visible: Treasure []      hidden  : Treasure []
-    #: boolean
+  
+  def buyLevels(visible , hidden)  #(visible: Treasure [],  hidden : Treasure []) : boolean
+    
   end
   
   
@@ -148,12 +149,10 @@ class Player
     end
     #: boolean
     
-    #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
-#más de 4 tesoros ocultos y false en caso contrario.
   end
   
-  def initTreasures() 
-    #: boolean
+  def initTreasures() #: boolean
+    
   end
   
   def isDead() 
@@ -163,19 +162,28 @@ class Player
   def hasVisibleTreasures()
     @pendingBadConsequence.specificVisibleTreasures.empty?
   end
-  
-  def player(name) #Player(name : string)
+
+=begin
+este Player es el constructor, que le pasas el nombre, lo he puesto bien arriba que tenias una ?
+  def player(name) 
     @name = name;
   end
+=end
   
-  def getVisibleTreasures() 
+  def getVisibleTreasures()
+    #Creo que se refiere a los tesoros visibles del jugador, no los del mal rollo,osea solo:
+    #@visibleTreasures
     @pendingBadConsequence.specificVisibleTreasures
   end
   
   def getHiddenTreasures() 
+    #Igual
     @pendingBadConsequence.specificHiddenTreasures
   end
 end
+
+
+
 
 =begin
   jugador = Player.new

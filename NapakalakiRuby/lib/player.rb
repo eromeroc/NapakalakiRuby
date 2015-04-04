@@ -170,11 +170,10 @@ class Player
     #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
   #sino suma el minimo
     resultado = @level
-    collar_visible = buscaCollar(@visibleTreasures)
-    collar_oculto = buscaCollar(@hiddenTreasures)
+    tiene_collar = buscaCollar(@visibleTreasures)
     @visibleTreasures.each do |k|
       if (k.maxBonus != k.minBonus)
-        if(collar_visible)
+        if(tiene_collar)
           resultado += k.maxBonus
         else
           resultado += k.minBonus
@@ -183,7 +182,7 @@ class Player
     end
     @hiddenTreasures.each do |k|
       if (k.maxBonus != k.minBonus)
-        if(collar_oculto)
+        if(tiene_collar)
           resultado += k.maxBonus
         else
           resultado += k.minBonus

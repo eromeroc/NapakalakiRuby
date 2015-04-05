@@ -12,15 +12,6 @@ class Player
 
   ¿Seria poner el require_relative de esas y ya esta?
   ¿Y el require_relative hay que ponerlo siempre que usamos un objeto de otra clase en todas?
-
-  En getCombatLevel, cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
-  sino suma el minimo
-
-  En hasVisibleTreasure, creo que se refiere a los tesoros del jugador, no del mal rollo pendiente.
-  Igual con getVisibleTreasure y el de los ocultos
-
-  En los dos de Discard, igual. Son los tesoros del jugador, y solo se descarta de los que quiere en concreto,
-  mejor lo hacemos más adelante cuando pida ese metodo 
   
 =end
 
@@ -142,11 +133,11 @@ class Player
   end
   
   def discardVisibleTreasure(t) # (t : Treasure) : void 
-    @pendingBadConsequence.specificVisibleTreasures = Array.new
+    
   end
   
   def discardHiddenTreasure(t) # (t : Treasure) : void
-      @pendingBadConsequence.specificHiddenTreasures = Array.new
+      
   end
   
   

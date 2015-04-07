@@ -206,7 +206,7 @@ class CardDealer
   end
   
   def shuffleTreasures()
-    
+    #num = rand(6) +1     es como hice el dado de dice
   end
   
   def shuffleMonsters()

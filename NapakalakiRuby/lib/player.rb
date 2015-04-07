@@ -24,7 +24,7 @@ class Player
   #−level : int
   
   def initialize(name)
-    @dead = true
+    @dead = false
     @name = name
     @level = 1
     @@MAXHIDDENTREASURES = 4
@@ -145,7 +145,7 @@ class Player
     
   end
   
-  def buscaCollar(array)
+  def hasNecklace(array)
     resultado = false
     array.each do |k|
       if k.type == TreasureKind::NECKLACE
@@ -162,7 +162,7 @@ class Player
     #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
   #sino suma el minimo
     resultado = @level
-    tiene_collar = buscaCollar(@visibleTreasures)
+    tiene_collar = hasNecklace(@visibleTreasures)
     @visibleTreasures.each do |k|
       if (k.maxBonus != k.minBonus)
         if(tiene_collar)
@@ -209,8 +209,7 @@ class Player
   
   
   def hasVisibleTreasures()
-    resultado = @visibleTreasures != 0
-    resultado
+    @visibleTreasures.empty?
   end
   
   def getVisibleTreasures()
@@ -223,8 +222,12 @@ class Player
 end
 
 
-
-
+=begin
   jugador = Player.new("marta")
   puts jugador.validState()
   puts jugador.getCombatLevel()
+  puts jugador.isDead()
+  puts jugador.getVisibleTreasures()
+  puts jugador.getHiddenTreasures() 
+  puts jugador.hasVisibleTreasures()
+=end

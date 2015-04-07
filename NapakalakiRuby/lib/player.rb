@@ -4,16 +4,6 @@ require_relative 'treasure'
 require_relative 'card_dealer'
 
 class Player
-=begin
-  Discontinuas con:
-    CardDealer
-    CombatResult
-    Dice
-
-  ¿Seria poner el require_relative de esas y ya esta?
-  ¿Y el require_relative hay que ponerlo siempre que usamos un objeto de otra clase en todas?
-  
-=end
 
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
   attr_reader :visibleTreasures       #Objeto Treasure

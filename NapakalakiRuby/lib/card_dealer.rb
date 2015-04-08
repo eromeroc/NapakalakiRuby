@@ -2,6 +2,8 @@
 require 'singleton'
 require_relative 'treasure'
 require_relative 'monster'
+require_relative 'bad_consequence'
+require_relative 'prize'
 
 class CardDealer
   
@@ -14,7 +16,7 @@ class CardDealer
   private
   def initTreasureCardDeck()
     @unusedTreasures = Array.new
-    #Sin revisar
+    
     #Estructura: Nombre, Piezas de oro, minBonus, maxBonus, TreasureKind::XXXXX
     @unusedTreasures = Array.new
     @unusedTreasures<< Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
@@ -237,8 +239,8 @@ class CardDealer
   
   #Inicializa las dos barajas de cartas: monstruos y tesoros
   def initCards()
-    initTreasuresCardDeck()
-    initMonstersCardDeck()
+    initTreasureCardDeck()
+    initMonsterCardDeck()
     
     @usedTreasures = Array.new
     @usedMonsters = Array.new
@@ -246,3 +248,7 @@ class CardDealer
   end
   
 end
+
+cartas = CardDealer.instance
+cartas.initCards()
+puts "Prueba CardDealer"

@@ -82,3 +82,6 @@ class Napakalaki
   end
   
 end
+
+napakalaki = Napakalaki.instance
+puts "Prueba Napakalaki"

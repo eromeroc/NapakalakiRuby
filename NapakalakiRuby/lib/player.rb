@@ -14,7 +14,7 @@ class Player
   #−level : int
   
   def initialize(name)
-    @dead = false
+    @dead = true
     @name = name
     @level = 1
     @@MAXHIDDENTREASURES = 4
@@ -212,7 +212,7 @@ class Player
 end
 
 
-=begin
+
   jugador = Player.new("marta")
   puts jugador.validState()
   puts jugador.getCombatLevel()
@@ -220,4 +220,4 @@ end
   puts jugador.getVisibleTreasures()
   puts jugador.getHiddenTreasures() 
   puts jugador.hasVisibleTreasures()
-=end
+

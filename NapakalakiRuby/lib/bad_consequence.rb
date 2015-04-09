@@ -60,12 +60,15 @@ class BadConsequence
      @death
   end
   
+  #Actualiza el mal rollo (que tiene que cumplir el jugador) basándose en el hecho de que el
+#jugador se descarta del tesoro visible t.
   def substractVisibleTreasure(t) # (t : Treasure) : void
-
+    @specificVisibleTreasures << t
   end
   
+  #Igual que el anterior, pero para los ocultos.
   def substractHiddenTreasure(t) # (t : Treasure) : void
-
+    @specificHiddenTreasures << t
   end
   
   def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence

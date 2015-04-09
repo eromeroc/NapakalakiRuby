@@ -68,8 +68,14 @@ class Player
   end
   
   
+  #Si el jugador tiene equipado el tesoro tipo NECKLACE, se lo entrega al CardDealer y lo elimina de sus tesoros visibles.
   def discardNecklaceIfVisible()
-    
+    @visibleTreasures.each do |k|
+      if k.type == TreasureKind::NECKLACE
+        giveTreasureBack(k)
+        @visibleTreasures.delete(k)
+      end
+    end
   end
   
   
@@ -96,6 +102,9 @@ class Player
   
   
   protected
+  #Calcula y devuelve los niveles que puede comprar el jugador con la lista t de tesoros. El
+#número de niveles no es redondeado ni al alza ni a la baja y se expresa mediante un
+#número en coma flotante.
   def computeGoldCoinsValue(t) #(t : Treasure[]) : float
     
   end
@@ -118,9 +127,11 @@ class Player
    
   end
   
+  #Comprueba si el tesoro (t) se puede pasar de oculto a visible, según las reglas del juego
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
    
   end
+  
   
   def discardVisibleTreasure(t) # (t : Treasure) : void 
     
@@ -220,4 +231,5 @@ end
   puts jugador.getVisibleTreasures()
   puts jugador.getHiddenTreasures() 
   puts jugador.hasVisibleTreasures()
+  puts jugador.discardNecklaceIfVisible()
 

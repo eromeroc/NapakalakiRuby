@@ -217,12 +217,24 @@ class CardDealer
   
   
   public
+  #Devuelve el siguiente tesoro que hay en el mazo de tesoros (unusedTreasures) y lo
+#elimina de él. Si el mazo está vacío, pasa el mazo de descartes (usedTreasures) al mazo
+#de tesoros y lo baraja, dejando el mazo de descartes vacío.
   def nextTreasure()
+    treasure = @unusedTreasures.first()
+    giveTreasureBack(treasure)
+    @unusedTreasures.delete_at(0)
     
+    treasure
   end
   
+  #Igual que la anterior pero con el mazo de monstruos.
   def nextMonster()
+    monster = @unusedTreasures.first()
+    @unusedTreasures.delete_at(0)
+    giveMonsterBack(monster)
     
+    monster
   end
   
   
@@ -251,4 +263,6 @@ end
 
 cartas = CardDealer.instance
 cartas.initCards()
+cartas.nextMonster()
+cartas.nextTreasure()
 puts "Prueba CardDealer"

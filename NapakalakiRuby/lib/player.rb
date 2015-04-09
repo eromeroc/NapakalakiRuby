@@ -101,12 +101,18 @@ class Player
   end
   
   
-  protected
+  #protected
+  public
   #Calcula y devuelve los niveles que puede comprar el jugador con la lista t de tesoros. El
 #número de niveles no es redondeado ni al alza ni a la baja y se expresa mediante un
 #número en coma flotante.
   def computeGoldCoinsValue(t) #(t : Treasure[]) : float
-    
+    oro = 0
+    t.each do|k| 
+      oro += k.goldCoins
+    end
+    niveles = oro / 100.0
+    niveles
   end
   
   
@@ -129,7 +135,14 @@ class Player
   
   #Comprueba si el tesoro (t) se puede pasar de oculto a visible, según las reglas del juego
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
-   
+   #Cada jugador puede equiparse con un único tesoro de cada tipo
+   resultado = true
+   @visibleTreasures.each do |k| 
+     if k == t
+       resultado = false
+     end
+   end
+   resultado
   end
   
   
@@ -225,11 +238,24 @@ end
 
 
   jugador = Player.new("marta")
-  puts jugador.validState()
-  puts jugador.getCombatLevel()
-  puts jugador.isDead()
-  puts jugador.getVisibleTreasures()
-  puts jugador.getHiddenTreasures() 
-  puts jugador.hasVisibleTreasures()
-  puts jugador.discardNecklaceIfVisible()
+#  puts jugador.validState()
+#  puts jugador.getCombatLevel()
+#  puts jugador.isDead()
+#  puts jugador.getVisibleTreasures()
+#  puts jugador.getHiddenTreasures() 
+#  puts jugador.hasVisibleTreasures()
+#  puts jugador.discardNecklaceIfVisible()  #privado
+  
+#  unusedTreasures = Array.new
+#  tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
+#  unusedTreasures<< tesoro1
+#  unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
+#  unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
+#  unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
+##  puts jugador.computeGoldCoinsValue(unusedTreasures)     #protegido
+#
+#  tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
+#  puts jugador.canMakeTreasureVisible(tesoro1)
+#  puts jugador.canMakeTreasureVisible(tesoro2)
 
+#Como añado un tesoro ????

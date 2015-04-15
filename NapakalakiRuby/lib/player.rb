@@ -72,7 +72,7 @@ class Player
   def discardNecklaceIfVisible()
     @visibleTreasures.each do |k|
       if k.type == TreasureKind::NECKLACE
-        giveTreasureBack(k)
+        #giveTreasureBack(k) 
         @visibleTreasures.delete(k)
       end
     end
@@ -244,7 +244,7 @@ end
 #  puts jugador.getVisibleTreasures()
 #  puts jugador.getHiddenTreasures() 
 #  puts jugador.hasVisibleTreasures()
-#  puts jugador.discardNecklaceIfVisible()  #privado
+#  jugador.discardNecklaceIfVisible()  #privado
   
 #  unusedTreasures = Array.new
 #  tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)

@@ -9,6 +9,7 @@ class Napakalaki
   attr_reader :currentMonster   #Objeto Monster
   attr_reader :currentPlayer    #Objeto Player
   attr_reader :players          #Array de players ¿A partir de 1?
+  attr_reader :currentPlayerIndex #¿Donde lo inicializo a -1?
 
   
   def initialize
@@ -16,12 +17,44 @@ class Napakalaki
   end
   
   private
+  
+  #Inicializa el array de jugadores que contiene Napakalaki, creando tantos jugadores como
+  #elementos haya en names, que es el array de String que contiene el nombre de los
+  #jugadores.
   def initPlayers(names) # (names : string[]) : void
-    
+      names.each do |k|
+            @players << Player.new(names[i]);
+       
+      end
   end
   
+  #Decide qué jugador es el siguiente en jugar. Se pueden dar dos posibilidades para calcular
+  #el índice que ocupa dicho jugador en la lista de jugadores, que se trate del primer turno o
+  #no. Para el primer turno se calculará la posición del primer jugador utilizando un número aleatorio.
+  #Se debe añadir a la clase Napakalali un atributo privado denominado
+  #currentPlayerIndex. Este atributo representa el índice del jugador que posee el
+  #turno.
+  #También debe actualizarse la variable de instancia currentPlayer como parte de las
+  #tareas del método.
   def nextPlayer() # : Player
+    siguiente
     
+    if(@currentPlayerIndex == -1)
+      siguiente = rand(@players.size())
+    end
+    else
+      if(@currentPlayerIndex = players.size())
+        siguiente = 0
+      end
+      else        #No entiendo que problema tiene con este!!!
+        siguiente = @currentPlayerIndex +1;
+      end
+    end
+      
+    @currentPlayerIndex = siguiente
+    @currentPlayer = @players.get(siguiente)
+    
+    @currentPlayer    
   end
   
   public
@@ -71,11 +104,11 @@ class Napakalaki
   end
   
   def getCurrentPlayer()  # : Player
-    
+    @currentPlayer
   end
   
   def getCurrentMonster() # : Monster
-    
+    @currentMonster
   end
   
   def canMakeTreasureVisible(t) # (t: Treasure) : boolean
@@ -107,8 +140,17 @@ class Napakalaki
     
   end
   
+#Devuelve true si result tiene el valor WINANDWINGAME del enumerado CombatResult, en
+#caso contrario devuelve false.
+
   def endOfGame(result) # (result : CombatResult) : boolean
+    endOfGame = false
     
+    if(result = WINANDWINGAME)
+      endOfGame = true
+    end
+    
+    endOfGame
   end
   
 end

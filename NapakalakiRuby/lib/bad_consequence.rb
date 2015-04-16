@@ -64,11 +64,13 @@ class BadConsequence
   #jugador se descarta del tesoro visible t.
   def substractVisibleTreasure(t) # (t : Treasure) : void
     @specificVisibleTreasures << t      #???
+    @nVisibleTreasures = @nVisibleTreasures +1
   end
   
   #Igual que el anterior, pero para los ocultos.
   def substractHiddenTreasure(t) # (t : Treasure) : void
     @specificHiddenTreasures << t       #??
+    @nHiddenTreasures = @nHiddenTreasures +1
   end
   
   def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence

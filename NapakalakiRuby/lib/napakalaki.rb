@@ -45,8 +45,8 @@ class Napakalaki
     else
       if(@currentPlayerIndex = players.size())
         siguiente = 0
-      end
-      else        #No entiendo que problema tiene con este!!!
+        
+      else        
         siguiente = @currentPlayerIndex +1;
       end
     end
@@ -100,7 +100,8 @@ class Napakalaki
 #  iniciar el juego con la llamada a nextTurn() para pasar al siguiente turno (que en este
 #  caso será el primero).
   def initGame(players)  #(players : String[]) : void
-    
+    CardDealer.instance.initCards
+    initPlayers(players)
   end
   
   def getCurrentPlayer()  # : Player

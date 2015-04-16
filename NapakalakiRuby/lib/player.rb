@@ -191,10 +191,18 @@ class Player
   end
   
   def discardHiddenTreasure(t) # (t : Treasure) : void
-      @hiddenTreasures.each do |k|
-      if k == t
-        @hiddenTreasures.delete(k)
+      if @currentPlayer.pendingBadConsequence != nil && !@currentPlayer.pendingBadConsequence.isEmpty
+      @currentPlayer.pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
+    
+      @HiddenTreasures.each do |k|
+        if k == t
+          @HiddenTreasures.delete(k)
+        end
       end
+    end
+    
+    if @currentPlayer.visibleTreasures.is_empty? && @currentPlayer.hiddenTreasures.is_empty?
+      @currentPlayer.die
     end
   end
   

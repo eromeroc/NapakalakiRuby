@@ -67,7 +67,8 @@ class Napakalaki
 #  iniciar el juego con la llamada a nextTurn() para pasar al siguiente turno (que en este
 #  caso será el primero).
   def initGame(players)  #(players : String[]) : void
-    
+    CardDealer.instance.initCards
+    initPlayers(players)
   end
   
   def getCurrentPlayer()  # : Player

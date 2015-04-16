@@ -72,7 +72,7 @@ class Player
   def discardNecklaceIfVisible()
     @visibleTreasures.each do |k|
       if k.type == TreasureKind::NECKLACE
-        #giveTreasureBack(k) 
+        CardDealer.instance.giveTreasureBack(k) 
         @visibleTreasures.delete(k)
       end
     end
@@ -137,12 +137,16 @@ class Player
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
    #Cada jugador puede equiparse con un único tesoro de cada tipo
    resultado = true
-   @visibleTreasures.each do |k| 
-     if k == t
+   if @visibleTreasures > 4
+     resultado = false
+   else
+    @visibleTreasures.each do |k| 
+      if k == t
        resultado = false
-     end
+      end
+    end
+    resultado
    end
-   resultado
   end
   
   

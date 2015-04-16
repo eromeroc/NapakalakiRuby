@@ -118,9 +118,7 @@ class Player
   
   public
   def applyPrize(p)   #(p : Prize) : void
-    # CREO REVISAR
-    decrementLevels(p.levels)
-    discardVisibleTreasure(p.treasures)  #Solo los visibles?
+   
   end
   
   def combat(m)  #(m : Monster) : CombatResult
@@ -175,11 +173,21 @@ class Player
   
   
   def discardVisibleTreasure(t) # (t : Treasure) : void 
-    @visibleTreasures.each do |k|
-      if k == t
-        @visibleTreasures.delete(k)
+    
+    if @currentPlayer.pendingBadConsequence != nil && !@currentPlayer.pendingBadConsequence.isEmpty
+      @currentPlayer.pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
+    
+      @visibleTreasures.each do |k|
+        if k == t
+          @visibleTreasures.delete(k)
+        end
       end
     end
+    
+    if @currentPlayer.visibleTreasures.is_empty? && @currentPlayer.hiddenTreasures.is_empty?
+      @currentPlayer.die
+    end
+    
   end
   
   def discardHiddenTreasure(t) # (t : Treasure) : void

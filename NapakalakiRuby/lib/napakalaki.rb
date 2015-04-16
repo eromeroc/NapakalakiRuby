@@ -67,8 +67,9 @@ class Napakalaki
 #  visibles del jugador. Al eliminar esos tesoros, si el jugador tiene un mal rollo pendiente, se
 #  indica a éste dicho descarte para su posible actualización.
   def discardVisibleTreasure(t) # (t : Treasure) : void
-    @currentPlayer.pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
     @currentPlayer.discardVisibleTreasure(t)
+    
+    
   end
   
 #  Análoga a la operación anterior aplicada a tesoros ocultos. Realizar el correspondiente

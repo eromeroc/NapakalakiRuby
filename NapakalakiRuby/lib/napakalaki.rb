@@ -83,7 +83,9 @@ class Napakalaki
 #  según las reglas del juego, para ello llama al método, para ello desde Player se ejecuta el
 #  método: canMakeTreasureVisible(t:Treasure ):boolean
   def makeTreasureVisible(t) # (t : Treasure) : boolean
-    
+    if canMakeTreasureVisible(t)
+      @currentPlayer.makeTreasureVisible(t)
+    end
   end
   
   

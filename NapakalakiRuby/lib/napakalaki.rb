@@ -41,7 +41,6 @@ class Napakalaki
     
     if(@currentPlayerIndex == -1)
       siguiente = rand(@players.size())
-    end
     else
       if(@currentPlayerIndex = players.size())
         siguiente = 0
@@ -49,8 +48,8 @@ class Napakalaki
       else        
         siguiente = @currentPlayerIndex +1;
       end
+    
     end
-      
     @currentPlayerIndex = siguiente
     @currentPlayer = @players.get(siguiente)
     
@@ -60,20 +59,23 @@ class Napakalaki
   public
   #Leer guión PS3S2, muuuy largo
   def combat() # : CombatResult
-    
+    result = @currentPlayer.combat(@currentMonster)
+    result
   end 
   
 #  Operación encargada de eliminar los tesoros visibles indicados de la lista de tesoros
 #  visibles del jugador. Al eliminar esos tesoros, si el jugador tiene un mal rollo pendiente, se
 #  indica a éste dicho descarte para su posible actualización.
   def discardVisibleTreasure(t) # (t : Treasure) : void
-  
+    @currentPlayer.pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
+    @currentPlayer.discardVisibleTreasure(t)
   end
   
 #  Análoga a la operación anterior aplicada a tesoros ocultos. Realizar el correspondiente
 #  diagrama de secuencia.
   def discardHiddenTreasure(t) # (t : Treasure) : void
-    
+    @currentPlayer.pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
+    @currentPlayer.discardHiddenTreasure(t)
   end
   
   
@@ -92,7 +94,13 @@ class Napakalaki
 #  comprar niveles si con ello ganas el juego), entonces se produce el mencionado
 #  incremento.
   def buyLevels(visible, hidden) # (visible : Treasure[], hidden : Treasure[]) :boolean
+    num_visible = computeGoldCoinsValue(visible)
+    num_oculto = computeGoldCoinsValue(hidden)
     
+    num_total = num_visible+num_oculto
+    if @currentPlayer.canIBuyLevels(num_total)
+      @levels += num_total
+    end
   end
   
 #  Se encarga de solicitar a CardDealer la inicialización de los mazos de cartas de
@@ -102,6 +110,7 @@ class Napakalaki
   def initGame(players)  #(players : String[]) : void
     CardDealer.instance.initCards
     initPlayers(players)
+    nextTurn
   end
   
   def getCurrentPlayer()  # : Player
@@ -134,7 +143,14 @@ class Napakalaki
 # inicialización de los tesoros se encuentra recogida en el diagrama subordinado
 # initTreasures.
   def nextTurn()  # : boolean
-    
+    if nextTurnAllowed
+      nextPlayer
+      @currentMonster = CardDealer.instance.nextMonster
+      
+      if @currentPlayer.isDead
+        initTreasures
+      end
+    end
   end
   
   def nextTurnAllowed() # : boolean

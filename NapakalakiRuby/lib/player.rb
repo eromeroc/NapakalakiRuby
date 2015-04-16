@@ -118,11 +118,35 @@ class Player
   
   public
   def applyPrize(p)   #(p : Prize) : void
-    
+    # CREO REVISAR
+    decrementLevels(p.levels)
+    discardVisibleTreasure(p.treasures)  #Solo los visibles?
   end
   
   def combat(m)  #(m : Monster) : CombatResult
-    
+    result = 
+    if @level > m.combatLevel
+      applyPrize(m.prize)   ## Hacer applyPrize
+      if @level < 10
+        result = CombatResult::WIN
+      else
+      result = CombatResult::WINANDWINGAME
+      end
+    else #@level <= m.combatLevel
+      num = Dice.instance.nextNumber
+      if num == 5 || num == 6
+        result = CombatResult::LooseAndEscape
+      else
+        if m.bc.death == true
+          die
+          result = CombatResult::LoseAndDie
+        else
+          applyBadConsequence(m.bc)
+          result = CombatResult::Lose
+        end
+      end
+    end
+    result
   end
   
   def applyBadConsequence(bad) #(bad : BadConsequence) : void
@@ -151,11 +175,19 @@ class Player
   
   
   def discardVisibleTreasure(t) # (t : Treasure) : void 
-    
+    @visibleTreasures.each do |k|
+      if k == t
+        @visibleTreasures.delete(k)
+      end
+    end
   end
   
   def discardHiddenTreasure(t) # (t : Treasure) : void
-      
+      @hiddenTreasures.each do |k|
+      if k == t
+        @hiddenTreasures.delete(k)
+      end
+    end
   end
   
   

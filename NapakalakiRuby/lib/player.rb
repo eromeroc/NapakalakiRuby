@@ -2,6 +2,7 @@
 require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
+require_relative 'dice'
 
 class Player
 
@@ -59,12 +60,22 @@ class Player
   end
   
   
-  #Cambia el estado del jugador a muerto, quitándole todos los tesoros y volviendo al nivel 1
+  #Cuando el jugador muere en un combate, esta operación es la encargada de dejarlo sin
+  #tesoros, ponerle el nivel a 1 e indicar que está muerto, en el atributo correspondiente.
   def die()
     @dead = true
     @level = 1
-    @visibleTreasures = new Array
-    @HiddenTreasures = new Array
+    
+    @visibleTreasures.each do|k|
+      CardDealer.instance.giveTreasureBack(k)
+    end
+    @visibleTreasures.clear
+    
+    @hiddenTreasures.each do|k|
+      CardDealer.instance.giveTreasureBack(k)
+    end
+    @hiddenTreasures.clear
+    
   end
   
   
@@ -117,7 +128,18 @@ class Player
   
   
   public
+  #Cuando el jugador gana el combate, esta operación es la encargada de aplicar el buen 
+  #rollo al jugador, sumando los niveles correspondiente y robando los tesoros indicados en el
+  #buen rollo del monstruo.
   def applyPrize(p)   #(p : Prize) : void
+    nLevels = p.getLevels
+    nPrize = p.getTreasures
+    
+    incrementLevels(nLevels)
+    
+    nLevels.each do |k|
+      @hiddenTreasures << CardDealer.instance.nextTreasure()
+    end
    
   end
   
@@ -147,7 +169,17 @@ class Player
     result
   end
   
+  #Decrementa sus niveles según indica el mal rollo y guarda una copia de un objeto
+  #badConsequence ajustada a los tesoros que puede perder según indique el mal rollo del
+  #monstruo y de los tesoros que disponga el jugador. La operación encargada de hacer este
+  #ajuste es adjustToFitTreasureLists de la clase badConsequence. El mal rollo
+  #pendiente (pendingbadConsequence) es el que el jugador almacenará y que deberá
+  #cumplir descartándose de esos tesoros antes de que pueda pasar al siguiente turno.
   def applyBadConsequence(bad) #(bad : BadConsequence) : void
+    decrementLevels(bad.getLevels)
+    
+    pendingBad = adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    setPendingBadConsequence(pendingBad)
     
   end
   
@@ -263,7 +295,28 @@ class Player
     respuesta
   end
   
+  #Cuando un jugador está en su primer turno o se ha quedado sin tesoros ocultos o visibles,
+  #hay que proporcionarle nuevos tesoros para que pueda seguir jugando. El número de
+  #tesoros que se les proporciona viene dado por el valor que saque al tirar el dado:
+  # .Si (dado == 1) roba un tesoro.
+  # .Si (1 < dado< 6) roba dos tesoros.
+  # .Si (dado == 6) roba tres tesoros.
+  
   def initTreasures() #: boolean
+    bringToLive()
+    number = Dice.instance.nextNumber()
+    
+    if(number == 1)
+      @hiddenTreasures << CardDealer.instance.nextTreasure()
+    else if(1 < number < 6)
+      for i in 0..1
+        @hiddenTreasures << CardDealer.instance.nextTreasure()
+      end
+    else
+      for i in 0..2
+        @hiddenTreasures << CardDealer.instance.nextTreasure()
+      end
+    end 
     
   end
   
@@ -310,4 +363,6 @@ end
 #  puts jugador.canMakeTreasureVisible(tesoro1)
 #  puts jugador.canMakeTreasureVisible(tesoro2)
 
-#Como añado un tesoro ????
+#Como añado un tesoro ???
+
+end

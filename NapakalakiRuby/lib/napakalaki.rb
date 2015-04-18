@@ -75,7 +75,6 @@ class Napakalaki
 #  Análoga a la operación anterior aplicada a tesoros ocultos. Realizar el correspondiente
 #  diagrama de secuencia.
   def discardHiddenTreasure(t) # (t : Treasure) : void
-    @currentPlayer.pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
     @currentPlayer.discardHiddenTreasure(t)
   end
   

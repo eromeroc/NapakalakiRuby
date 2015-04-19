@@ -56,7 +56,7 @@ class Player
   
   #Asigna el mal rollo al jugador
   def setPendingBadConsequence(b) #b : BadConsequence
-    pendingBadConsequence = b
+    @pendingBadConsequence = b
   end
   
   
@@ -103,12 +103,10 @@ class Player
   def canIBuyLevels(i)      #(i : int) : boolean
     l = i / 1000
     if (@level += l) >= 10
-      respuesta = false
+      return false
     else
-      respuesta = true
+      return true
     end
-    
-    respuesta
   end
   
   
@@ -118,11 +116,11 @@ class Player
 #número de niveles no es redondeado ni al alza ni a la baja y se expresa mediante un
 #número en coma flotante.
   def computeGoldCoinsValue(t) #(t : Treasure[]) : float
-    oro = 0
+    goldCoinsValue = 0
     t.each do|k| 
-      oro += k.goldCoins
+      goldCoinsValue += k.goldCoins
     end
-    niveles = oro / 100.0
+    niveles = goldCoinsValue / 100.0
     niveles
   end
   
@@ -137,20 +135,21 @@ class Player
     
     incrementLevels(nLevels)
     
-    nLevels.each do |k|
+    # No sería un for hasta nPrize ?
+    nLevels.each do |k|   
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
   end
   
   def combat(m)  #(m : Monster) : CombatResult
-    result = 
+    result
     if @level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
       if @level < 10
         result = CombatResult::WIN
       else
-      result = CombatResult::WINANDWINGAME
+        result = CombatResult::WINANDWINGAME
       end
     else #@level <= m.combatLevel
       num = Dice.instance.nextNumber
@@ -178,8 +177,8 @@ class Player
   def applyBadConsequence(bad) #(bad : BadConsequence) : void
     decrementLevels(bad.getLevels)
     
-    pendingBad = adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    setPendingBadConsequence(pendingBad)
+    @pendingBadConsequence = adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    setPendingBadConsequence(@pendingBadConsequence)
     
   end
   
@@ -190,67 +189,92 @@ class Player
   #Comprueba si el tesoro (t) se puede pasar de oculto a visible, según las reglas del juego
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
    #Cada jugador puede equiparse con un único tesoro de cada tipo
-   resultado = true
-   if @visibleTreasures > 4
-     resultado = false
+   canMakeVisible = true
+   if @visibleTreasures.size > 4
+     canMakeVisible = false
    else
     @visibleTreasures.each do |k| 
       if k == t
-       resultado = false
+       canMakeVisible = false
       end
     end
-    resultado
    end
+   
+    canMakeVisible
   end
   
   
   def discardVisibleTreasure(t) # (t : Treasure) : void 
     
-    if @currentPlayer.pendingBadConsequence != nil && !@currentPlayer.pendingBadConsequence.isEmpty
-      @currentPlayer.pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
+    if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
+      @pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
     
+    end
+      #Se puede hacer mejor? 
       @visibleTreasures.each do |k|
         if k == t
           @visibleTreasures.delete(k)
         end
       end
-    end
-    
-    if @currentPlayer.visibleTreasures.is_empty? && @currentPlayer.hiddenTreasures.is_empty?
-      @currentPlayer.die
-    end
+      
+      CardDealer.instance.giveTreasureBack(t)
+      dieIfNoTreasures
     
   end
   
   def discardHiddenTreasure(t) # (t : Treasure) : void
-      if @currentPlayer.pendingBadConsequence != nil && !@currentPlayer.pendingBadConsequence.isEmpty
-      @currentPlayer.pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
-    
+      if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
+      @pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
+      end
+      
       @HiddenTreasures.each do |k|
         if k == t
           @HiddenTreasures.delete(k)
         end
       end
-    end
-    
-    if @currentPlayer.visibleTreasures.is_empty? && @currentPlayer.hiddenTreasures.is_empty?
-      @currentPlayer.die
-    end
+      CardDealer.instance.giveTreasureBack
+      dieIfNoTreasures
   end
   
   
   def buyLevels(visible , hidden)  #(visible: Treasure [],  hidden : Treasure []) : boolean
+
+    l = computeGoldCoinsValue(visible)
+    l += computeGoldCoinsValue(hidden)
     
-  end
-  
-  def hasNecklace(array)
-    resultado = false
-    array.each do |k|
-      if k.type == TreasureKind::NECKLACE
-        resultado =true
+    canI = canIBuyLevels(levels)
+    
+    if(canI)
+      incrementLevels(l)
+      
+      visible.each do |k|
+        discardVisibleTreasure(k)
+      end
+      
+      hidden.each do |k|
+        discardHiddenTreasure(k)
       end
     end
-    resultado
+    can I
+  end
+  
+  def hasNecklace
+    hasNecklace = false
+    
+    @visibleTreasures.each do |k|
+      if k.type == TreasureKind::NECKLACE
+        hasNecklace =true
+      end
+    end
+    
+    if(!hasNeacklace)
+      @hiddenTreasures.each do |k|
+        if k.type == TreasureKind::NECKLACE
+          hasNecklace =true
+        end
+      end
+    end
+    hasNecklace
   end
   #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
   #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego
@@ -259,28 +283,26 @@ class Player
   def getCombatLevel() 
     #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
   #sino suma el minimo
-    resultado = @level
-    tiene_collar = hasNecklace(@visibleTreasures)
-    @visibleTreasures.each do |k|
-      if (k.maxBonus != k.minBonus)
-        if(tiene_collar)
-          resultado += k.maxBonus
-        else
-          resultado += k.minBonus
-        end
+    combatLevel = @level
+    
+    if(hasNecklace())
+      @visibleTreasures.each do |k|
+          combatLevel += k.maxBonus
+      end
+     
+      @hiddenTreasures.each do |k|
+          combatLevel += k.maxBonus
+      end
+    else
+      @visibleTreasures.each do |k|
+          combatLevel += k.minBonus
+      end
+     
+      @hiddenTreasures.each do |k|
+          combatLevel += k.minBonus
       end
     end
-    @hiddenTreasures.each do |k|
-      if (k.maxBonus != k.minBonus)
-        if(tiene_collar)
-          resultado += k.maxBonus
-        else
-          resultado += k.minBonus
-        end
-      end
-    end
-   
-    resultado
+    combatLevel
   end
   
   #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene

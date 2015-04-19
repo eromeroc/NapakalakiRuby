@@ -42,7 +42,7 @@ class Napakalaki
     if(@currentPlayerIndex == -1)
       siguiente = rand(@players.size())
     else
-      if(@currentPlayerIndex = players.size())
+      if(@currentPlayerIndex == players.size())
         siguiente = 0
         
       else        
@@ -83,9 +83,14 @@ class Napakalaki
 #  según las reglas del juego, para ello llama al método, para ello desde Player se ejecuta el
 #  método: canMakeTreasureVisible(t:Treasure ):boolean
   def makeTreasureVisible(t) # (t : Treasure) : boolean
+    resultado = false
     if canMakeTreasureVisible(t)
+      resultado = true
       @currentPlayer.makeTreasureVisible(t)
+      @currentPlayer.discardHiddenTreasure(t);
     end
+    
+    resultado
   end
   
   
@@ -96,13 +101,7 @@ class Napakalaki
 #  comprar niveles si con ello ganas el juego), entonces se produce el mencionado
 #  incremento.
   def buyLevels(visible, hidden) # (visible : Treasure[], hidden : Treasure[]) :boolean
-    num_visible = computeGoldCoinsValue(visible)
-    num_oculto = computeGoldCoinsValue(hidden)
-    
-    num_total = num_visible+num_oculto
-    if @currentPlayer.canIBuyLevels(num_total)
-      @levels += num_total
-    end
+    @currentPlayer.buyLevels(visible, hidden)
   end
   
 #  Se encarga de solicitar a CardDealer la inicialización de los mazos de cartas de
@@ -124,7 +123,7 @@ class Napakalaki
   end
   
   def canMakeTreasureVisible(t) # (t: Treasure) : boolean
-    
+    @currentPlayer.canMakeTreasureVisible(t)
   end
   
   def getVisibleTreasures() # : Treasure[]
@@ -145,7 +144,8 @@ class Napakalaki
 # inicialización de los tesoros se encuentra recogida en el diagrama subordinado
 # initTreasures.
   def nextTurn()  # : boolean
-    if nextTurnAllowed
+    stateOk = nextTurnAllowed
+    if stateOk
       nextPlayer
       @currentMonster = CardDealer.instance.nextMonster
       
@@ -153,10 +153,16 @@ class Napakalaki
         initTreasures
       end
     end
+    
+    stateOk
   end
   
   def nextTurnAllowed() # : boolean
-    
+    resultado = false
+    if(@currentPlayer.validState == true)
+      resultado = true
+    end 
+    resultado
   end
   
 #Devuelve true si result tiene el valor WINANDWINGAME del enumerado CombatResult, en
@@ -165,7 +171,7 @@ class Napakalaki
   def endOfGame(result) # (result : CombatResult) : boolean
     endOfGame = false
     
-    if(result = WINANDWINGAME)
+    if(result == WINANDWINGAME)
       endOfGame = true
     end
     

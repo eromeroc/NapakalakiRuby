@@ -11,7 +11,7 @@ class CardDealer
   
   private
   def initialize
-    
+    initCards
   end
   
   

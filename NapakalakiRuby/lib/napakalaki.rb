@@ -25,9 +25,10 @@ class Napakalaki
   #elementos haya en names, que es el array de String que contiene el nombre de los
   #jugadores.
   def initPlayers(names) # (names : string[]) : void
-      names.each do |k|
-            @players << Player.new(names[k]);
-       
+    @player = Array.new
+      for i in 0..names.size()
+            @players << Player.new(names.first)
+            names.delete_at(0)
       end
   end
   

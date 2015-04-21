@@ -101,12 +101,12 @@ class Player
   #Devuelve true si con los niveles que compra no gana la partida y false en caso
   #contrario.
   def canIBuyLevels(i)      #(i : int) : boolean
+    buy = true
     l = i / 1000
     if (@level += l) >= 10
-      return false
-    else
-      return true
+      buy = false
     end
+    buy 
   end
   
   
@@ -120,7 +120,7 @@ class Player
     t.each do|k| 
       goldCoinsValue += k.goldCoins
     end
-    niveles = goldCoinsValue / 100.0
+    niveles = goldCoinsValue / 100.0 #100 o 1000?
     niveles
   end
   
@@ -136,7 +136,7 @@ class Player
     incrementLevels(nLevels)
     
     # No sería un for hasta nPrize ?
-    nLevels.each do |k|   
+    nPrize.each do |k|   
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
@@ -153,10 +153,10 @@ class Player
       end
     else #@level <= m.combatLevel
       num = Dice.instance.nextNumber
-      if num == 5 || num == 6
+      if num >= 5
         result = CombatResult::LooseAndEscape
       else
-        if m.bc.death == true
+        if m.bc.kills() == true
           die
           result = CombatResult::LoseAndDie
         else
@@ -308,13 +308,12 @@ class Player
   #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
   #más de 4 tesoros ocultos y false en caso contrario.
   def validState() 
+    valid = false
     if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size <= 4)
-      respuesta = true
-    else
-      respuesta = false
+      valid = true
     end
     
-    respuesta
+    valid
   end
   
   #Cuando un jugador está en su primer turno o se ha quedado sin tesoros ocultos o visibles,

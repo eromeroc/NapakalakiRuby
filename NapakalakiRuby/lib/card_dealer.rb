@@ -9,11 +9,12 @@ class CardDealer
   
   include Singleton
   
+  private
   def initialize
     
   end
   
-  private
+  
   def initTreasureCardDeck()
     @unusedTreasures = Array.new
     

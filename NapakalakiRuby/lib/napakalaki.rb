@@ -1,6 +1,9 @@
 
 require 'singleton'
-
+require_relative 'card_dealer'
+require_relative  'player'
+require_relative  'treasure'
+require_relative  'combat_result'
 
 class Napakalaki
   include Singleton
@@ -23,7 +26,7 @@ class Napakalaki
   #jugadores.
   def initPlayers(names) # (names : string[]) : void
       names.each do |k|
-            @players << Player.new(names[i]);
+            @players << Player.new(names[k]);
        
       end
   end
@@ -83,14 +86,14 @@ class Napakalaki
 #  según las reglas del juego, para ello llama al método, para ello desde Player se ejecuta el
 #  método: canMakeTreasureVisible(t:Treasure ):boolean
   def makeTreasureVisible(t) # (t : Treasure) : boolean
-    resultado = false
+    makeVisible = false
     if canMakeTreasureVisible(t)
-      resultado = true
+      makeVisible = true
       @currentPlayer.makeTreasureVisible(t)
       @currentPlayer.discardHiddenTreasure(t);
     end
     
-    resultado
+    makeVisible
   end
   
   
@@ -150,7 +153,7 @@ class Napakalaki
       @currentMonster = CardDealer.instance.nextMonster
       
       if @currentPlayer.isDead
-        initTreasures
+        @currentPlayer.initTreasures
       end
     end
     
@@ -158,11 +161,11 @@ class Napakalaki
   end
   
   def nextTurnAllowed() # : boolean
-    resultado = false
+    nextTurnAllowed = false
     if(@currentPlayer.validState == true)
-      resultado = true
+      nextTurnAllowed = true
     end 
-    resultado
+    nextTurnAllowed
   end
   
 #Devuelve true si result tiene el valor WINANDWINGAME del enumerado CombatResult, en
@@ -181,4 +184,11 @@ class Napakalaki
 end
 
 napakalaki = Napakalaki.instance
+napakalaki.initGame(["nombre1"])
+napakalaki.nextTurn()
+napakalaki.discardVisibleTreasure([TreasureKind::ARMOR])
+napakalaki.discardHiddenTreasure([TreasureKind::ARMOR])
+napakalaki.combat
+napakalaki.buyLevels([TreasureKind::ARMOR],[TreasureKind::ARMOR])
+napakalaki.makeTreasureVisible([TreasureKind::ARMOR])
 puts "Prueba Napakalaki"

@@ -1,5 +1,6 @@
 # coding: utf-8 
 
+require_relative 'treasure'
 
 class BadConsequence
     
@@ -63,23 +64,51 @@ class BadConsequence
   #Actualiza el mal rollo (que tiene que cumplir el jugador) basándose en el hecho de que el
   #jugador se descarta del tesoro visible t.
   def substractVisibleTreasure(t) # (t : Treasure) : void
-    @specificVisibleTreasures << t      #???
-    @nVisibleTreasures = @nVisibleTreasures +1
+    if(@nVisibleTreasures > 0)
+      @nVisibleTreasures = @nVisibleTreasures -1
+    else
+      @specificVisibleTreasures.each do |i|
+        if(i == t.type)
+          @specificVisibleTreasure.delete(i)
+        end
+      end
+    end
+  
   end
   
   #Igual que el anterior, pero para los ocultos.
   def substractHiddenTreasure(t) # (t : Treasure) : void
-    @specificHiddenTreasures << t       #??
-    @nHiddenTreasures = @nHiddenTreasures +1
+    if(@nHiddenTreasures > 0)
+      @nHiddenTreasures = @nHiddenTreasures -1
+    else
+      @specificHiddenTreasures.each do |i|
+        if(i == t.type)
+          @specificHiddenTreasure.delete(i)
+        end
+      end
+    end
   end
   #Recibe como parámetros los tesoros visibles y ocultos de los que dispone el jugador y
   #devuelve un nuevo objeto mal rollo creado a partir del objeto mal rollo que ejecuta este
   #método.
-  #El objeto de mal rollo devuelto por tToFitTreasureLists solo contendrá listas
+  #El objeto de mal rollo devuelto por adjustToFitTreasureLists solo contendrá listas
   #de tipos de tesoros o cantidades de tesoros de forma que el jugador correspondiente
   #pueda cumplir el mal rollo generado.
   def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence
     
+    visible = Array.new
+    hidden = Array.new
+    
+    v.each do |i|
+      visible << i.type
+    end
+    
+    h.each do |k|
+      hidden << k.type
+    end
+    
+    
+    bc = BadConsequence.newSpecificTreasures("Nuevo mal rollo", 0, visible, hidden)
   end
  
   
@@ -103,3 +132,16 @@ class BadConsequence
    output
   end
 end
+
+#PRUEBA BADCONSEQUENCE
+=begin
+
+bc = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.\n", 1, 4, 0)
+t = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
+bc.substractVisibleTreasure(t)
+bc.substractHiddenTreasure(t)
+
+puts bc.to_s
+puts "Prueba Bad Consequence"
+
+=end

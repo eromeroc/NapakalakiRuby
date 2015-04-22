@@ -363,7 +363,7 @@ end
 
 
   jugador = Player.new("marta")
-#  puts jugador.validState()
+# puts jugador.validState()
 #  puts jugador.getCombatLevel()
 #  puts jugador.isDead()
 #  puts jugador.getVisibleTreasures()
@@ -383,6 +383,5 @@ end
 #  puts jugador.canMakeTreasureVisible(tesoro1)
 #  puts jugador.canMakeTreasureVisible(tesoro2)
 
-#Como añado un tesoro ???
 
 end

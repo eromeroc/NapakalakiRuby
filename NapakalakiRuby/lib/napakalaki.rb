@@ -1,4 +1,4 @@
-
+# coding: utf-8 
 require 'singleton'
 require_relative 'card_dealer'
 require_relative  'player'
@@ -14,39 +14,25 @@ class Napakalaki
   attr_reader :players          #Array de players ¿A partir de 1?
   attr_reader :currentPlayerIndex #¿Donde lo inicializo a -1?
 
-  
+  private
   def initialize
-    
+    @currentPlayerIndex = -1
+    @players = Array.new
   end
   
-  private
-  
-  #Inicializa el array de jugadores que contiene Napakalaki, creando tantos jugadores como
-  #elementos haya en names, que es el array de String que contiene el nombre de los
-  #jugadores.
+  #Inicializa el array de players
   def initPlayers(names) # (names : string[]) : void
-    @player = Array.new
-      for i in 0..names.size()
-            @players << Player.new(names.first)
-            names.delete_at(0)
+      names.each do |k|
+            @players << Player.new(k)
       end
   end
   
-  #Decide qué jugador es el siguiente en jugar. Se pueden dar dos posibilidades para calcular
-  #el índice que ocupa dicho jugador en la lista de jugadores, que se trate del primer turno o
-  #no. Para el primer turno se calculará la posición del primer jugador utilizando un número aleatorio.
-  #Se debe añadir a la clase Napakalali un atributo privado denominado
-  #currentPlayerIndex. Este atributo representa el índice del jugador que posee el
-  #turno.
-  #También debe actualizarse la variable de instancia currentPlayer como parte de las
-  #tareas del método.
+  #Da valores a currentPlayer, currentPlayerIndex y devuelve el Player currentPlayer
   def nextPlayer() # : Player
-    siguiente
-    
     if(@currentPlayerIndex == -1)
       siguiente = rand(@players.size())
     else
-      if(@currentPlayerIndex == players.size())
+      if(@currentPlayerIndex == players.size()-1)
         siguiente = 0
         
       else        
@@ -55,13 +41,12 @@ class Napakalaki
     
     end
     @currentPlayerIndex = siguiente
-    @currentPlayer = @players.get(siguiente)
-    
+    @currentPlayer = @players[siguiente]
     @currentPlayer    
   end
   
   public
-  #Leer guión PS3S2, muuuy largo
+ 
   def combat() # : CombatResult
     result = @currentPlayer.combat(@currentMonster)
     result
@@ -72,8 +57,6 @@ class Napakalaki
 #  indica a éste dicho descarte para su posible actualización.
   def discardVisibleTreasure(t) # (t : Treasure) : void
     @currentPlayer.discardVisibleTreasure(t)
-    
-    
   end
   
 #  Análoga a la operación anterior aplicada a tesoros ocultos. Realizar el correspondiente
@@ -91,7 +74,7 @@ class Napakalaki
     if canMakeTreasureVisible(t)
       makeVisible = true
       @currentPlayer.makeTreasureVisible(t)
-      @currentPlayer.discardHiddenTreasure(t);
+      @currentPlayer.discardHiddenTreasure(t)
     end
     
     makeVisible
@@ -148,14 +131,14 @@ class Napakalaki
 # inicialización de los tesoros se encuentra recogida en el diagrama subordinado
 # initTreasures.
   def nextTurn()  # : boolean
+    nextPlayer
     stateOk = nextTurnAllowed
     if stateOk
-      nextPlayer
       @currentMonster = CardDealer.instance.nextMonster
       
-      if @currentPlayer.isDead
+#      if @currentPlayer.isDead
         @currentPlayer.initTreasures
-      end
+      #end
     end
     
     stateOk
@@ -185,11 +168,11 @@ class Napakalaki
 end
 
 napakalaki = Napakalaki.instance
-napakalaki.initGame(["nombre1"])
+napakalaki.initGame(["nombre1", "nombre2"])
 napakalaki.nextTurn()
 napakalaki.discardVisibleTreasure([TreasureKind::ARMOR])
 napakalaki.discardHiddenTreasure([TreasureKind::ARMOR])
 napakalaki.combat
-napakalaki.buyLevels([TreasureKind::ARMOR],[TreasureKind::ARMOR])
-napakalaki.makeTreasureVisible([TreasureKind::ARMOR])
+napakalaki.buyLevels([Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)],[Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)])
+napakalaki.makeTreasureVisible(Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET))
 puts "Prueba Napakalaki"

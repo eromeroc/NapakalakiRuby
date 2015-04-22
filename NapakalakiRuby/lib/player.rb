@@ -143,7 +143,6 @@ class Player
   end
   
   def combat(m)  #(m : Monster) : CombatResult
-    result
     if @level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
       if @level < 10
@@ -154,14 +153,14 @@ class Player
     else #@level <= m.combatLevel
       num = Dice.instance.nextNumber
       if num >= 5
-        result = CombatResult::LooseAndEscape
+        result = CombatResult::LOSEANDESCAPE
       else
         if m.bc.kills() == true
           die
-          result = CombatResult::LoseAndDie
+          result = CombatResult::LOSEANDDIE
         else
           applyBadConsequence(m.bc)
-          result = CombatResult::Lose
+          result = CombatResult::LOSE
         end
       end
     end
@@ -175,9 +174,9 @@ class Player
   #pendiente (pendingbadConsequence) es el que el jugador almacenará y que deberá
   #cumplir descartándose de esos tesoros antes de que pueda pasar al siguiente turno.
   def applyBadConsequence(bad) #(bad : BadConsequence) : void
-    decrementLevels(bad.getLevels)
+    decrementLevels(bad.levels)
     
-    @pendingBadConsequence = adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    @pendingBadConsequence = bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
     setPendingBadConsequence(@pendingBadConsequence)
     
   end
@@ -227,12 +226,12 @@ class Player
       @pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
       end
       
-      @HiddenTreasures.each do |k|
+      @hiddenTreasures.each do |k|
         if k == t
-          @HiddenTreasures.delete(k)
+          @hiddenTreasures.delete(k)
         end
       end
-      CardDealer.instance.giveTreasureBack
+      CardDealer.instance.giveTreasureBack(t)
       dieIfNoTreasures
   end
   
@@ -242,7 +241,7 @@ class Player
     l = computeGoldCoinsValue(visible)
     l += computeGoldCoinsValue(hidden)
     
-    canI = canIBuyLevels(levels)
+    canI = canIBuyLevels(l)
     
     if(canI)
       incrementLevels(l)
@@ -255,7 +254,7 @@ class Player
         discardHiddenTreasure(k)
       end
     end
-    can I
+    canI
   end
   
   def hasNecklace
@@ -329,12 +328,12 @@ class Player
     
     if(number == 1)
       @hiddenTreasures << CardDealer.instance.nextTreasure()
-    else if(1 < number < 6)
-      for i in 0..1
+    else if(number == 6)
+      for i in 0..2
         @hiddenTreasures << CardDealer.instance.nextTreasure()
       end
     else
-      for i in 0..2
+      for i in 0..1
         @hiddenTreasures << CardDealer.instance.nextTreasure()
       end
     end 

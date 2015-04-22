@@ -231,8 +231,8 @@ class CardDealer
   
   #Igual que la anterior pero con el mazo de monstruos.
   def nextMonster()
-    monster = @unusedTreasures.first()
-    @unusedTreasures.delete_at(0)
+    monster = @unusedMonsters.first()
+    @unusedMonsters.delete_at(0)
     giveMonsterBack(monster)
     
     monster
@@ -262,8 +262,8 @@ class CardDealer
   
 end
 
-cartas = CardDealer.instance
-cartas.initCards()
-cartas.nextMonster()
-cartas.nextTreasure()
-puts "Prueba CardDealer"
+#cartas = CardDealer.instance
+#cartas.initCards()
+#cartas.nextMonster()
+#cartas.nextTreasure()
+#puts "Prueba CardDealer"

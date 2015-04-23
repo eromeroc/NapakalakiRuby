@@ -16,6 +16,8 @@ class Dice
   end
 end
 
+#PRUEBA DICE 
+
 =begin
 for i in 0..5
   puts Dice.instance.nextNumber()

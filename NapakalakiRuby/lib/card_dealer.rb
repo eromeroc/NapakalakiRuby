@@ -255,6 +255,9 @@ class CardDealer
     initTreasureCardDeck()
     initMonsterCardDeck()
     
+    shuffleMonsters()
+    shuffleTreasures()
+    
     @usedTreasures = Array.new
     @usedMonsters = Array.new
     
@@ -262,8 +265,10 @@ class CardDealer
   
 end
 
-#cartas = CardDealer.instance
-#cartas.initCards()
-#cartas.nextMonster()
-#cartas.nextTreasure()
-#puts "Prueba CardDealer"
+cartas = CardDealer.instance
+cartas.initCards()
+puts cartas.nextMonster().to_s
+puts cartas.nextMonster().to_s
+puts cartas.nextMonster().to_s
+cartas.nextTreasure()
+puts "Prueba CardDealer"

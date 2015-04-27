@@ -67,13 +67,16 @@ class BadConsequence
     if(@nVisibleTreasures > 0)
       @nVisibleTreasures = @nVisibleTreasures -1
     else
+      TreasureKind substract = nil
       @specificVisibleTreasures.each do |i|
         if(i == t.type)
-          @specificVisibleTreasure.delete(i)
+          substract = i
         end
       end
+      if substract != nil
+        @specificVisibleTreasures.remove(substract)
+      end
     end
-  
   end
   
   #Igual que el anterior, pero para los ocultos.
@@ -81,10 +84,14 @@ class BadConsequence
     if(@nHiddenTreasures > 0)
       @nHiddenTreasures = @nHiddenTreasures -1
     else
+      TreasureKind substract= nil
       @specificHiddenTreasures.each do |i|
         if(i == t.type)
-          @specificHiddenTreasure.delete(i)
+          substract = i
         end
+      end
+      if substract != nil
+        @specificHiddenTreasures.remove(substract)
       end
     end
   end

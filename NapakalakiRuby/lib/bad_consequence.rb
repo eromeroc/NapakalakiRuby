@@ -45,9 +45,8 @@ class BadConsequence
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
-    if @text == " " && @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures.empty? &&
-       @specificVisibleTreasures.empty? && @death  == false
-    
+    if  @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures.empty? &&
+      @specificVisibleTreasures.empty? && @death  == false
       respuesta = true
     else
       respuesta = false    
@@ -74,7 +73,7 @@ class BadConsequence
         end
       end
       if substract != nil
-        @specificVisibleTreasures.remove(substract)
+        @specificVisibleTreasures.delete(substract)
       end
     end
   end
@@ -92,7 +91,7 @@ class BadConsequence
         end
       end
       if substract != nil
-        @specificHiddenTreasures.remove(substract)
+        @specificHiddenTreasures.delete(substract)
       end
     end
   end
@@ -105,19 +104,48 @@ class BadConsequence
   #pueda cumplir el mal rollo generado.
   def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence
     
-    visible = Array.new
-    hidden = Array.new
     
-    v.each do |i|
-      visible << i.type
+    if (v.empty? && h.empty?)
+      #bc = BadConsequence.newNumberOfTreasures(@text,0,@nVisibleTreasures, @nHiddenTreasures)
+      bc = BadConsequence.newVacio
+    else
+      if (@nVisibleTreasures > 0  || @nHiddenTreasures >0)
+        if (@nVisibleTreasures > v.size())
+          nVisible = v.size()
+        else
+          nVisible = @nVisibleTreasures
+        end
+        if (@nHiddenTreasures > v.size())
+          nHidden = v.size()
+        else
+          nHidden = @nHiddenTreasures
+        end
+        bc = BadConsequence.newNumberOfTreasures(@text,0,nVisible, nHidden)
+      else
+        visible = Array.new
+        hidden = Array.new
+        v.each do |i|
+          @specificVisibleTreasures.each do |j|
+            if j == i.type
+              visible << j
+            end
+          end
+        
+        end
+    
+        h.each do |k|
+          @specificHiddenTreasures.each do |j|
+            if j == k.type
+              hidden << j
+            end
+          end
+        end
+      
+        bc = BadConsequence.newSpecificTreasures(@text, 0, visible, hidden)
+      end
     end
     
-    h.each do |k|
-      hidden << k.type
-    end
-    
-    
-    bc = BadConsequence.newSpecificTreasures(@text, @levels, visible, hidden)
+    bc
   end
  
   

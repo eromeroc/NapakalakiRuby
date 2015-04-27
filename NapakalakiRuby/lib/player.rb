@@ -131,8 +131,8 @@ class Player
   #rollo al jugador, sumando los niveles correspondiente y robando los tesoros indicados en el
   #buen rollo del monstruo.
   def applyPrize(p)   #(p : Prize) : void
-    nLevels = p.getLevels
-    nPrize = p.getTreasures
+    nLevels = p.levels
+    nPrize = p.treasures
     
     incrementLevels(nLevels)
     
@@ -241,7 +241,7 @@ class Player
   def discardVisibleTreasure(t) # (t : Treasure) : void 
     
     if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
-      @pendingBadConsequence.specificVisibleTreasures.substractVisibleTreasure(t)
+      @pendingBadConsequence.substractVisibleTreasure(t)
     
     end
       #Se puede hacer mejor? 
@@ -261,7 +261,7 @@ class Player
   # indica a éste dicho descarte para su posible actualización.
   def discardHiddenTreasure(t) # (t : Treasure) : void
       if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
-      @pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
+        @pendingBadConsequence.substractHiddenTreasure(t)
       end
       
       @hiddenTreasures.each do |k|
@@ -413,29 +413,29 @@ end
 
 
 
-  jugador = Player.new("marta")
-  puts jugador.isDead()
- 
-
-  puts jugador.validState()
-  puts jugador.getCombatLevel()
-  puts jugador.isDead
-   puts jugador.getVisibleTreasures()
-   puts jugador.getHiddenTreasures() 
-   puts jugador.hasVisibleTreasures()
-   
-
-   unusedTreasures = Array.new
-   tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
-   unusedTreasures<< tesoro1
-   unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
-   unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
-   unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
-  
- 
-   tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
-   puts jugador.canMakeTreasureVisible(tesoro1)
-   puts jugador.canMakeTreasureVisible(tesoro2)
+#  jugador = Player.new("marta")
+#  puts jugador.isDead()
+# 
+#
+#  puts jugador.validState()
+#  puts jugador.getCombatLevel()
+#  puts jugador.isDead
+#   puts jugador.getVisibleTreasures()
+#   puts jugador.getHiddenTreasures() 
+#   puts jugador.hasVisibleTreasures()
+#   
+#
+#   unusedTreasures = Array.new
+#   tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
+#   unusedTreasures<< tesoro1
+#   unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
+#   unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
+#   unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
+#  
+# 
+#   tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
+#   puts jugador.canMakeTreasureVisible(tesoro1)
+#   puts jugador.canMakeTreasureVisible(tesoro2)
 
 
 

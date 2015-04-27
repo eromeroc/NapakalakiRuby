@@ -117,7 +117,7 @@ class BadConsequence
     end
     
     
-    bc = BadConsequence.newSpecificTreasures("Nuevo mal rollo", 0, visible, hidden)
+    bc = BadConsequence.newSpecificTreasures(@text, @levels, visible, hidden)
   end
  
   

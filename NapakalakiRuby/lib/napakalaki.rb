@@ -25,6 +25,7 @@ class Napakalaki
       names.each do |k|
             @players << Player.new(k)
       end
+      @currentPlayer = players[0];
   end
   
   #Decide qué jugador es el siguiente en jugar. 

@@ -417,6 +417,7 @@ end
    puts jugador.hasVisibleTreasures()
    jugador.discardNecklaceIfVisible()  #privado
   
+<<<<<<< HEAD
    unusedTreasures = Array.new
    tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
    unusedTreasures<< tesoro1
@@ -430,6 +431,5 @@ end
    puts jugador.canMakeTreasureVisible(tesoro2)
 
 =end
-
 
 end

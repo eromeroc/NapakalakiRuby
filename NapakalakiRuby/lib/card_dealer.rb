@@ -261,6 +261,9 @@ class CardDealer
     initTreasureCardDeck()
     initMonsterCardDeck()
     
+    shuffleMonsters()
+    shuffleTreasures()
+    
     @usedTreasures = Array.new
     @usedMonsters = Array.new
     
@@ -268,12 +271,15 @@ class CardDealer
   
 end
 
+
 #PRUEBA CARDDEALER
 
 =begin
   cartas = CardDealer.instance
   cartas.initCards()
-  cartas.nextMonster()
+  puts cartas.nextMonster().to_s
+  puts cartas.nextMonster().to_s
+  puts cartas.nextMonster().to_s
   cartas.nextTreasure()
   puts "Prueba CardDealer"
 =end

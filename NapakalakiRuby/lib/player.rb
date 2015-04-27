@@ -3,7 +3,9 @@ require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
 require_relative 'dice'
+require_relative 'combat_result'
 
+module Model
 class Player
 
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
@@ -338,8 +340,8 @@ class Player
       end
     end 
     
+    end
   end
-  
   
   #Devuelve true si el jugador esta muerto
   def isDead() 
@@ -362,6 +364,7 @@ end
 
 
 
+
   jugador = Player.new("marta")
 # puts jugador.validState()
 #  puts jugador.getCombatLevel()
@@ -378,6 +381,7 @@ end
 #  unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
 #  unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
 #  puts jugador.computeGoldCoinsValue(unusedTreasures)     #protegido
+
 
 
 

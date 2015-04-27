@@ -1,7 +1,7 @@
 # coding: utf-8 
 
 require_relative 'treasure'
-
+module Model
 class BadConsequence
     
     attr_reader :text              #Mal rollo
@@ -152,3 +152,5 @@ puts bc.to_s
 puts "Prueba Bad Consequence"
 
 =end
+
+end

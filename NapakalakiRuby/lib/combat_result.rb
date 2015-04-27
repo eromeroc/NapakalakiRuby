@@ -1,4 +1,4 @@
-
+module Model
 module CombatResult
   
   WINANDWINGAME=:WINANDWINGAME
@@ -7,4 +7,5 @@ module CombatResult
   LOSEANDESCAPE=:LOSEANDESCAPE
   LOSEANDDIE=:LOSEANDDIE
     
+end
 end

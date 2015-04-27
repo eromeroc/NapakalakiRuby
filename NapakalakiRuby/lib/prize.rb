@@ -1,4 +1,4 @@
-
+module Model
 class Prize
     attr_reader :treasures
     attr_reader :levels
@@ -14,4 +14,5 @@ class Prize
       
       output
     end
+end
 end

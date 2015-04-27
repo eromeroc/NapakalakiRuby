@@ -1,6 +1,6 @@
 
 require 'singleton'
-
+module Model
 class Dice
   include Singleton
 
@@ -21,3 +21,4 @@ for i in 0..5
   puts Dice.instance.nextNumber()
 end
 =end
+end

@@ -7,6 +7,7 @@
 require 'singleton'
 require_relative 'Napakalaki'
 require_relative 'Command'
+require_relative 'combat_result'
 
 module Test
 

@@ -5,6 +5,7 @@ require_relative  'player'
 require_relative  'treasure'
 require_relative  'combat_result'
 
+module Model
 class Napakalaki
   include Singleton
   
@@ -169,15 +170,17 @@ class Napakalaki
 end
 
 #PRUEBA NAPAKALAKI
+#
+#napakalaki = Napakalaki.instance
+#napakalaki.initGame(["nombre1", "nombre2"])
+#napakalaki.nextTurn()
+#napakalaki.discardVisibleTreasure([TreasureKind::ARMOR])
+#napakalaki.discardHiddenTreasure([TreasureKind::ARMOR])
+#napakalaki.combat
+#napakalaki.buyLevels([Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)],[Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)])
+#
+#puts napakalaki.makeTreasureVisible(Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET))
+#puts napakalaki.endOfGame(CombatResult::WIN)
+#puts "Prueba Napakalaki"
 
-napakalaki = Napakalaki.instance
-napakalaki.initGame(["nombre1", "nombre2"])
-napakalaki.nextTurn()
-napakalaki.discardVisibleTreasure([TreasureKind::ARMOR])
-napakalaki.discardHiddenTreasure([TreasureKind::ARMOR])
-napakalaki.combat
-napakalaki.buyLevels([Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)],[Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)])
-
-puts napakalaki.makeTreasureVisible(Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET))
-puts napakalaki.endOfGame(CombatResult::WIN)
-puts "Prueba Napakalaki"
+end

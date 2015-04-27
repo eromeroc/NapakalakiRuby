@@ -1,5 +1,5 @@
 
-
+module Model
 class Monster
     attr_reader :name
     attr_reader :combatLevel
@@ -24,4 +24,5 @@ class Monster
       output
     end
     
+end
 end

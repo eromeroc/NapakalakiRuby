@@ -1,6 +1,7 @@
 
 require_relative 'treasure_kind'
 
+module Model
 class Treasure
   
   attr_reader :name
@@ -17,4 +18,5 @@ class Treasure
     @type = t
   end
   
+end
 end

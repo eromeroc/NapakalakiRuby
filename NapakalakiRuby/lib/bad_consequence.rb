@@ -1,7 +1,7 @@
 # coding: utf-8 
 
 require_relative 'treasure'
-
+module Model
 class BadConsequence
     
     attr_reader :text              #Mal rollo
@@ -128,6 +128,7 @@ class BadConsequence
     array.each do |i| 
       texto += (i.to_s + " ")
      end
+     texto
   end
  
   def to_s
@@ -146,6 +147,8 @@ end
 #PRUEBA BADCONSEQUENCE
 =begin
 
+
+
 bc = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.\n", 1, 4, 0)
 t = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
 bc.substractVisibleTreasure(t)
@@ -154,4 +157,7 @@ bc.substractHiddenTreasure(t)
 puts bc.to_s
 puts "Prueba Bad Consequence"
 
+
 =end
+
+end

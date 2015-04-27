@@ -3,7 +3,9 @@ require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
 require_relative 'dice'
+require_relative 'combat_result'
 
+module Model
 class Player
 
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
@@ -379,6 +381,7 @@ class Player
       end
     end 
     
+    end
   end
   
   #Devuelve true si el jugador esta muerto
@@ -408,6 +411,7 @@ end
 #PRUEBA PLAYER
 
 
+
   jugador = Player.new("marta")
   puts jugador.isDead()
  
@@ -433,5 +437,6 @@ end
    puts jugador.canMakeTreasureVisible(tesoro2)
 
 =end
+
 
 end

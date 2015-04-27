@@ -1,4 +1,4 @@
-
+module Model
 module TreasureKind
     ARMOR=:ARMOR
     ONEHAND=:ONEHAND  
@@ -6,4 +6,5 @@ module TreasureKind
     HELMET=:HELMET
     SHOE=:SHOE
     NECKLACE =:NECKLACE
+end
 end

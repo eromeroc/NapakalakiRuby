@@ -4,7 +4,7 @@ require_relative 'treasure'
 require_relative 'monster'
 require_relative 'bad_consequence'
 require_relative 'prize'
-
+module Model
 class CardDealer
   
   include Singleton
@@ -271,15 +271,12 @@ class CardDealer
   
 end
 
+#cartas = CardDealer.instance
+#cartas.initCards()
+#puts cartas.nextMonster().to_s
+#puts cartas.nextMonster().to_s
+#puts cartas.nextMonster().to_s
+#cartas.nextTreasure()
+#puts "Prueba CardDealer"
+end
 
-#PRUEBA CARDDEALER
-
-=begin
-  cartas = CardDealer.instance
-  cartas.initCards()
-  puts cartas.nextMonster().to_s
-  puts cartas.nextMonster().to_s
-  puts cartas.nextMonster().to_s
-  cartas.nextTreasure()
-  puts "Prueba CardDealer"
-=end

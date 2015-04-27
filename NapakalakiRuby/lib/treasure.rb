@@ -18,5 +18,15 @@ class Treasure
     @type = t
   end
   
+  def to_s
+    "\nNombre: = "+ @name +
+              "\nTipo: = " + @type.to_s +
+              "\n\tModenas de oro: " + @goldCoins.to_s +
+              "\n\tBonus Minimo: " + @minBonus.to_s +
+              "\n\tBonus Maximo: " + @maxBonus.to_s
+  end
 end
+
+puts Treasure.new("Varita de atizamiento", 400, 3, 4, TreasureKind::ONEHAND).to_s
 end
+

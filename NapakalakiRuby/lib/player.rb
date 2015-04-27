@@ -9,6 +9,7 @@ class Player
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
   attr_reader :visibleTreasures       #Objeto Treasure
   attr_reader :hiddenTreasures        #Objeto Treasure
+  attr_reader :dead
  
   #-dead : boolean
   #−name : string
@@ -404,11 +405,13 @@ end
 
 #PRUEBA PLAYER
 
-=begin
+
   jugador = Player.new("marta")
+ 
+=begin
   puts jugador.validState()
-   puts jugador.getCombatLevel()
-   puts jugador.isDead()
+  puts jugador.getCombatLevel()
+  puts jugador.dead
    puts jugador.getVisibleTreasures()
    puts jugador.getHiddenTreasures() 
    puts jugador.hasVisibleTreasures()
@@ -427,4 +430,6 @@ end
    puts jugador.canMakeTreasureVisible(tesoro2)
 
 =end
+
+
 end

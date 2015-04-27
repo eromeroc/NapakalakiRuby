@@ -185,7 +185,7 @@ end
 
 
 #PRUEBA NAPAKALAKI
-=begin
+
 napakalaki = Napakalaki.instance
 napakalaki.initGame(["nombre1", "nombre2"])
 napakalaki.nextTurn()
@@ -197,4 +197,3 @@ napakalaki.buyLevels([Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELME
 puts napakalaki.makeTreasureVisible(Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET))
 puts napakalaki.endOfGame(CombatResult::WIN)
 puts "Prueba Napakalaki"
-=end

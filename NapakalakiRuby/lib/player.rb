@@ -9,7 +9,6 @@ class Player
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
   attr_reader :visibleTreasures       #Objeto Treasure
   attr_reader :hiddenTreasures        #Objeto Treasure
-  attr_reader :dead
  
   #-dead : boolean
   #−name : string
@@ -382,12 +381,10 @@ class Player
     
   end
   
-  
   #Devuelve true si el jugador esta muerto
-  def isDead() 
+  def isDead()
     @dead
   end
-  
   
   def hasVisibleTreasures()
     @visibleTreasures.empty?
@@ -400,6 +397,11 @@ class Player
   def getHiddenTreasures() 
     @hiddenTreasures
   end
+  
+  def to_s()
+    output = "\nNombre: #{@name}"+
+      "\nNivel: #{@level}"
+  end
 end
 
 
@@ -407,6 +409,7 @@ end
 
 
   jugador = Player.new("marta")
+  puts jugador.isDead()
  
 =begin
   puts jugador.validState()

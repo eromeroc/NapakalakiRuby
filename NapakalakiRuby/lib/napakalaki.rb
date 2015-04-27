@@ -149,7 +149,7 @@ class Napakalaki
     if stateOk
       @currentMonster = CardDealer.instance.nextMonster
       
-      if @currentPlayer.isDead
+      if @currentPlayer.isDead()
         @currentPlayer.initTreasures
       end
     end

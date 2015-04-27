@@ -14,7 +14,7 @@ class CardDealer
     initCards
   end
   
-  
+  #Inicializa el mazo de cartas de tesoros
   def initTreasureCardDeck()
     @unusedTreasures = Array.new
     
@@ -54,6 +54,7 @@ class CardDealer
     @unusedTreasures<< Treasure.new("Varita de atizamiento", 400, 3, 4, TreasureKind::ONEHAND)   
   end
   
+  #Inicializa el mazo de cartas de monstruos
   def initMonsterCardDeck()
     @unusedMonsters = Array.new
 
@@ -208,19 +209,22 @@ class CardDealer
     
   end
   
+  #Baraja el mazo de cartas de tesoros
   def shuffleTreasures()
     @unusedTreasures.shuffle!
   end
   
+  #Baraja el mazo de cartas de monstruos
   def shuffleMonsters()
     @unusedMonsters.shuffle!
   end
   
   
   public
+  
   #Devuelve el siguiente tesoro que hay en el mazo de tesoros (unusedTreasures) y lo
-#elimina de él. Si el mazo está vacío, pasa el mazo de descartes (usedTreasures) al mazo
-#de tesoros y lo baraja, dejando el mazo de descartes vacío.
+  #elimina de él. Si el mazo está vacío, pasa el mazo de descartes (usedTreasures) al mazo
+  #de tesoros y lo baraja, dejando el mazo de descartes vacío.
   def nextTreasure()
     treasure = @unusedTreasures.first()
     giveTreasureBack(treasure)
@@ -229,7 +233,9 @@ class CardDealer
     treasure
   end
   
-  #Igual que la anterior pero con el mazo de monstruos.
+  #Devuelve el siguiente monstruo que hay en el mazo de monstruos (unusedMonters) y lo
+  #elimina de él. Si el mazo está vacío, pasa el mazo de descartes (usedMonsters) al mazo
+  #de monstruos y lo baraja, dejando el mazo de descartes vacío.
   def nextMonster()
     monster = @unusedMonsters.first()
     @unusedMonsters.delete_at(0)
@@ -273,3 +279,4 @@ end
 #cartas.nextTreasure()
 #puts "Prueba CardDealer"
 end
+

@@ -11,6 +11,7 @@ class Player
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
   attr_reader :visibleTreasures       #Objeto Treasure
   attr_reader :hiddenTreasures        #Objeto Treasure
+  attr_reader :dead
  
   #-dead : boolean
   #−name : string
@@ -112,11 +113,10 @@ class Player
   end
   
   
-  #protected
-  public
+  protected
   #Calcula y devuelve los niveles que puede comprar el jugador con la lista t de tesoros. El
-#número de niveles no es redondeado ni al alza ni a la baja y se expresa mediante un
-#número en coma flotante.
+  #número de niveles no es redondeado ni al alza ni a la baja y se expresa mediante un
+  #número en coma flotante.
   def computeGoldCoinsValue(t) #(t : Treasure[]) : float
     goldCoinsValue = 0
     t.each do|k| 
@@ -137,13 +137,35 @@ class Player
     
     incrementLevels(nLevels)
     
-    # No sería un for hasta nPrize ?
     nPrize.each do |k|   
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
   end
   
+=begin
+    Si el nivel de jugador > nivel del monstruo {
+            Se actualiza el nivel y tesoros del jugador y se invoca al operación applyPrize
+            Devuelve Win si el jugador no gana la partida (nivel del jugador <10).
+            Devuelve WinAndWinGame si el jugador gana la partida.
+      }
+      Si el nivel del jugador es <= nivel del monstruo {
+        Se lanza el dado
+        Si sale 5 ó 6, {
+            No pasa nada y se devuelve LooseAndEscape
+        } en otro caso {
+            Se analiza en qué consiste el mal rollo
+            Si el jugador muere {
+                Se invoca a la operación die
+                Se devuelve LoseAndDie
+            } en otro caso {
+                Se invoca a la operación applyBadConsequence
+                Se devuelve Lose
+            }
+        }
+      }
+    
+=end
   def combat(m)  #(m : Monster) : CombatResult
     if @level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
@@ -183,13 +205,23 @@ class Player
     
   end
   
+  # Pasa tersoros ocultos a visibles, siempre que pueda hacerlo según las reglas 
   def makeTreasureVisible(t) # (t: Treasure) : boolean  
+     make = false
+        
+        if(canMakeTreasureVisible(t))
+            @visibleTreasures << t
+            @hiddenTreasures.delete(t)
+            make = true
+        end
+        
+        make
    
   end
   
   #Comprueba si el tesoro (t) se puede pasar de oculto a visible, según las reglas del juego
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
-   #Cada jugador puede equiparse con un único tesoro de cada tipo
+   
    canMakeVisible = true
    if @visibleTreasures.size > 4
      canMakeVisible = false
@@ -204,7 +236,9 @@ class Player
     canMakeVisible
   end
   
-  
+  # Eliminar los tesoros visibles indicados de la lista de tesoros
+  # visibles del jugador. Al eliminar esos tesoros, si el jugador tiene un mal rollo pendiente, se
+  # indica a éste dicho descarte para su posible actualización.
   def discardVisibleTreasure(t) # (t : Treasure) : void 
     
     if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
@@ -223,6 +257,9 @@ class Player
     
   end
   
+  # Eliminar los tesoros ocultos indicados de la lista de tesoros
+  # ocultos del jugador. Al eliminar esos tesoros, si el jugador tiene un mal rollo pendiente, se
+  # indica a éste dicho descarte para su posible actualización.
   def discardHiddenTreasure(t) # (t : Treasure) : void
       if @pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty
       @pendingBadConsequence.specificHiddenTreasures.substractHiddenTreasure(t)
@@ -237,7 +274,12 @@ class Player
       dieIfNoTreasures
   end
   
-  
+  # Permite comprar niveles antes de combatir con el monstruo actual. Para
+  # ello, a partir de las listas de tesoros (pueden ser tanto ocultos como visibles) se calculan
+  # los niveles que puede subir el jugador en función del número de piezas de oro que sumen.
+  # Si al jugador le está permitido comprar la cantidad de niveles resultantes (no se puede
+  # comprar niveles si con ello ganas el juego), entonces se produce el mencionado
+  # incremento
   def buyLevels(visible , hidden)  #(visible: Treasure [],  hidden : Treasure []) : boolean
 
     l = computeGoldCoinsValue(visible)
@@ -259,6 +301,7 @@ class Player
     canI
   end
   
+  # Devuelve true si el jugador tiene un tesoro de tipo collar en el array pasado
   def hasNecklace
     hasNecklace = false
     
@@ -277,13 +320,11 @@ class Player
     end
     hasNecklace
   end
+  
   #Devuelve el nivel de combate del jugador, que viene dado por su nivel más los
-  #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego
-  
-  
+  #bonus que le proporcionan los tesoros que tenga equipados, según las reglas del juego 
   def getCombatLevel() 
-    #cuando el max y min son distintos, suma el maximo cuando tiene de tipo collar,
-  #sino suma el minimo
+    
     combatLevel = @level
     
     if(hasNecklace())
@@ -305,6 +346,7 @@ class Player
     end
     combatLevel
   end
+  
   
   #Devuelve true cuando el jugador no tiene ningún mal rollo que cumplir y no tiene
   #más de 4 tesoros ocultos y false en caso contrario.
@@ -363,26 +405,34 @@ class Player
 end
 
 
+#PRUEBA PLAYER
+
 
 
   jugador = Player.new("marta")
-# puts jugador.validState()
-#  puts jugador.getCombatLevel()
-#  puts jugador.isDead()
-#  puts jugador.getVisibleTreasures()
-#  puts jugador.getHiddenTreasures() 
-#  puts jugador.hasVisibleTreasures()
-#  jugador.discardNecklaceIfVisible()  #privado
-  
-#  unusedTreasures = Array.new
-#  tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
-#  unusedTreasures<< tesoro1
-#  unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
-#  unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
-#  unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
-#  puts jugador.computeGoldCoinsValue(unusedTreasures)     #protegido
+ 
+=begin
+  puts jugador.validState()
+  puts jugador.getCombatLevel()
+  puts jugador.dead
+   puts jugador.getVisibleTreasures()
+   puts jugador.getHiddenTreasures() 
+   puts jugador.hasVisibleTreasures()
+   jugador.discardNecklaceIfVisible()  #privado
 
+   unusedTreasures = Array.new
+   tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
+   unusedTreasures<< tesoro1
+   unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
+   unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
+   unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
+    puts jugador.computeGoldCoinsValue(unusedTreasures)     #protegido
+ 
+   tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
+   puts jugador.canMakeTreasureVisible(tesoro1)
+   puts jugador.canMakeTreasureVisible(tesoro2)
 
+=end
 
 
 end

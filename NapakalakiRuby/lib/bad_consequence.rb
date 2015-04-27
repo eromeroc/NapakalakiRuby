@@ -79,7 +79,8 @@ class BadConsequence
     end
   end
   
-  #Igual que el anterior, pero para los ocultos.
+  #Actualiza el mal rollo (que tiene que cumplir el jugador) basándose en el hecho de que el
+  #jugador se descarta del tesoro oculto t.
   def substractHiddenTreasure(t) # (t : Treasure) : void
     if(@nHiddenTreasures > 0)
       @nHiddenTreasures = @nHiddenTreasures -1
@@ -95,6 +96,7 @@ class BadConsequence
       end
     end
   end
+  
   #Recibe como parámetros los tesoros visibles y ocultos de los que dispone el jugador y
   #devuelve un nuevo objeto mal rollo creado a partir del objeto mal rollo que ejecuta este
   #método.
@@ -115,9 +117,10 @@ class BadConsequence
     end
     
     
-    bc = BadConsequence.newSpecificTreasures("Nuevo mal rollo", 0, visible, hidden)
+    bc = BadConsequence.newSpecificTreasures(@text, @levels, visible, hidden)
   end
  
+  
   
   def arrayToString(array)
     texto = "\n\t"
@@ -125,6 +128,7 @@ class BadConsequence
     array.each do |i| 
       texto += (i.to_s + " ")
      end
+     texto
   end
  
   def to_s
@@ -143,6 +147,8 @@ end
 #PRUEBA BADCONSEQUENCE
 =begin
 
+
+
 bc = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.\n", 1, 4, 0)
 t = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
 bc.substractVisibleTreasure(t)
@@ -150,6 +156,7 @@ bc.substractHiddenTreasure(t)
 
 puts bc.to_s
 puts "Prueba Bad Consequence"
+
 
 =end
 

@@ -132,15 +132,13 @@ class BadConsequence
   end
  
   def to_s
-      output = "\n\t\tMal rollo = #{@text}"+
-       "\n\tNiveles que pierdes = #{@levels}"+
-       "\n\tNº de tesoros escondidos #{@nHiddenTreasures}"+
-       "\n\tNº de tesoros visibles = #{@nVisibleTreasures}"+
-       "\n\tMuerte = #{@death}"+
-       "\n\tTesoros ocultos = #{arrayToString(@specificHiddenTreasures)}"+
-       "\n\tTesoros visibles = #{arrayToString(@specificVisibleTreasures)}"
-      
-   output
+      "\n\t\tMal rollo = " +@text+
+       "\n\tNiveles que pierdes = " +@levels.to_s+
+       "\n\tNº de tesoros escondidos "+@nHiddenTreasures.to_s+
+       "\n\tNº de tesoros visibles " +@nVisibleTreasures.to_s+
+       "\n\tMuerte = "+@death.to_s+
+       "\n\tTesoros ocultos = "+arrayToString(@specificHiddenTreasures)+
+       "\n\tTesoros visibles = "+arrayToString(@specificVisibleTreasures)
   end
 end
 

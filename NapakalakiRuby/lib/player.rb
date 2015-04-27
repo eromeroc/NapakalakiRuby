@@ -402,8 +402,9 @@ class Player
   end
   
   def to_s()
-    output = "\nNombre: #{@name}"+
-      "\nNivel: #{@level}"
+    "\nNombre: "+@name+
+      "\nNivel: "+@level.to_s+
+      "\nMal rollo pendiente: "+@pendingBadConsequence.to_s
   end
 end
 

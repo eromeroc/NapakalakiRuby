@@ -20,7 +20,7 @@ class Treasure
   
   def to_s
     "\nNombre: = "+ @name +
-              "\nTipo: = " + @type.to_s +
+              "\n\tTipo: " + @type.to_s +
               "\n\tModenas de oro: " + @goldCoins.to_s +
               "\n\tBonus Minimo: " + @minBonus.to_s +
               "\n\tBonus Maximo: " + @maxBonus.to_s

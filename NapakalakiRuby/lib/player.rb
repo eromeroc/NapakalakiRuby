@@ -1,4 +1,5 @@
 # coding: utf-8 
+
 require_relative 'bad_consequence'
 require_relative 'treasure'
 require_relative 'card_dealer'
@@ -121,7 +122,7 @@ class Player
     t.each do|k| 
       goldCoinsValue += k.goldCoins
     end
-    niveles = goldCoinsValue / 100.0 #100 o 1000?
+    niveles = goldCoinsValue / 1000.0 
     niveles
   end
   
@@ -402,18 +403,25 @@ class Player
   end
   
   def to_s()
-    "\nNombre: "+@name+
-      "\nNivel: "+@level.to_s+
-      "\nMal rollo pendiente: "+@pendingBadConsequence.to_s
+    output = "\nNombre:= "+@name+
+                    "\n\tNivel: "+@level.to_s
+      if(@pendingBadConsequence.isEmpty())
+        output +=  "\n\tMal rollo pendiente vacio"
+      else
+        output += "\n\tMal rollo pendiente: "+@pendingBadConsequence
+      end
+      
+    output
   end
-end
 
+end
 
 #PRUEBA PLAYER
 
 
 
-#  jugador = Player.new("marta")
+  jugador = Player.new("marta")
+  puts jugador.to_s
 #  puts jugador.isDead()
 # 
 #
@@ -436,8 +444,5 @@ end
 #   tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
 #   puts jugador.canMakeTreasureVisible(tesoro1)
 #   puts jugador.canMakeTreasureVisible(tesoro2)
-
-
-
 
 end

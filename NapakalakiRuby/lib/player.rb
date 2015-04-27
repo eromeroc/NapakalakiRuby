@@ -311,7 +311,7 @@ class Player
       end
     end
     
-    if(!hasNeacklace)
+    if(!hasNecklace)
       @hiddenTreasures.each do |k|
         if k.type == TreasureKind::NECKLACE
           hasNecklace =true
@@ -411,14 +411,14 @@ end
 
   jugador = Player.new("marta")
  
-=begin
+
   puts jugador.validState()
   puts jugador.getCombatLevel()
-  puts jugador.dead
+  puts jugador.isDead
    puts jugador.getVisibleTreasures()
    puts jugador.getHiddenTreasures() 
    puts jugador.hasVisibleTreasures()
-   jugador.discardNecklaceIfVisible()  #privado
+   
 
    unusedTreasures = Array.new
    tesoro1 = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
@@ -426,13 +426,13 @@ end
    unusedTreasures<< Treasure.new("Botas de investigación", 600, 3, 4, TreasureKind::SHOE)
    unusedTreasures<< Treasure.new("Capucha de Cthulhu", 500, 3, 5, TreasureKind::HELMET)
    unusedTreasures<< Treasure.new("A prueba de babas", 400, 2, 5, TreasureKind::ARMOR)
-    puts jugador.computeGoldCoinsValue(unusedTreasures)     #protegido
+  
  
    tesoro2 = Treasure.new("Garabato místico", 300, 2, 2, TreasureKind::ONEHAND)
    puts jugador.canMakeTreasureVisible(tesoro1)
    puts jugador.canMakeTreasureVisible(tesoro2)
 
-=end
+
 
 
 end

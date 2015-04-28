@@ -9,10 +9,9 @@ class Prize
     end
     
     def to_s
-        output = "\n\tTesoros: #{@treasures}"+
-        "\n\tNiveles: #{@levels}"
+        "\n\t\tTesoros: #{@treasures}"+
+        "\n\t\tNiveles: #{@levels}"
       
-      output
     end
 end
 end

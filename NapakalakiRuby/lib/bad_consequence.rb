@@ -2,7 +2,8 @@
 
 require_relative 'treasure'
 module Model
-class BadConsequence
+  
+ class BadConsequence
     
     attr_reader :text              #Mal rollo
     attr_reader :levels            #Niveles que se pierden
@@ -151,7 +152,7 @@ class BadConsequence
   
   
   def arrayToString(array)
-    texto = "\n\t"
+    texto = " "
     
     array.each do |i| 
       texto += (i.to_s + " ")
@@ -160,13 +161,13 @@ class BadConsequence
   end
  
   def to_s
-      "\n\t\tMal rollo = " +@text+
-       "\n\tNiveles que pierdes = " +@levels.to_s+
-       "\n\tNº de tesoros ocultos "+@nHiddenTreasures.to_s+
-       "\n\tNº de tesoros visibles " +@nVisibleTreasures.to_s+
-       "\n\tMuerte = "+@death.to_s+
-       "\n\tTesoros ocultos = "+arrayToString(@specificHiddenTreasures)+
-       "\n\tTesoros visibles = "+arrayToString(@specificVisibleTreasures)
+      " " +@text+
+       "\n\t\tNiveles que pierdes: " +@levels.to_s+
+       "\n\t\tNº de tesoros ocultos: "+@nHiddenTreasures.to_s+
+       "\n\t\tNº de tesoros visibles: " +@nVisibleTreasures.to_s+
+       "\n\t\tMuerte: "+@death.to_s+
+       "\n\t\tTesoros ocultos: "+arrayToString(@specificHiddenTreasures)+
+       "\n\t\tTesoros visibles: "+arrayToString(@specificVisibleTreasures)
   end
 end
 

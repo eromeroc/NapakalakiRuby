@@ -227,11 +227,24 @@ class Player
    if @visibleTreasures.size > 4
      canMakeVisible = false
    else
+     contador = 0 
     @visibleTreasures.each do |k| 
-      if k.type == t.type
+      if (k.type == t.type)
        canMakeVisible = false
       end
+      if (k.type == TreasureKind::ONEHAND)
+        contador+=contador
+      end
     end
+    
+    if((t.type == TreasureKind::ONEHAND) && (contador < 2))
+      canMakeVisible = true
+    end
+      
+    if ((t.type == TreasureKind::BOTHHANDS) && (contador >0))
+      canMakeVisible = false
+    end
+        
    end
    
     canMakeVisible
@@ -309,6 +322,7 @@ class Player
     @visibleTreasures.each do |k|
       if k.type == TreasureKind::NECKLACE
         hasNecklace =true
+        #@pendingBadConsequence = 
       end
     end
     
@@ -316,8 +330,13 @@ class Player
       @hiddenTreasures.each do |k|
         if k.type == TreasureKind::NECKLACE
           hasNecklace =true
+          #@pendingBadConsequence = 
         end
       end
+    end
+    
+    if(hasNecklace)
+      
     end
     hasNecklace
   end
@@ -327,23 +346,36 @@ class Player
   def getCombatLevel() 
     
     combatLevel = @level
+    necklace = hasNecklace
+    usado = false
     
-    if(hasNecklace())
-      @visibleTreasures.each do |k|
+    @visibleTreasures.each do |k|
+      if(k.maxBonus != k.minBonus)
+        if(necklace)
+          usado = true
           combatLevel += k.maxBonus
-      end
-     
-      @hiddenTreasures.each do |k|
+        else
+          combatLevel += k.minBonus
+        end
+      else
+        combatLevel += k.maxBonus
+      end 
+    end
+    
+    @hiddenTreasures.each do |k|
+      if(k.maxBonus != k.minBonus)
+        if(necklace)
+          usado = true
           combatLevel += k.maxBonus
-      end
-    else
-      @visibleTreasures.each do |k|
+        else
           combatLevel += k.minBonus
-      end
-     
-      @hiddenTreasures.each do |k|
-          combatLevel += k.minBonus
-      end
+        end
+      else
+        combatLevel += k.maxBonus
+      end 
+    end
+    if usado
+      discardNecklace
     end
     combatLevel
   end
@@ -353,7 +385,7 @@ class Player
   #más de 4 tesoros ocultos y false en caso contrario.
   def validState() 
     valid = false
-    if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size <= 4)
+    if(@pendingBadConsequence.isEmpty() && @hiddenTreasures.size <= @@MAXHIDDENTREASURES)
       valid = true
     end
     
@@ -374,7 +406,7 @@ class Player
     if(number == 1)
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     else if(number == 6)
-      for i in 0..2
+      for i in 0..2 
         @hiddenTreasures << CardDealer.instance.nextTreasure()
       end
     else

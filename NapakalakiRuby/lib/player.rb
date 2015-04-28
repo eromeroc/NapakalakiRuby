@@ -38,10 +38,10 @@ class Player
   #Incrementa el nivel del jugador en i niveles
   #1 <=level <= 10 
   def incrementLevels(l)
-    if (@level += l) >= 10
+    if (@level + l >= 10)
       @level = 10
     else
-      @level += l
+      @level = @level + l
     end
   end
   
@@ -49,10 +49,10 @@ class Player
   #Decrementa el nivel del jugador en i niveles
   #1 <=level <= 10  
   def decrementLevels(l)
-    if (@level -= l) <= 1
+    if (@level - l <= 1)
       @level = 1
     else
-      @level -= l
+      @level = @level - l
     end
   end
   
@@ -122,7 +122,7 @@ class Player
     t.each do|k| 
       goldCoinsValue += k.goldCoins
     end
-    niveles = goldCoinsValue / 1000.0 
+    niveles = goldCoinsValue / 1000 
     niveles
   end
   
@@ -137,7 +137,7 @@ class Player
     
     incrementLevels(nLevels)
     
-    nPrize.each do |k|   
+    for i in 0..nPrize  
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
@@ -167,9 +167,10 @@ class Player
     
 =end
   def combat(m)  #(m : Monster) : CombatResult
-    if @level > m.combatLevel
+    level = getCombatLevel()
+    if level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
-      if @level < 10
+      if level < 10
         result = CombatResult::WIN
       else
         result = CombatResult::WINANDWINGAME
@@ -227,7 +228,7 @@ class Player
      canMakeVisible = false
    else
     @visibleTreasures.each do |k| 
-      if k == t
+      if k.type == t.type
        canMakeVisible = false
       end
     end
@@ -407,10 +408,14 @@ class Player
       if(@pendingBadConsequence.isEmpty())
         output +=  "\n\tMal rollo pendiente vacio"
       else
-        output += "\n\tMal rollo pendiente: "+@pendingBadConsequence
+        output += "\n\tMal rollo pendiente: "+@pendingBadConsequence.to_s
       end
       
     output
+  end
+  
+  def getName()
+    @name
   end
 
 end

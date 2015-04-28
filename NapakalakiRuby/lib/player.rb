@@ -37,10 +37,10 @@ class Player
   #Incrementa el nivel del jugador en i niveles
   #1 <=level <= 10 
   def incrementLevels(l)
-    if (@level += l) >= 10
+    if (@level + l >= 10)
       @level = 10
     else
-      @level += l
+      @level = @level + l
     end
   end
   
@@ -48,10 +48,10 @@ class Player
   #Decrementa el nivel del jugador en i niveles
   #1 <=level <= 10  
   def decrementLevels(l)
-    if (@level -= l) <= 1
+    if (@level - l <= 1)
       @level = 1
     else
-      @level -= l
+      @level = @level - l
     end
   end
   

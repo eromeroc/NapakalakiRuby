@@ -45,8 +45,8 @@ class BadConsequence
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
-    if  @nVisibleTreasures == 0 && @nHiddenTreasures == 0 && @specificHiddenTreasures.empty? &&
-      @specificVisibleTreasures.empty? && @death  == false
+    if  ((@nVisibleTreasures == 0) && (@nHiddenTreasures == 0) && (@specificHiddenTreasures.empty?) &&
+      (@specificVisibleTreasures.empty?) && (@death  == false))
       respuesta = true
     else
       respuesta = false    

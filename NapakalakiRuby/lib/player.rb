@@ -122,7 +122,7 @@ class Player
     t.each do|k| 
       goldCoinsValue += k.goldCoins
     end
-    niveles = goldCoinsValue / 1000.0 
+    niveles = goldCoinsValue / 1000 
     niveles
   end
   
@@ -137,7 +137,7 @@ class Player
     
     incrementLevels(nLevels)
     
-    nPrize.each do |k|   
+    for i in 0..nPrize  
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
@@ -167,9 +167,10 @@ class Player
     
 =end
   def combat(m)  #(m : Monster) : CombatResult
-    if @level > m.combatLevel
+    level = getCombatLevel()
+    if level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
-      if @level < 10
+      if level < 10
         result = CombatResult::WIN
       else
         result = CombatResult::WINANDWINGAME
@@ -227,7 +228,7 @@ class Player
      canMakeVisible = false
    else
     @visibleTreasures.each do |k| 
-      if k == t
+      if k.type == t.type
        canMakeVisible = false
       end
     end
@@ -412,6 +413,10 @@ class Player
       end
       
     output
+  end
+  
+  def getName()
+    @name
   end
 
 end

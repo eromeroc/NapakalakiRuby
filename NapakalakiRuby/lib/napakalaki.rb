@@ -36,7 +36,7 @@ class Napakalaki
   #  Se actualiza currentPlayerIndex y currentPlayer
   def nextPlayer() # : Player
     if(@currentPlayerIndex == -1)
-      siguiente = dice.instance.nextNumber % @players.length
+      siguiente = Dice.instance.nextNumber % @players.length
     else
       if(@currentPlayerIndex == @players.size()-1)
         siguiente = 0

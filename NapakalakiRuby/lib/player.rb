@@ -137,7 +137,7 @@ class Player
     
     incrementLevels(nLevels)
     
-    for i in 0..nPrize  
+    for i in 0..nPrize-1 
       @hiddenTreasures << CardDealer.instance.nextTreasure()
     end
    
@@ -170,7 +170,7 @@ class Player
     level = getCombatLevel()
     if level > m.combatLevel
       applyPrize(m.prize)   ## Hacer applyPrize
-      if level < 10
+      if @level < 10
         result = CombatResult::WIN
       else
         result = CombatResult::WINANDWINGAME
@@ -224,31 +224,39 @@ class Player
   def canMakeTreasureVisible(t) # (t : Treasure) : boolean
    
    canMakeVisible = true
-   if @visibleTreasures.size > 4
+   
+   contador = 0 
+   hasBothHands = false
+   
+  @visibleTreasures.each do |k| 
+    if (k.type == t.type)
      canMakeVisible = false
-   else
-     contador = 0 
-    @visibleTreasures.each do |k| 
-      if (k.type == t.type)
-       canMakeVisible = false
-      end
-      if (k.type == TreasureKind::ONEHAND)
-        contador+=contador
-      end
     end
+    if (k.type == TreasureKind::ONEHAND)
+      contador = contador +1
+    end
+    if (k.type == TreasureKind::BOTHHANDS)
+      hasBothHands = true
+    end
+  end
     
-    if((t.type == TreasureKind::ONEHAND) && (contador < 2))
+  if(t.type == TreasureKind::ONEHAND) 
+    if(contador < 2)
       canMakeVisible = true
     end
-      
-    if ((t.type == TreasureKind::BOTHHANDS) && (contador >0))
+    if(hasBothHands)
       canMakeVisible = false
     end
-        
-   end
-   
-    canMakeVisible
+    
   end
+  
+  if ((t.type == TreasureKind::BOTHHANDS) && (contador != 0))
+    canMakeVisible = false
+  end
+  
+        
+    canMakeVisible
+end
   
   # Eliminar los tesoros visibles indicados de la lista de tesoros
   # visibles del jugador. Al eliminar esos tesoros, si el jugador tiene un mal rollo pendiente, se
@@ -361,21 +369,9 @@ class Player
         combatLevel += k.maxBonus
       end 
     end
-    
-    @hiddenTreasures.each do |k|
-      if(k.maxBonus != k.minBonus)
-        if(necklace)
-          usado = true
-          combatLevel += k.maxBonus
-        else
-          combatLevel += k.minBonus
-        end
-      else
-        combatLevel += k.maxBonus
-      end 
-    end
+  
     if usado
-      discardNecklace
+      discardNecklaceIfVisible
     end
     combatLevel
   end
@@ -405,15 +401,16 @@ class Player
     
     if(number == 1)
       @hiddenTreasures << CardDealer.instance.nextTreasure()
-    else if(number == 6)
-      for i in 0..2 
-        @hiddenTreasures << CardDealer.instance.nextTreasure()
-      end
-    else
-      for i in 0..1
-        @hiddenTreasures << CardDealer.instance.nextTreasure()
-      end
-    end 
+      else 
+        if(number == 6)
+          for i in 0..2 
+            @hiddenTreasures << CardDealer.instance.nextTreasure()
+          end
+        else
+          for i in 0..1
+            @hiddenTreasures << CardDealer.instance.nextTreasure()
+          end
+      end 
     
     end
   end

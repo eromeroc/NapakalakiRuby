@@ -408,7 +408,7 @@ class Player
       if(@pendingBadConsequence.isEmpty())
         output +=  "\n\tMal rollo pendiente vacio"
       else
-        output += "\n\tMal rollo pendiente: "+@pendingBadConsequence
+        output += "\n\tMal rollo pendiente: "+@pendingBadConsequence.to_s
       end
       
     output

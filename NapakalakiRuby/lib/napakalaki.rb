@@ -26,7 +26,6 @@ class Napakalaki
       names.each do |k|
             @players << Player.new(k)
       end
-      @currentPlayer = players[0];
   end
   
   #Decide qué jugador es el siguiente en jugar. 
@@ -37,9 +36,9 @@ class Napakalaki
   #  Se actualiza currentPlayerIndex y currentPlayer
   def nextPlayer() # : Player
     if(@currentPlayerIndex == -1)
-      siguiente = rand(@players.size())
+      siguiente = dice.instance.nextNumber % @players.length
     else
-      if(@currentPlayerIndex == players.size()-1)
+      if(@currentPlayerIndex == @players.size()-1)
         siguiente = 0
         
       else        
@@ -48,7 +47,7 @@ class Napakalaki
     
     end
     @currentPlayerIndex = siguiente
-    @currentPlayer = @players[siguiente]
+    @currentPlayer = @players[@currentPlayerIndex]
     @currentPlayer    
   end
   
@@ -145,9 +144,9 @@ class Napakalaki
   #      porque es el primer turno, se inicializan sus tesoros siguiendo las reglas del juego. La
   #      inicialización de los tesoros se encuentra recogida en el diagrama subordinado initTreasures.
   def nextTurn()  # : boolean
-    nextPlayer
     stateOk = nextTurnAllowed
     if stateOk
+      nextPlayer
       @currentMonster = CardDealer.instance.nextMonster
       
       if @currentPlayer.isDead()
@@ -164,9 +163,13 @@ class Napakalaki
   # Para ello usa el método de Player: validState()
   def nextTurnAllowed() # : boolean
     nextTurnAllowed = false
-    if(@currentPlayer.validState == true)
+    if (@currentPlayer == nil)
       nextTurnAllowed = true
-    end 
+    else
+      if(@currentPlayer.validState == true)
+        nextTurnAllowed = true
+      end
+    end
     nextTurnAllowed
   end
   

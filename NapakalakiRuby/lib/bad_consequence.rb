@@ -47,7 +47,7 @@ module Model
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
     if  ((@nVisibleTreasures == 0) && (@nHiddenTreasures == 0) && (@specificHiddenTreasures.empty?) &&
-      (@specificVisibleTreasures.empty?) && (@death  == false))
+      (@specificVisibleTreasures.empty?) && (@death  == false) && (@level == 0))
       respuesta = true
     else
       respuesta = false    
@@ -107,7 +107,6 @@ module Model
     
     
     if (v.empty? && h.empty?)
-      #bc = BadConsequence.newNumberOfTreasures(@text,0,@nVisibleTreasures, @nHiddenTreasures)
       bc = BadConsequence.newVacio
     else
       if (@nVisibleTreasures > 0  || @nHiddenTreasures >0)

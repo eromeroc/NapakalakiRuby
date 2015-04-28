@@ -406,7 +406,7 @@ class Player
   def to_s()
     output = "\nNombre:= "+@name+ "\n\tNivel: "+@level.to_s
       if(@pendingBadConsequence.isEmpty())
-        output +=  "\n\tMal rollo pendiente vacio"
+        output +=  "\n\tNo tienes mal rollo pendiente"
       else
         output += "\n\tMal rollo pendiente: "+@pendingBadConsequence.to_s
       end

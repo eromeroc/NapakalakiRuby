@@ -19,8 +19,8 @@ end
 #PRUEBA DICE 
 
 
-for i in 0..5
-  puts Dice.instance.nextNumber()
-end
+#for i in 0..5
+#  puts Dice.instance.nextNumber()
+#end
 
 end

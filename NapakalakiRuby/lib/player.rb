@@ -453,8 +453,8 @@ end
 
 
 
-  jugador = Player.new("marta")
-  puts jugador.to_s
+#  jugador = Player.new("marta")
+#  puts jugador.to_s
 #  puts jugador.isDead()
 # 
 #

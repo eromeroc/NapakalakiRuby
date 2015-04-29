@@ -27,6 +27,6 @@ class Treasure
   end
 end
 
-puts Treasure.new("Varita de atizamiento", 400, 3, 4, TreasureKind::ONEHAND).to_s
+#puts Treasure.new("Varita de atizamiento", 400, 3, 4, TreasureKind::ONEHAND).to_s
 end
 

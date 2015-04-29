@@ -10,9 +10,9 @@ class Napakalaki
   include Singleton
   
   
-  attr_reader :currentMonster   #Objeto Monster
-  attr_reader :currentPlayer    #Objeto Player
-  attr_reader :players          #Array de players 
+  attr_reader :currentMonster   
+  attr_reader :currentPlayer    
+  attr_reader :players          
   attr_reader :currentPlayerIndex 
 
   private

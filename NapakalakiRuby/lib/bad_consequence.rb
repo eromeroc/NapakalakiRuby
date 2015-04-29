@@ -67,7 +67,7 @@ module Model
     if(@nVisibleTreasures > 0)
       @nVisibleTreasures = @nVisibleTreasures -1
     else
-      TreasureKind substract = nil
+      substract = nil
       @specificVisibleTreasures.each do |i|
         if(i == t.type)
           substract = i
@@ -85,7 +85,7 @@ module Model
     if(@nHiddenTreasures > 0)
       @nHiddenTreasures = @nHiddenTreasures -1
     else
-      TreasureKind substract= nil
+      substract= nil
       @specificHiddenTreasures.each do |i|
         if(i == t.type)
           substract = i
@@ -171,10 +171,8 @@ module Model
 end
 
 #PRUEBA BADCONSEQUENCE
+
 =begin
-
-
-
 bc = BadConsequence.newNumberOfTreasures("Pierdes todos tus tesores visibles.\n", 1, 4, 0)
 t = Treasure.new("¡Sí mi amo!", 0, 4, 7, TreasureKind::HELMET)
 bc.substractVisibleTreasure(t)
@@ -182,8 +180,6 @@ bc.substractHiddenTreasure(t)
 
 puts bc.to_s
 puts "Prueba Bad Consequence"
-
-
 =end
 
 end

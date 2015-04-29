@@ -169,7 +169,7 @@ class Player
   def combat(m)  #(m : Monster) : CombatResult
     level = getCombatLevel()
     if level > m.combatLevel
-      applyPrize(m.prize)   ## Hacer applyPrize
+      applyPrize(m.prize)  
       if @level < 10
         result = CombatResult::WIN
       else
@@ -323,29 +323,16 @@ end
     canI
   end
   
-  # Devuelve true si el jugador tiene un tesoro de tipo collar en el array pasado
+  # Devuelve true si el jugador tiene equipado un tesoro de tipo collar en el array pasado
   def hasNecklace
     hasNecklace = false
     
     @visibleTreasures.each do |k|
       if k.type == TreasureKind::NECKLACE
-        hasNecklace =true
-        #@pendingBadConsequence = 
+        hasNecklace =true 
       end
     end
-    
-    if(!hasNecklace)
-      @hiddenTreasures.each do |k|
-        if k.type == TreasureKind::NECKLACE
-          hasNecklace =true
-          #@pendingBadConsequence = 
-        end
-      end
-    end
-    
-    if(hasNecklace)
-      
-    end
+
     hasNecklace
   end
   

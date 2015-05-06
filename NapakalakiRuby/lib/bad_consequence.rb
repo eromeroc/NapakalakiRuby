@@ -24,25 +24,7 @@ module Model
     @death = death
   end
   
-  def self.newNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
-    new(aText,someLevels, someVisibleTreasures, someHiddenTreasures, Array.new, Array.new,false)
-  end
-  
-  def self.newDeath (aText)
-    new(aText, 0, 0, 0 , Array.new, Array.new, true)
-  end
-    
-  def self.newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
-    new(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
-  end
-  
-  def self.newVacio()
-    new(" ", 0,0, 0, Array.new, Array.new, false)
-  end
-  
-  private_class_method :new
-  
-
+ 
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
@@ -182,4 +164,27 @@ puts bc.to_s
 puts "Prueba Bad Consequence"
 =end
 
+
+class BadConsequenceDeath < BadConsequence
+  def initialize (aText)
+    super(aText,0, 0, 0 , Array.new, Array.new, true)
+    #new(aText, 0, 0, 0 , Array.new, Array.new, true)
+  end
+end
+
+class BadConsequenceNumTreasures < BadConsequence
+  def initialize (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
+    super(aText,someLevels, someVisibleTreasures, someHiddenTreasures, Array.new, Array.new,false)
+  end
+end
+
+class BadConsequenceTypeTreasures < BadConsequence
+  def initialize(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
+    super(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
+  end
+end
+
+
+bc = BadConsequenceDeath.new("j")
+puts "Funciona"
 end

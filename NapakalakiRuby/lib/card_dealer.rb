@@ -209,6 +209,18 @@ class CardDealer
     
   end
   
+  def initCultistCardDeck()
+    @unusedCultists = Array.new
+    
+    @unusedCultists << Cultist.new("Sectario", 1)
+    @unusedCultists << Cultist.new("Sectario", 2)
+    @unusedCultists << Cultist.new("Sectario", 1)
+    @unusedCultists << Cultist.new("Sectario", 2)
+    @unusedCultists << Cultist.new("Sectario", 1)
+    @unusedCultists << Cultist.new("Sectario", 1)
+    
+  end
+  
   #Baraja el mazo de cartas de tesoros
   def shuffleTreasures()
     @unusedTreasures.shuffle!
@@ -217,6 +229,10 @@ class CardDealer
   #Baraja el mazo de cartas de monstruos
   def shuffleMonsters()
     @unusedMonsters.shuffle!
+  end
+  
+  def shuffleCultists()
+    @unusedCultists.shuffle!
   end
   
   
@@ -230,6 +246,7 @@ class CardDealer
     giveTreasureBack(treasure)
     @unusedTreasures.delete_at(0)
     
+    
     treasure
   end
   
@@ -242,6 +259,13 @@ class CardDealer
     giveMonsterBack(monster)
     
     monster
+  end
+  
+  def nextCultist()
+    cultist = @unusedCultists.first()
+    @unusedCultists.delete_at(0)
+    
+    cultist
   end
   
   
@@ -260,9 +284,11 @@ class CardDealer
   def initCards()
     initTreasureCardDeck()
     initMonsterCardDeck()
+    initCultistCardDeck()
     
     shuffleMonsters()
     shuffleTreasures()
+    shuffleCultists()
     
     @usedTreasures = Array.new
     @usedMonsters = Array.new

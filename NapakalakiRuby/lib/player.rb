@@ -12,10 +12,10 @@ class Player
   attr_reader :pendingBadConsequence  #Objeto BadConsequence
   attr_reader :visibleTreasures       #Objeto Treasure
   attr_reader :hiddenTreasures        #Objeto Treasure
+  attr_reader :dead
+  attr_reader :name
+  attr_reader :level
  
-  #-dead : boolean
-  #−name : string
-  #−level : int
   
   def initialize(name)
     @dead = true
@@ -432,6 +432,34 @@ end
   
   def getName()
     @name
+  end
+  
+  #Constructor de copia
+  #¿¿¿¿Tiene que ser un constructor o en ruby es otro metodo y ya???
+  def self.copyPlayer(player)
+        @dead = player.dead
+        @name = player.name
+        @level = player.level
+        @hiddenTreasures = player.hiddenTreasures
+        @visibleTreasures = player.visibleTreasures
+        @pendingBadConsequence= player.pendingBadConsequence
+  end
+  
+  protected
+  def getOponentLevel
+    
+  end
+  
+  def shouldConvert
+    number = Dice.instance.nextNumber
+    
+    if(number == 6)
+      convert = true
+    else
+      convert = false
+    end
+    
+    convert   
   end
 
 end

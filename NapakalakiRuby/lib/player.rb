@@ -24,7 +24,7 @@ class Player
     @@MAXHIDDENTREASURES = 4
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
-    @pendingBadConsequence = BadConsequence.newVacio  
+    @pendingBadConsequence = BadConsequence.new("Vacio",0,0,0); 
   end
   
   private  

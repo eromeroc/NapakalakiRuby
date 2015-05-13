@@ -57,6 +57,14 @@ class Napakalaki
   # Llama al metodo combat de la clase Player para llevar a cabo el combate
   def combat() # : CombatResult
     result = @currentPlayer.combat(@currentMonster)
+    
+    if(result == CombatResult::LOSEANDCONVERT)
+      cultistCard = CardDealer.instance.nextCultist()
+      cultistPlayer = CultistPlayer.new(@currentPlayer, cultistCard)
+      @currentPlayer = cultistPlayer
+      @player[@currentPlayerIndex] = cultistPlayer  
+    end
+    
     result
   end 
   

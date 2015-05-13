@@ -142,7 +142,9 @@ module Model
   end
  
   def to_s
-      " " +@text+
+       "Esto es un mal rollo
+con el siguiente contenido\n"+
+      +@text+
        "\n\t\tNiveles que pierdes: " +@levels.to_s+
        "\n\t\tNº de tesoros ocultos: "+@nHiddenTreasures.to_s+
        "\n\t\tNº de tesoros visibles: " +@nVisibleTreasures.to_s+

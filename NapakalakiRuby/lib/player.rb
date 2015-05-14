@@ -194,6 +194,7 @@ class Player
         end
       end
     end
+    discardNecklaceIfVisible()
     result
   end
   
@@ -347,24 +348,17 @@ end
     
     combatLevel = @level
     necklace = hasNecklace
-    usado = false
     
-    @visibleTreasures.each do |k|
-      if(k.maxBonus != k.minBonus)
-        if(necklace)
-          usado = true
+    if(necklace)
+      @visibleTreasures.each do |k|
           combatLevel += k.maxBonus
-        else
+      end
+    else
+      @visibleTreasures.each do |k|
           combatLevel += k.minBonus
-        end
-      else
-        combatLevel += k.maxBonus
-      end 
+      end
     end
   
-    if usado
-      discardNecklaceIfVisible
-    end
     combatLevel
   end
   

@@ -65,6 +65,8 @@ class Napakalaki
       @player[@currentPlayerIndex] = cultistPlayer  
     end
     
+    CardDealer.instance.giveMonsterBack(@currentMonster)
+    
     result
   end 
   

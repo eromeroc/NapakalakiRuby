@@ -16,12 +16,12 @@ class Player
   attr_reader :name
   attr_reader :level
  
+  @@MAXHIDDENTREASURES = 4
   
   def initialize(name)
     @dead = true
     @name = name
     @level = 1
-    @@MAXHIDDENTREASURES = 4
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
     @pendingBadConsequence = BadConsequence.new("Vacio",0,0,0); 

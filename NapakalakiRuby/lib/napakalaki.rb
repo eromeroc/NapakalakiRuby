@@ -57,6 +57,7 @@ class Napakalaki
   # Llama al metodo combat de la clase Player para llevar a cabo el combate
   def combat() # : CombatResult
     result = @currentPlayer.combat(@currentMonster)
+    CardDealer.instace.giveMonsterBack(@currentMonster)
     result
   end 
   

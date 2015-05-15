@@ -24,7 +24,16 @@ module Model
     @death = death
   end
   
- 
+  def self.newNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
+  
+  def self.newDeath (aText)
+    
+  def self.newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
+  
+  def self.newVacio()
+  
+  private_class_method :new
+  
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
@@ -168,7 +177,7 @@ puts "Prueba Bad Consequence"
 
 
 class BadConsequenceDeath < BadConsequence
-  def initialize (aText)
+  def newDeath (aText)
     super(aText,0, 0, 0 , Array.new, Array.new, true)
     #new(aText, 0, 0, 0 , Array.new, Array.new, true)
   end

@@ -2,6 +2,7 @@
 
 require_relative 'bad_consequence'
 require_relative 'treasure'
+require_relative 'monster'
 require_relative 'card_dealer'
 require_relative 'dice'
 require_relative 'combat_result'
@@ -168,14 +169,14 @@ class Player
 =end
   def combat(m)  #(m : Monster) : CombatResult
     level = getCombatLevel()
-    if level > m.combatLevel
+    if level > getOponentLevel(m)
       applyPrize(m.prize)  
       if @level < 10
         result = CombatResult::WIN
       else
         result = CombatResult::WINANDWINGAME
       end
-    else #@level <= m.combatLevel
+    else #@level <= getOponentLevel(m)
       num = Dice.instance.nextNumber
       if num >= 5
         result = CombatResult::LOSEANDESCAPE
@@ -184,11 +185,16 @@ class Player
           die
           result = CombatResult::LOSEANDDIE
         else
-          applyBadConsequence(m.bc)
-          result = CombatResult::LOSE
+          if (shouldConvert)
+            result = CombatResult::LOSEANDCONVERT
+          else
+            applyBadConsequence(m.bc)
+            result = CombatResult::LOSE
+          end
         end
       end
     end
+    discardNecklaceIfVisible()
     result
   end
   
@@ -342,24 +348,17 @@ end
     
     combatLevel = @level
     necklace = hasNecklace
-    usado = false
     
-    @visibleTreasures.each do |k|
-      if(k.maxBonus != k.minBonus)
-        if(necklace)
-          usado = true
+    if(necklace)
+      @visibleTreasures.each do |k|
           combatLevel += k.maxBonus
-        else
+      end
+    else
+      @visibleTreasures.each do |k|
           combatLevel += k.minBonus
-        end
-      else
-        combatLevel += k.maxBonus
-      end 
+      end
     end
   
-    if usado
-      discardNecklaceIfVisible
-    end
     combatLevel
   end
   
@@ -446,7 +445,8 @@ end
   end
   
   protected
-  def getOponentLevel
+  def getOponentLevel(m)
+    m.getBasicValue
     
   end
   

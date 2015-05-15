@@ -11,13 +11,13 @@ class CultistPlayer < Player
   @@totalCultistPlayers = 0
   
   def initialize(p, c)
-    copyPlayer(p)
+    super.copyPlayer(p)
     @myCultistCard = c
     @@totalCultistPlayers += 1
   end
   
   def getCombatLevel
-    getCombatLevel + @myCultistCard.getSpecialValue
+    super + @myCultistCard.getSpecialValue
         
   end
   
@@ -28,10 +28,16 @@ class CultistPlayer < Player
   end
   
   def getOponentLevel(m)
-    
+    m.getSpecialValue
   end
   
   def computeGoldCoinsValue(t)
+    goldCoinsValue = 0
+    t.each do|k| 
+      goldCoinsValue += k.goldCoins *2
+    end
+    niveles = goldCoinsValue / 1000 
+    niveles
     
   end
   

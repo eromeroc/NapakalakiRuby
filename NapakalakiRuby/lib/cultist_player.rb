@@ -7,7 +7,7 @@ class CultistPlayer < Player
   
   attr_reader :totalCultistPlayers
   attr_reader :myCultistCard
-  #player no es una variable no??? como llamo a getCombatLevel???
+
   @@totalCultistPlayers = 0
   
   def initialize(p, c)
@@ -17,10 +17,7 @@ class CultistPlayer < Player
   end
   
   def getCombatLevel
-#     level = super.getCombatLevel()
-#     level+= myCultistCard.getSpecialValue()
-#     level
-    super + @myCultistCard.getSpecialValue
+    level = super + @myCultistCard.getSpecialValue
         
   end
   

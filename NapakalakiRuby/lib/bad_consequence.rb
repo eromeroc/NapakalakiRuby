@@ -24,18 +24,12 @@ module Model
 #    @specificVisibleTreasures = someSpecificVisibleTreasures 
 #    @death = true
 #   end
+
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
-    if  ((@nVisibleTreasures == 0) && (@nHiddenTreasures == 0) && (@specificHiddenTreasures.empty?) &&
-      (@specificVisibleTreasures.empty?) && (@death  == false) && (@levels == 0))
-      respuesta = true
-    else
-      respuesta = false    
-    end
-   respuesta
+    
   end
- 
  
   #Devuelve true si el mal rollo es muerte
   def kills()
@@ -45,37 +39,13 @@ module Model
   #Actualiza el mal rollo (que tiene que cumplir el jugador) basándose en el hecho de que el
   #jugador se descarta del tesoro visible t.
   def substractVisibleTreasure(t) # (t : Treasure) : void
-    if(@nVisibleTreasures > 0)
-      @nVisibleTreasures = @nVisibleTreasures -1
-    else
-      substract = nil
-      @specificVisibleTreasures.each do |i|
-        if(i == t.type)
-          substract = i
-        end
-      end
-      if substract != nil
-        @specificVisibleTreasures.delete(substract)
-      end
-    end
+    
   end
   
   #Actualiza el mal rollo (que tiene que cumplir el jugador) basándose en el hecho de que el
   #jugador se descarta del tesoro oculto t.
   def substractHiddenTreasure(t) # (t : Treasure) : void
-    if(@nHiddenTreasures > 0)
-      @nHiddenTreasures = @nHiddenTreasures -1
-    else
-      substract= nil
-      @specificHiddenTreasures.each do |i|
-        if(i == t.type)
-          substract = i
-        end
-      end
-      if substract != nil
-        @specificHiddenTreasures.delete(substract)
-      end
-    end
+    
   end
   
   #Recibe como parámetros los tesoros visibles y ocultos de los que dispone el jugador y
@@ -86,47 +56,6 @@ module Model
   #pueda cumplir el mal rollo generado.
   def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence
     
-    
-    if (v.empty? && h.empty?)
-      bc = BadConsequenceNumTreasures.new(@aText,0,0,0)
-    else
-      if (@nVisibleTreasures > 0  || @nHiddenTreasures >0)
-        if (@nVisibleTreasures > v.size())
-          nVisible = v.size()
-        else
-          nVisible = @nVisibleTreasures
-        end
-        if (@nHiddenTreasures > h.size())
-          nHidden = h.size()
-        else
-          nHidden = @nHiddenTreasures
-        end
-        bc = BadConsequenceNumTreasures.new(@text,0,nVisible, nHidden)
-      else
-        visible = Array.new
-        hidden = Array.new
-        v.each do |i|
-          @specificVisibleTreasures.each do |j|
-            if j == i.type
-              visible << j
-            end
-          end
-        
-        end
-    
-        h.each do |k|
-          @specificHiddenTreasures.each do |j|
-            if j == k.type
-              hidden << j
-            end
-          end
-        end
-      
-        bc = BadConsequenceTypeTreasures.new(@text, 0, visible, hidden)
-      end
-    end
-    
-    bc
   end
  
   
@@ -141,15 +70,7 @@ module Model
   end
  
   def to_s
-       "Esto es un mal rollo
-con el siguiente contenido\n"+
-      +@text+
-       "\n\t\tNiveles que pierdes: " +@levels.to_s+
-       "\n\t\tNº de tesoros ocultos: "+@nHiddenTreasures.to_s+
-       "\n\t\tNº de tesoros visibles: " +@nVisibleTreasures.to_s+
-       "\n\t\tMuerte: "+@death.to_s+
-       "\n\t\tTesoros ocultos: "+arrayToString(@specificHiddenTreasures)+
-       "\n\t\tTesoros visibles: "+arrayToString(@specificVisibleTreasures)
+      
   end
 end
 
@@ -166,46 +87,4 @@ puts "Prueba Bad Consequence"
 =end
 
 
-class BadConsequenceDeath < BadConsequence
-
-  def initialize(aText)
-#    super(aText,0,0,0,Array.new,Array.new, true)
-    @text = aText
-    @levels = 0
-    @nVisibleTreasures = 0
-    @nHiddenTreasures = 0
-    @specificHiddenTreasures  = Array.new
-    @specificVisibleTreasures = Array.new
-    @death = true
-  end
-end
-
-class BadConsequenceNumTreasures < BadConsequence
-  def initialize (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
-    @text = aText
-    @levels = someLevels
-    @nVisibleTreasures = someVisibleTreasures
-    @nHiddenTreasures = someHiddenTreasures
-    @specificHiddenTreasures  = Array.new
-    @specificVisibleTreasures = Array.new
-    @death = false
-  end
-end
-
-class BadConsequenceTypeTreasures < BadConsequence
-  def initialize(aText, someLevels, someSpecificVisibleTreasures, someSpecigicHiddenTreasures)
-    #super(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
-    @text = aText
-    @levels = someLevels
-    @nVisibleTreasures = 0
-    @nHiddenTreasures = 0
-    @specificHiddenTreasures  = someSpecificVisibleTreasures
-    @specificVisibleTreasures = someSpecigicHiddenTreasures
-    @death = false
-  end
-end
-
-
-bc = BadConsequenceDeath.new("j")
-puts "Funciona"
 end

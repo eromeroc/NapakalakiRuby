@@ -11,29 +11,19 @@ module Model
     attr_reader :nVisibleTreasures #Nº tesoros visibles que se pierden
     attr_reader :death             #Mal rollo de tipo muerte
     attr_reader :specificHiddenTreasures  #Tesorros ocultos
-    attr_reader :specificVisibleTreasures  #Tesoros visibles
+    attr_reader :specificVisibleTreasures  #Tesoros visible
 
+ # private_class_method :new
   
-  def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
-    @text = aText
-    @levels = someLevels
-    @nVisibleTreasures = someVisibleTreasures
-    @nHiddenTreasures = someHiddenTreasures
-    @specificHiddenTreasures  = someSpecificHiddenTreasures 
-    @specificVisibleTreasures = someSpecificVisibleTreasures 
-    @death = death
-  end
-  
-  def self.newNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
-  
-  def self.newDeath (aText)
-    
-  def self.newSpecificTreasures(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
-  
-  def self.newVacio()
-  
-  private_class_method :new
-  
+#   def initialize
+#    @text = aText
+#    @levels = someLevels
+#    @nVisibleTreasures = someVisibleTreasures
+#    @nHiddenTreasures = someHiddenTreasures
+#    @specificHiddenTreasures  = someSpecificHiddenTreasures 
+#    @specificVisibleTreasures = someSpecificVisibleTreasures 
+#    @death = true
+#   end
   #Devuelve true cuando el mal rollo está vacío. Eso significa que el conjunto de
   #atributos del mal rollo indican que no hay mal rollo que cumplir.
   def isEmpty()
@@ -98,7 +88,7 @@ module Model
     
     
     if (v.empty? && h.empty?)
-      bc = BadConsequence.newVacio
+      bc = BadConsequenceNumTreasures.new(@aText,0,0,0)
     else
       if (@nVisibleTreasures > 0  || @nHiddenTreasures >0)
         if (@nVisibleTreasures > v.size())
@@ -111,7 +101,7 @@ module Model
         else
           nHidden = @nHiddenTreasures
         end
-        bc = BadConsequence.newNumberOfTreasures(@text,0,nVisible, nHidden)
+        bc = BadConsequenceNumTreasures.new(@text,0,nVisible, nHidden)
       else
         visible = Array.new
         hidden = Array.new
@@ -132,7 +122,7 @@ module Model
           end
         end
       
-        bc = BadConsequence.newSpecificTreasures(@text, 0, visible, hidden)
+        bc = BadConsequenceTypeTreasures.new(@text, 0, visible, hidden)
       end
     end
     
@@ -177,21 +167,41 @@ puts "Prueba Bad Consequence"
 
 
 class BadConsequenceDeath < BadConsequence
-  def initialize (aText)
-    super(aText,0, 0, 0 , Array.new, Array.new, true)
-    #new(aText, 0, 0, 0 , Array.new, Array.new, true)
+
+  def initialize(aText)
+#    super(aText,0,0,0,Array.new,Array.new, true)
+    @text = aText
+    @levels = 0
+    @nVisibleTreasures = 0
+    @nHiddenTreasures = 0
+    @specificHiddenTreasures  = Array.new
+    @specificVisibleTreasures = Array.new
+    @death = true
   end
 end
 
 class BadConsequenceNumTreasures < BadConsequence
   def initialize (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
-    super(aText,someLevels, someVisibleTreasures, someHiddenTreasures, Array.new, Array.new,false)
+    @text = aText
+    @levels = someLevels
+    @nVisibleTreasures = someVisibleTreasures
+    @nHiddenTreasures = someHiddenTreasures
+    @specificHiddenTreasures  = Array.new
+    @specificVisibleTreasures = Array.new
+    @death = false
   end
 end
 
 class BadConsequenceTypeTreasures < BadConsequence
-  def initialize(aText, someLevels, someSpecificVisibleTreasures, someHiddenTreasures)
-    super(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
+  def initialize(aText, someLevels, someSpecificVisibleTreasures, someSpecigicHiddenTreasures)
+    #super(aText, someLevels, 0, 0, someSpecificVisibleTreasures, someHiddenTreasures,false)
+    @text = aText
+    @levels = someLevels
+    @nVisibleTreasures = 0
+    @nHiddenTreasures = 0
+    @specificHiddenTreasures  = someSpecificVisibleTreasures
+    @specificVisibleTreasures = someSpecigicHiddenTreasures
+    @death = false
   end
 end
 

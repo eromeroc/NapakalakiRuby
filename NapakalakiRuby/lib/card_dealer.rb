@@ -68,7 +68,7 @@ class CardDealer
                                         [TreasureKind::ARMOR],
                                         [TreasureKind::ARMOR])
     prize = Prize.new(2, 1)
-    @unusedMonsters << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize)
+    @unusedMonsters << Monster.new("3 Byakhees de bonanza", 8, badConsequence, prize,0)
 
 
     # Chibithulhu
@@ -78,7 +78,7 @@ class CardDealer
                                                         [TreasureKind::HELMET],
                                                         Array.new)
     prize = Prize.new(1, 1)
-    @unusedMonsters << Monster.new("Chibithulhu", 2, badConsequence, prize)
+    @unusedMonsters << Monster.new("Chibithulhu", 2, badConsequence, prize,0)
 
 
     # El sopor de Dunwich
@@ -87,7 +87,7 @@ class CardDealer
                                                         [TreasureKind::HELMET],
                                                         Array.new)
     prize = Prize.new(1,1)
-    @unusedMonsters << Monster.new("El sopor de Dunwich", 2, badConsequence, prize)
+    @unusedMonsters << Monster.new("El sopor de Dunwich", 2, badConsequence, prize,0)
 
 
     # Ángeles de la noche ibicenca
@@ -97,14 +97,14 @@ class CardDealer
                                                         [TreasureKind::ONEHAND],
                                                         [TreasureKind::ONEHAND])
     prize = Prize.new(4,1)
-    @unusedMonsters << Monster.new("Ángeles de la noche ibicenca", 14, badConsequence, prize)
+    @unusedMonsters << Monster.new("Ángeles de la noche ibicenca", 14, badConsequence, prize,0)
 
 
     # El gorrón en el umbral
     badConsequence = BadConsequenceNumTreasures.new("Pierdes todos tus tesores visibles.", 1,
                                                         4, 0)
     prize = Prize.new(3,1)
-    @unusedMonsters << Monster.new("El gorrón en el umbral", 10, badConsequence, prize)
+    @unusedMonsters << Monster.new("El gorrón en el umbral", 10, badConsequence, prize,0)
 
 
     # H.P. Munchcraft
@@ -112,7 +112,7 @@ class CardDealer
                                                         0, [TreasureKind::ARMOR],
                                                         Array.new)
     prize = Prize.new(2,1)
-    @unusedMonsters << Monster.new("H.P. Munchcraft", 6, badConsequence, prize)
+    @unusedMonsters << Monster.new("H.P. Munchcraft", 6, badConsequence, prize,0)
 
 
     # Bichgooth
@@ -121,14 +121,14 @@ class CardDealer
                                                         [TreasureKind::ARMOR],
                                                         Array.new)
     prize = Prize.new(1,1)
-    @unusedMonsters << Monster.new("Bichgooth", 2, badConsequence, prize)
+    @unusedMonsters << Monster.new("Bichgooth", 2, badConsequence, prize,0)
 
 
     # El rey de rosa
     badConsequence = BadConsequenceNumTreasures.new("Pierdes 5 niveles y 3 tesoros visibles",
                                                         5, 3, 0)
     prize = Prize.new(4,2)
-    @unusedMonsters << Monster.new("El rey de rosa", 13, badConsequence, prize)
+    @unusedMonsters << Monster.new("El rey de rosa", 13, badConsequence, prize,0)
 
 
     # La que redacta en las tinieblas
@@ -137,7 +137,7 @@ class CardDealer
                                                         2, 0, 0)
     prize = Prize.new(1,1)
     @unusedMonsters << Monster.new("La que redacta en las tinieblas", 2,
-                              badConsequence, prize)
+                              badConsequence, prize,0)
 
 
     #Los hondos
@@ -145,13 +145,13 @@ class CardDealer
                                             "bastante superficiales y te aburren "+
                                             "mortalmente. Estas muerto")
     prize = Prize.new(2,1)
-    @unusedMonsters << Monster.new("Los hondos", 8 ,badConsequence,prize)
+    @unusedMonsters << Monster.new("Los hondos", 8 ,badConsequence,prize,0)
 
     #Semillas Cthulhu
     badConsequence = BadConsequenceNumTreasures.new("Pierdes 2 niveles y 2 "+
                                                         "tesoros ocultos", 2, 0, 2)
     prize = Prize.new(2,1)
-    @unusedMonsters << Monster.new("Semillas Cthulhu", 4, badConsequence, prize)
+    @unusedMonsters << Monster.new("Semillas Cthulhu", 4, badConsequence, prize,0)
 
     #Dameargo
     badConsequence = BadConsequenceTypeTreasures.new("Te intentas escaquear."+
@@ -159,53 +159,53 @@ class CardDealer
                                                         [TreasureKind::ONEHAND],
                                                         Array.new)
     prize = Prize.new(2,1)
-    @unusedMonsters << Monster.new("Dameargo", 1, badConsequence, prize)
+    @unusedMonsters << Monster.new("Dameargo", 1, badConsequence, prize,0)
 
     #Pollipólipo volante
     badConsequence = BadConsequenceNumTreasures.new("Da mucho asquito."+
                                                         " Pierdes 3 niveles",
                                                         3, 0, 0)
     prize = Prize.new(1,1)
-    @unusedMonsters << Monster.new("Pollipólipo volante", 3, badConsequence, prize)
+    @unusedMonsters << Monster.new("Pollipólipo volante", 3, badConsequence, prize,0)
 
     #Yskhtihyssq-Goth
     badConsequence = BadConsequenceDeath.new("No le hace gracia que"+
                                             " pronuncien mal su nombre. Estas"+
                                             " muerto")
     prize = Prize.new(3,1)
-    @unusedMonsters << Monster.new("Yskhtihyssq-Goth", 12, badConsequence, prize)
+    @unusedMonsters << Monster.new("Yskhtihyssq-Goth", 12, badConsequence, prize,0)
 
 
     #Familia feliz
     badConsequence = BadConsequenceDeath.new("La familia te atrapa."+
                                             "Estas muerto")
     prize = Prize.new(4,1)
-    @unusedMonsters << Monster.new("Familia feliz", 1, badConsequence, prize)
+    @unusedMonsters << Monster.new("Familia feliz", 1, badConsequence, prize,0)
     
     #Roboggoth
     badConsequence = BadConsequenceTypeTreasures.new("La quinta directiva primaria te obliga a perder 2 niveles"+
                                                          "y un tesoro 2 manos visible", 2,[TreasureKind::BOTHHANDS], Array.new)
     prize = Prize.new(2, 1)
-    @unusedMonsters << Monster.new("Roboggoth", 8, badConsequence, prize)
+    @unusedMonsters << Monster.new("Roboggoth", 8, badConsequence, prize,0)
         
     #El espia
     badConsequence = BadConsequenceTypeTreasures.new("Te asusta en la noche.Pierdes un casco visible",0,
                                                         [TreasureKind::HELMET], Array.new)
     prize = Prize.new(1, 1)
-    @unusedMonsters << Monster.new("El espía", 5, badConsequence, prize)
+    @unusedMonsters << Monster.new("El espía", 5, badConsequence, prize,0)
     
     #El lenguas
     badConsequence = BadConsequenceNumTreasures.new("Menudo susto te llevas. Pierdes 2 niveles y"+
                                                          "5 tesoros visibles", 2, 5, 0)
     prize = Prize.new(1, 1)
-    @unusedMonsters << Monster.new("El lenguas", 20, badConsequence, prize)
+    @unusedMonsters << Monster.new("El lenguas", 20, badConsequence, prize,0)
     
     
     #Bicefalo
     badConsequence = BadConsequenceNumTreasures.new("Te faltan manos para tanta cabeza. Pierdes 3 niveles"+
                                                          "y tus tesoros visibles de las manos", 3, 4, 0)
     prize = Prize.new(1,1)
-    @unusedMonsters << Monster.new("Bicefalo", 20, badConsequence, prize)
+    @unusedMonsters << Monster.new("Bicefalo", 20, badConsequence, prize,0)
     
   end
   

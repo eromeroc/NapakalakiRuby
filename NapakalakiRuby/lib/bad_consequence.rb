@@ -177,7 +177,7 @@ puts "Prueba Bad Consequence"
 
 
 class BadConsequenceDeath < BadConsequence
-  def newDeath (aText)
+  def initialize (aText)
     super(aText,0, 0, 0 , Array.new, Array.new, true)
     #new(aText, 0, 0, 0 , Array.new, Array.new, true)
   end

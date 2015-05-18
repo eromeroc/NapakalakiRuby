@@ -11,12 +11,15 @@ class CultistPlayer < Player
   @@totalCultistPlayers = 0
   
   def initialize(p, c)
-    super.copyPlayer(p)
+    super.copyPlayer(p) 
     @myCultistCard = c
     @@totalCultistPlayers += 1
   end
   
   def getCombatLevel
+#     level = super.getCombatLevel()
+#     level+= myCultistCard.getSpecialValue()
+#     level
     super + @myCultistCard.getSpecialValue
         
   end

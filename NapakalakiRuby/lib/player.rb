@@ -25,7 +25,7 @@ class Player
     @level = 1
     @visibleTreasures = Array.new
     @hiddenTreasures = Array.new
-    @pendingBadConsequence = BadConsequence.new("Vacio",0,0,0); 
+    @pendingBadConsequence = BadConsequenceNumTreasures.new("Vacio",0,0,0); 
   end
   
   private  
@@ -419,7 +419,8 @@ end
   end
   
   def to_s()
-    output = "\nNombre:= "+@name+ "\n\tNivel: "+@level.to_s
+    output = "\nNombre:= "+@name+ "\n\tNivel: "+@level.to_s+
+      "\n\tNivel de combate: "+getCombatLevel
       if(@pendingBadConsequence.isEmpty())
         output +=  "\n\tNo tienes mal rollo pendiente"
       else

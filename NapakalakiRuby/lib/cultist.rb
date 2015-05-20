@@ -21,9 +21,6 @@ module Model
       specialValue
     end
   end
-  
-  sectario = Cultist.new("j1",2);
-  puts sectario.getBasicValue()
-  puts sectario.getSpecialValue()
+
   
 end

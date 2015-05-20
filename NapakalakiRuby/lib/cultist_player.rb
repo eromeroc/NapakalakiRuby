@@ -17,7 +17,7 @@ class CultistPlayer < Player
   end
   
   def getCombatLevel
-    level = super + @myCultistCard.getSpecialValue
+    level = super.getCombatLevel + @myCultistCard.getSpecialValue
         
   end
   

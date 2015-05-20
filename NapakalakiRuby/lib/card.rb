@@ -1,13 +1,15 @@
 
+module Model
+  module Card
 
-module Card
-
-  def getBasicValue
+    def getBasicValue
     
-  end
+    end
   
-  def getSpecialValue
+    def getSpecialValue
+    
+    end
     
   end
-    
 end
+

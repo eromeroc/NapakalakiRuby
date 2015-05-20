@@ -1,3 +1,4 @@
+# coding: utf-8
 
 module Model
 
@@ -26,8 +27,7 @@ module Model
     end
     
     def to_s
-      "Esto es un mal rollo con el siguiente contenido\n"+
-        +@text+
+      "Esto es un mal rollo con el siguiente contenido\n" +@text+
         "\n\t\tNiveles que pierdes: " +@levels.to_s+
         "\n\t\tNº de tesoros ocultos: "+@nHiddenTreasures.to_s+
         "\n\t\tNº de tesoros ocultos: "+@nHiddenTreasures.to_s+

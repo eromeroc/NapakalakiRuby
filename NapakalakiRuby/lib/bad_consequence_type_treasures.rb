@@ -1,3 +1,4 @@
+# coding: utf-8
 
 module Model
   class BadConsequenceTypeTreasures < BadConsequence
@@ -84,8 +85,7 @@ module Model
     end
     
     def to_s
-      "Esto es un mal rollo con el siguiente contenido\n"+
-        +@text+
+      "Esto es un mal rollo con el siguiente contenido\n" +@text+
         "\n\t\tNiveles que pierdes: " +@levels.to_s+
         "\n\t\tTesoros ocultos: "+arrayToString(@specificHiddenTreasures)+
         "\n\t\tTesoros visibles: "+arrayToString(@specificVisibleTreasures)

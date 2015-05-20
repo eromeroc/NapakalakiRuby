@@ -207,6 +207,48 @@ class CardDealer
     prize = Prize.new(1,1)
     @unusedMonsters << Monster.new("Bicefalo", 20, badConsequence, prize,0)
     
+    #
+    #SECTARIOS
+    
+    #El mal indecible impronunciable
+    badConsequence = BadConsequenceTypeTreasures.new("Pierdes una mano visible", 0,
+                    [TreasureKind::ONEHAND], Array.new)
+    prize = Prize.new(3,1)
+    @unusedMonsters << Monster.new("El mal indecible impronunciable", 10, badConsequence, prize, -2)
+        
+    #Testigos oculares
+    badConsequence = BadConsequenceNumTreasures.new("Pierdes tus tesoros visibles. Jajaja", 0,7,0)
+    prize = Prize.new(2,1)
+    @unusedMonsters << Monster.new("Testigos oculares", 6, badConsequence, prize,2)
+        
+    #El gran Cthulhu
+        badConsequence = BadConsequenceDeath.new("Hoy no es tu dia de suerte, mueres.")
+        prize = Prize.new(2,5)
+        @unusedMonsters << Monster.new("El gran Cthulhu", 20, badConsequence, prize,4)
+        
+        #Serpiente político
+        badConsequence = BadConsequenceNumTreasures.new("Tu gobierno te recorta dos niveles.", 2,0,0)
+        prize = Prize.new(2,1)
+        @unusedMonsters << Monster.new("Serpiente político", 8, badConsequence, prize,-2)
+        
+       #Felpuggoth
+        badConsequence = BadConsequenceTypeTreasures.new("Pierdes tu casco y armadura visible.Pierdes tus manos ocultas", 0,
+             [TreasureKind::ARMOR, TreasureKind::HELMET], 
+             [TreasureKind::ONEHAND, TreasureKind::ONEHAND, TreasureKind::ONEHAND, TreasureKind::ONEHAND,
+              TreasureKind::BOTHHANDS,TreasureKind::BOTHHANDS,TreasureKind::BOTHHANDS,TreasureKind::BOTHHANDS])
+        prize = Prize.new(1,1)
+        @unusedMonsters << Monster.new("Felpuggoth", 2, badConsequence, prize,5)
+        
+        #Shoggoth
+        badConsequence = BadConsequenceNumTreasures.new("Pierdes dos niveles",2,0,0)
+        prize = Prize.new(4,2)
+        @unusedMonsters << Monster.new("Shoggoth", 16, badConsequence, prize,-4)
+        
+        #Lolitaggoth
+        badConsequence = BadConsequenceNumTreasures.new("Pintalabios negro. Pierdes dos niveles",2,0,0)
+        prize = Prize.new(1,1)
+        @unusedMonsters << Monster.new("Lolitaggoth", 2, badConsequence, prize,3)
+    
   end
   
   def initCultistCardDeck()

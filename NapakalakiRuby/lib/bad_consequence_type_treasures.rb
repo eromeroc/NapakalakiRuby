@@ -1,5 +1,11 @@
 # coding: utf-8
 
+
+require_relative 'bad_consequence'
+require_relative 'bad_consequence_death'
+require_relative 'bad_consequence_num_treasures'
+require_relative 'treasure'
+
 module Model
   class BadConsequenceTypeTreasures < BadConsequence
     def initialize(aText, someLevels, someSpecificVisibleTreasures, someSpecificHiddenTreasures)
@@ -91,4 +97,8 @@ module Model
         "\n\t\tTesoros visibles: "+arrayToString(@specificVisibleTreasures)
     end
   end
+  
+ 
+  
+  
 end

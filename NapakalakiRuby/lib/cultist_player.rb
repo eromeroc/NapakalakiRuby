@@ -1,6 +1,5 @@
 
 require_relative 'player'
-require_relative 'card'
 require_relative 'cultist'
 
 module Model

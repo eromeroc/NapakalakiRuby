@@ -1,5 +1,8 @@
 # coding: utf-8
 
+require_relative 'bad_consequence'
+
+
 module Model
   class BadConsequenceNumTreasures < BadConsequence
     def initialize (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
@@ -47,8 +50,8 @@ module Model
     #pueda cumplir el mal rollo generado.
     def adjustToFitTreasureLists(v, h) # (v : Treasure[], h : Treasure[]) : BadConsequence
     
-      nVisible
-      nHidden
+      nVisible = 0
+      nHidden = 0
       if (@nVisibleTreasures > 0  || @nHiddenTreasures >0)
         if (@nVisibleTreasures > v.size())
           nVisible = v.size()
@@ -72,6 +75,8 @@ module Model
         "\n\t\tNº de tesoros visibles: " + @nVisibleTreasures.to_s
     end
   end
+  
+  
 end
  
 

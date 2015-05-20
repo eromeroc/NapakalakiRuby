@@ -1,11 +1,8 @@
 
 require_relative 'treasure_kind'
-require_relative 'card'
 
 module Model
   class Treasure
-  
-    include Card
   
     attr_reader :name
     attr_reader :goldCoins

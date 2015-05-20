@@ -1,5 +1,10 @@
 # coding: utf-8
 
+require_relative 'bad_consequence'
+require_relative 'bad_consequence_num_treasures'
+require_relative 'bad_consequence_type_treasures'
+require_relative 'treasure'
+
 module Model
 
 
@@ -34,5 +39,38 @@ module Model
         "\n\t\tMuerte: "+@death.to_s
     end
   end
+
+  
+#PRUEBA BADCONSEQUENCE
+# 
+#  bc1 = BadConsequenceDeath.new("muerte");
+#  bc2 = BadConsequenceNumTreasures.new("numero",0,0,0);
+#  bc3 = BadConsequenceTypeTreasures.new("tipo",0,Array.new, Array.new);
+#  aux = BadConsequenceDeath.new("aux");
+#
+#  aux = bc2;
+#  bc2= bc1;
+#  bc1=aux;
+#       
+#  aux= bc3;
+#  bc3 = bc2;
+#  bc2=aux;
+#  bc2=bc1;
+#  
+#  v = Treasure.new("s", 2,0,0,[TreasureKind::ARMOR])
+#  h = Treasure.new("s", 0,0,0,[TreasureKind::ARMOR])
+#  hidden = Array.new
+#  hidden << h
+#  visible = Array.new
+#  visible << v
+#  
+#  bc1.adjustToFitTreasureLists(visible,hidden)
+#  bc2.adjustToFitTreasureLists(visible,hidden)
+#  bc3.adjustToFitTreasureLists(visible,hidden)
+#        
+#  puts bc1.isEmpty()
+#  puts bc2.isEmpty()
+#  puts bc3.isEmpty()
+#  puts "Prueba BC"
 
 end

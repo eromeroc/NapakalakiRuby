@@ -1,11 +1,9 @@
 # coding: utf-8
 
-require_relative 'card'
 
 module Model
 class Monster
   
-    include Card
     
     attr_reader :name
     attr_reader :combatLevel

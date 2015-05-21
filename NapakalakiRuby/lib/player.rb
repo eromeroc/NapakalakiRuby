@@ -57,13 +57,13 @@ class Player
     end
   end
   
-  
+  public #####PRIVATE
   #Asigna el mal rollo al jugador
   def setPendingBadConsequence(b) #b : BadConsequence
     @pendingBadConsequence = b
   end
   
-  
+  private
   #Cuando el jugador muere en un combate, esta operación es la encargada de dejarlo sin
   #tesoros, ponerle el nivel a 1 e indicar que está muerto, en el atributo correspondiente.
   def die()
@@ -435,7 +435,6 @@ end
   end
   
   #Constructor de copia
-  #¿¿¿¿Tiene que ser un constructor o en ruby es otro metodo y ya???
   def self.copyPlayer(player)
         @dead = player.dead
         @name = player.name

@@ -10,8 +10,9 @@ module Model
 
     @@totalCultistPlayers = 0
   
-    def initialize(p, c)
-      super.copyPlayer(p) 
+    def initialize(p,c)
+      #super("sectario")
+      super.copyPlayer(p)
       @myCultistCard = c
       @@totalCultistPlayers += 1
     end

@@ -47,8 +47,8 @@ module Model
     
     puts sect1.getCombatLevel
     
-    puts cult1.getBasicValue()
-    puts cult1.getSpecialValue()
+    puts cult1.getBasicValue
+    puts cult1.getSpecialValue
   end
 
 end 

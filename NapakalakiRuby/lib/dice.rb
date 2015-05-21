@@ -18,8 +18,8 @@ end
 
 #PRUEBA DICE 
 
-for i in 0..2
-  puts Dice.instance.nextNumber()
-end
+#for i in 0..2
+#  puts Dice.instance.nextNumber()
+#end
 
 end

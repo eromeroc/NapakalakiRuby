@@ -12,7 +12,6 @@ module Model
   
 
     def initialize(p,c)
-      #super("sectario")
       copyPlayer(p)
       @myCultistCard = c
       @@totalCultistPlayers += 1

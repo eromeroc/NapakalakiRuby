@@ -10,6 +10,7 @@ module Model
 
     @@totalCultistPlayers = 0
   
+
     def initialize(p,c)
       #super("sectario")
       super.copyPlayer(p)
@@ -49,5 +50,4 @@ module Model
 end
 
 
-#
 

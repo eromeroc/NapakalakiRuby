@@ -435,6 +435,7 @@ end
   end
   
   #Constructor de copia
+  #¿¿¿¿Tiene que ser un constructor o en ruby es otro metodo y ya???
   def self.copyPlayer(player)
         @dead = player.dead
         @name = player.name

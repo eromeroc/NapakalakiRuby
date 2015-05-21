@@ -13,13 +13,13 @@ module Model
 
     def initialize(p,c)
       #super("sectario")
-      super.copyPlayer(p)
+      copyPlayer(p)
       @myCultistCard = c
       @@totalCultistPlayers += 1
     end
   
     def getCombatLevel
-      level = super.getCombatLevel + @myCultistCard.getSpecialValue      
+      level = super + @myCultistCard.getSpecialValue      
     end
   
     protected

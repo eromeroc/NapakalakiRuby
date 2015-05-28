@@ -14,8 +14,8 @@ module Model
       @levels = someLevels
       @nVisibleTreasures = 0
       @nHiddenTreasures = 0
-      @specificHiddenTreasures  = someSpecificVisibleTreasures
-      @specificVisibleTreasures = someSpecificHiddenTreasures
+      @specificHiddenTreasures  = someSpecificHiddenTreasures
+      @specificVisibleTreasures = someSpecificVisibleTreasures
       @death = false
     end
   

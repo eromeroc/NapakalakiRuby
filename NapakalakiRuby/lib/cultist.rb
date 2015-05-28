@@ -1,4 +1,4 @@
-require_relative 'cultist_player'
+
 
 module Model
   class Cultist

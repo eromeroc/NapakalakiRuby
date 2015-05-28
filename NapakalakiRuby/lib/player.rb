@@ -57,7 +57,7 @@ class Player
     end
   end
   
-  public #####PRIVATE
+  private
   #Asigna el mal rollo al jugador
   def setPendingBadConsequence(b) #b : BadConsequence
     @pendingBadConsequence = b
@@ -420,7 +420,7 @@ end
   
   def to_s()
     output = "\nNombre:= "+@name+ "\n\tNivel: "+@level.to_s+
-      "\n\tNivel de combate: "+getCombatLevel
+      "\n\tNivel de combate: "+getCombatLevel.to_s
       if(@pendingBadConsequence.isEmpty())
         output +=  "\n\tNo tienes mal rollo pendiente"
       else
@@ -462,6 +462,7 @@ end
     
     convert   
   end
+  
 
 end
 
